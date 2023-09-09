@@ -1,3 +1,4 @@
+import { StaticImageData } from "next/image";
 import { Category } from "./category";
 import { User } from "./user";
 
@@ -7,6 +8,6 @@ export type Post = {
   createdAt: string;
   title: string;
   category: Category;
-  image: string;
+  image: StaticImageData;
   description: string;
 }

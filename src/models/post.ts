@@ -1,3 +1,4 @@
+import { StaticImageData } from "next/image";
 import Category from "./category";
 import User from "./user";
 
@@ -10,7 +11,7 @@ export default class Post implements Post {
     public createdAt: string,
     public title: string,
     public category: Category,
-    public image: string,
+    public image: StaticImageData,
     public description: string
   ) {
     this.id = id;
