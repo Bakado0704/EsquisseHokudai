@@ -1,22 +1,39 @@
-import { Fragment } from "react";
-import Post from "@/models/post";
+"use client";
+
 import Image from "next/image";
-import { dummyData } from "@/dummy-data/dummy-data";
+import { dummyData, esquisse } from "@/dummy-data/dummy-data";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { useRouter } from "next/navigation";
+import { FormEvent, useRef } from "react";
 
-function ProductDetailPage({props.params.id}) {
-  const productId = props.params.pid;
+type Props = {
+  params: Params;
+};
 
-  const selectedPost = dummyData.find((post) => post.id === productId);
+function ProductDetailPage(props: Props) {
+  const router = useRouter();
+  const textInputRef = useRef<HTMLInputElement | null>(null);
+  const postedId = props.params.id;
 
-  console.log(props);
+  const selectedPost = dummyData.find((post) => post.id === postedId);
+  const selectedEsquisse = esquisse.find(
+    (esquisse) => esquisse.id === postedId
+  );
+
+  console.log(selectedEsquisse);
 
   if (!selectedPost) {
     return <p>Loading...</p>;
   }
 
+  async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
+    // event.preventDefault();
+
+    router.push(`/esquisse/${postedId}`);
+  }
+
   return (
     <div>
-      <Image src={selectedPost.image} alt="" width={300} height={200} />
       <div>
         {selectedPost.category.projectType}
         {selectedPost.category.buildingType}
@@ -25,6 +42,29 @@ function ProductDetailPage({props.params.id}) {
       <p>{selectedPost.title}</p>
       <p>{selectedPost.user.username}</p>
       <p>{selectedPost.createdAt}</p>
+      <Image src={selectedPost.image} alt="" width={500} height={300} />
+      <p>{selectedPost.description}</p>
+
+      <ul>
+        {esquisse.map((esquisse) => {
+          if (esquisse.id === postedId) {
+            return (
+              <li key={esquisse.createdAt}>
+                <p>{esquisse.user.username}</p>
+                <p>{esquisse.text}</p>
+              </li>
+            );
+          }
+        })}
+      </ul>
+
+      <form onSubmit={submitFormHandler}>
+        <div>
+          <label htmlFor="text">コメントを追加する。</label>
+          <input type="text" id="text" ref={textInputRef} />
+        </div>
+        <button>メッセージを投稿する</button>
+      </form>
     </div>
   );
 }
