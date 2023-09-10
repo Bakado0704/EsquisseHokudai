@@ -16,11 +16,6 @@ function ProductDetailPage(props: Props) {
   const postedId = props.params.id;
 
   const selectedPost = dummyData.find((post) => post.id === postedId);
-  const selectedEsquisse = esquisse.find(
-    (esquisse) => esquisse.id === postedId
-  );
-
-  console.log(selectedEsquisse);
 
   if (!selectedPost) {
     return <p>Loading...</p>;
@@ -39,7 +34,7 @@ function ProductDetailPage(props: Props) {
         {selectedPost.category.buildingType}
         {selectedPost.category.toolType}
       </div>
-      <p>{selectedPost.title}</p>
+      <h1>{selectedPost.title}</h1>
       <p>{selectedPost.user.username}</p>
       <p>{selectedPost.createdAt}</p>
       <Image src={selectedPost.image} alt="" width={500} height={300} />
