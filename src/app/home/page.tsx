@@ -12,52 +12,28 @@ export default function Page() {
       <h1>ホーム</h1>
       <ul>
         {dummyData.map((dummyData) => {
-          let tags: string[] = [];
+          let tags: (ProjectType | BuildingType | ToolType)[] = [];
 
           //集合配列tagについて
           dummyData.category.projectType?.map((data) => {
-            tags.push(data[1]);
+            tags.push(data);
           });
 
           dummyData.category.buildingType?.map((data) => {
-            tags.push(data[1]);
+            tags.push(data);
           });
 
           dummyData.category.toolType?.map((data) => {
-            tags.push(data[1]);
+            tags.push(data);
           });
-
-          console.log(tags);
 
           return (
             <li key={dummyData.id}>
               <Link href={`/esquisse/${dummyData.id}`}>
                 <Image src={dummyData.image} alt="" width={300} height={200} />
                 <ul>
-                  {dummyData.category.projectType &&
-                    dummyData.category.projectType.map((data: ProjectType) => {
-                      if (data) {
-                        return (
-                          <li key={data[0]}>
-                            <p>{data[1]}</p>
-                          </li>
-                        );
-                      }
-                    })}
-                  {dummyData.category.buildingType &&
-                    dummyData.category.buildingType.map(
-                      (data: BuildingType) => {
-                        if (data) {
-                          return (
-                            <li key={data[0]}>
-                              <p>{data[1]}</p>
-                            </li>
-                          );
-                        }
-                      }
-                    )}
-                  {dummyData.category.toolType &&
-                    dummyData.category.toolType.map((data: ToolType) => {
+                  {tags &&
+                    tags.map((data) => {
                       if (data) {
                         return (
                           <li key={data[0]}>

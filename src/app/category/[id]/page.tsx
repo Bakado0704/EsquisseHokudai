@@ -1,4 +1,5 @@
-import { category, dummyData } from "@/dummy-data/dummy-data";
+import { buildingCategory, dummyData, projectCategory, toolCategory } from "@/dummy-data/dummy-data";
+import CategoryList from "@/models/categoryList";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Image from "next/image";
@@ -10,8 +11,21 @@ type Props = {
 
 export default function Page(props: Props) {
   const postedId = props.params.id;
-  const categoryTitle = category.find(
-    (category) => category.id === BuildingType.housing
+
+  let tags: (CategoryList)[] = [];
+  //集合配列tagについて
+  buildingCategory?.map((data) => {
+    tags.push(data);
+  });
+  projectCategory?.map((data) => {
+    tags.push(data);
+  });
+  toolCategory?.map((data) => {
+    tags.push(data);
+  });
+
+  const categoryTitle = tags.find(
+    (category) => category.id[0] === postedId
   )?.title;
 
   return (
@@ -19,7 +33,24 @@ export default function Page(props: Props) {
       <h1>{categoryTitle}</h1>
       <ul>
         {dummyData.map((dummyData) => {
-          if (dummyData.category.buildingType === postedId) {
+          let tags: (ProjectType | BuildingType | ToolType)[] = [];
+          let selectedtags: string[] = [];
+
+          //集合配列tagについて
+          dummyData.category.projectType?.map((data) => {
+            tags.push(data);
+            selectedtags.push(data[0]);
+          });
+          dummyData.category.buildingType?.map((data) => {
+            tags.push(data);
+            selectedtags.push(data[0]);
+          });
+          dummyData.category.toolType?.map((data) => {
+            tags.push(data);
+            selectedtags.push(data[0]);
+          });
+
+          if (selectedtags.includes(postedId)) {
             return (
               <li key={dummyData.id}>
                 <Link href={`/esquisse/${dummyData.id}`}>
@@ -30,33 +61,16 @@ export default function Page(props: Props) {
                     height={200}
                   />
                   <ul>
-                    {dummyData.category.projectType && dummyData.category.projectType.map((data: ProjectType) => {
-                      if(data) {
-                        return (
-                          <li key={data[0]}>
-                            <Link href={`/esquisse/${data[0]}`}><p>{data[1]}</p></Link>
-                          </li>
-                        )
-                      }
-                    })}
-                    {dummyData.category.buildingType && dummyData.category.buildingType.map((data: BuildingType) => {
-                      if(data) {
-                        return (
-                          <li key={data[0]}>
-                            <Link href={`/esquisse/${data[0]}`}><p>{data[1]}</p></Link>
-                          </li>
-                        )
-                      }
-                    })}
-                    {dummyData.category.toolType && dummyData.category.toolType.map((data: ToolType) => {
-                      if(data) {
-                        return (
-                          <li key={data[0]}>
-                            <Link href={`/esquisse/${data[0]}`}><p>{data[1]}</p></Link>
-                          </li>
-                        )
-                      }
-                    })}
+                    {tags &&
+                      tags.map((data) => {
+                        if (data) {
+                          return (
+                            <li key={data[0]}>
+                              <p>{data[1]}</p>
+                            </li>
+                          );
+                        }
+                      })}
                   </ul>
                   <p>{dummyData.title}</p>
                   <p>{dummyData.user.username}</p>

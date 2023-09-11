@@ -5,6 +5,8 @@ import { dummyData, esquisse } from "@/dummy-data/dummy-data";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef } from "react";
+import { BuildingType, ProjectType, ToolType } from "@/types/category";
+import Link from "next/link";
 
 type Props = {
   params: Params;
@@ -21,6 +23,19 @@ function ProductDetailPage(props: Props) {
     return <p>Loading...</p>;
   }
 
+  let tags: (ProjectType | BuildingType | ToolType)[] = [];
+
+  //集合配列tagについて
+  selectedPost.category.projectType?.map((data) => {
+    tags.push(data);
+  });
+  selectedPost.category.buildingType?.map((data) => {
+    tags.push(data);
+  });
+  selectedPost.category.toolType?.map((data) => {
+    tags.push(data);
+  });
+
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     // event.preventDefault();
 
@@ -29,11 +44,19 @@ function ProductDetailPage(props: Props) {
 
   return (
     <div>
-      <div>
-        {selectedPost.category.projectType}
-        {selectedPost.category.buildingType}
-        {selectedPost.category.toolType}
-      </div>
+      <ul>
+        {tags.map((data) => {
+          if (data) {
+            return (
+              <li key={data[0]}>
+                <Link href={`/category/${data[0]}`}>
+                  <p>{data[1]}</p>
+                </Link>
+              </li>
+            );
+          }
+        })}
+      </ul>
       <h1>{selectedPost.title}</h1>
       <p>{selectedPost.user.username}</p>
       <p>{selectedPost.createdAt}</p>
