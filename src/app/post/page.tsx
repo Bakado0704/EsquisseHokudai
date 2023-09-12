@@ -16,8 +16,6 @@ export default function Page() {
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log();
-
     router.push("/home");
   }
 
@@ -33,8 +31,8 @@ export default function Page() {
           {projectCategory.map((category) => {
             return (
               <li key={category.id[0]}>
-                <label htmlFor="title">
-                  <input type="checkbox" id={category.id[0]} />
+                <label htmlFor="title" >
+                  <input type="checkbox" id={category.id[0]} value={category.id[0]}/>
                   {category.title}
                 </label>
               </li>
@@ -46,7 +44,7 @@ export default function Page() {
             return (
               <li key={category.id[0]}>
                 <label htmlFor="title">
-                  <input type="checkbox" id={category.id[0]} />
+                  <input type="checkbox" id={category.id[0]} value={category.id[0]}/>
                   {category.title}
                 </label>
               </li>
@@ -58,7 +56,7 @@ export default function Page() {
             return (
               <li key={category.id[0]}>
                 <label htmlFor="title">
-                  <input type="checkbox" id={category.id[0]} />
+                  <input type="checkbox" id={category.id[0]} value={category.id[0]}/>
                   {category.title}
                 </label>
               </li>

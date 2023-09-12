@@ -4,14 +4,35 @@ import Link from "next/link";
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-export default function Home() {
-  const emailInputRef = useRef<HTMLInputElement | null>(null);
-  const passwordInputRef = useRef<HTMLInputElement | null>(null);
+export async function getAllEvents() {
+  const response = await fetch(
+    "https://react-getting-started-2a850-default-rtdb.firebaseio.com/posts.json"
+  );
+  const data = await response.json();
 
+  const events = [];
+
+  for (const key in data) {
+    events.push({
+      id: key,
+      ...data[key],
+    });
+  }
+
+  return events;
+}
+
+export default function Login() {
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const allDatas = await getAllEvents();
+
+    console.log(allDatas);
 
     const enteredEmail = emailInputRef.current?.value;
     const enteredPassword = passwordInputRef.current?.value;

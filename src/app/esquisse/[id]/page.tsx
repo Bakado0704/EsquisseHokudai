@@ -36,47 +36,49 @@ function ProductDetailPage(props: Props) {
     tags.push(data);
   });
 
-  async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
+  function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     // event.preventDefault();
+
+
 
     router.push(`/esquisse/${postedId}`);
   }
 
   return (
     <div>
-      <ul>
-        {tags.map((data) => {
-          if (data) {
-            return (
-              <li key={data[0]}>
-                <Link href={`/category/${data[0]}`}>
-                  <p>{data[1]}</p>
-                </Link>
-              </li>
-            );
-          }
-        })}
-      </ul>
-      <h1>{selectedPost.title}</h1>
-      <p>{selectedPost.user.username}</p>
-      <p>{selectedPost.createdAt}</p>
-      <Image src={selectedPost.image} alt="" width={500} height={300} />
-      <p>{selectedPost.description}</p>
-
-      <ul>
-        {esquisse.map((esquisse) => {
-          if (esquisse.id === postedId) {
-            return (
-              <li key={esquisse.createdAt}>
-                <p>{esquisse.user.username}</p>
-                <p>{esquisse.text}</p>
-              </li>
-            );
-          }
-        })}
-      </ul>
-
       <form onSubmit={submitFormHandler}>
+        <ul>
+          {tags.map((data) => {
+            if (data) {
+              return (
+                <li key={data[0]}>
+                  <Link href={`/category/${data[0]}`}>
+                    <p>{data[1]}</p>
+                  </Link>
+                </li>
+              );
+            }
+          })}
+        </ul>
+        <h1>{selectedPost.title}</h1>
+        <p>{selectedPost.user.username}</p>
+        <p>{selectedPost.createdAt}</p>
+        <Image src={selectedPost.image} alt="" width={500} height={300} />
+        <p>{selectedPost.description}</p>
+
+        <ul>
+          {esquisse.map((esquisse) => {
+            if (esquisse.id === postedId) {
+              return (
+                <li key={esquisse.createdAt}>
+                  <p>{esquisse.user.username}</p>
+                  <p>{esquisse.text}</p>
+                </li>
+              );
+            }
+          })}
+        </ul>
+
         <div>
           <label htmlFor="text">コメントを追加する。</label>
           <input type="text" id="text" ref={textInputRef} />
