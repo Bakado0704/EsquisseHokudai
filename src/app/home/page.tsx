@@ -9,61 +9,73 @@ import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { useEffect } from "react";
 import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
+import { getAllEvents } from "@/helpers/api-util";
 
 export default function Page() {
   const dispatch = useDispatch();
-  // const posts = useSelector((state: RootState) => state.post.posts);
-
-  // console.log(posts);
+  const posts = useSelector((state: RootState) => state.post.posts);
 
   useEffect(() => {
-    dispatch(IndicatePost(5));
+    getAllEvents().then(function (result) {
+      dispatch(IndicatePost(result));
+    });
   });
+
+  if (!posts) {
+    <p>Loading...</p>;
+  }
 
   return (
     <div>
       <h1>ホーム</h1>
-      <ul>
-        {dummyData.map((dummyData) => {
-          let tags: (ProjectType | BuildingType | ToolType)[] = [];
+      {posts && (
+        <ul>
+          {dummyData.map((dummyData) => {
+            let tags: (ProjectType | BuildingType | ToolType)[] = [];
 
-          //集合配列tagについて
-          dummyData.category.projectType?.map((data) => {
-            tags.push(data);
-          });
+            //集合配列tagについて
+            dummyData.category.projectType?.map((data) => {
+              tags.push(data);
+            });
 
-          dummyData.category.buildingType?.map((data) => {
-            tags.push(data);
-          });
+            dummyData.category.buildingType?.map((data) => {
+              tags.push(data);
+            });
 
-          dummyData.category.toolType?.map((data) => {
-            tags.push(data);
-          });
+            dummyData.category.toolType?.map((data) => {
+              tags.push(data);
+            });
 
-          return (
-            <li key={dummyData.id}>
-              <Link href={`/esquisse/${dummyData.id}`}>
-                <Image src={dummyData.image} alt="" width={300} height={200} />
-                <ul>
-                  {tags &&
-                    tags.map((data) => {
-                      if (data) {
-                        return (
-                          <li key={data[0]}>
-                            <p>{data[1]}</p>
-                          </li>
-                        );
-                      }
-                    })}
-                </ul>
-                <p>{dummyData.title}</p>
-                <p>{dummyData.user.username}</p>
-                <p>{dummyData.createdAt}</p>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+            return (
+              <li key={dummyData.id}>
+                <Link href={`/esquisse/${dummyData.id}`}>
+                  <Image
+                    src={dummyData.image}
+                    alt=""
+                    width={300}
+                    height={200}
+                  />
+                  <ul>
+                    {tags &&
+                      tags.map((data) => {
+                        if (data) {
+                          return (
+                            <li key={data[0]}>
+                              <p>{data[1]}</p>
+                            </li>
+                          );
+                        }
+                      })}
+                  </ul>
+                  <p>{dummyData.title}</p>
+                  <p>{dummyData.user.username}</p>
+                  <p>{dummyData.createdAt}</p>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      )}
       <Link href="/post">投稿する</Link>
     </div>
   );
