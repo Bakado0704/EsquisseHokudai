@@ -1,9 +1,9 @@
-import User from "../../models/user";
+import Post from "@/models/post";
 
 export type state = {
-  post: User;
+  posts: Post[];
 };
 
-// const initialState: state = {};
+const initialState: state = { posts: [] };
 
-// export default initialState;
+export default initialState;

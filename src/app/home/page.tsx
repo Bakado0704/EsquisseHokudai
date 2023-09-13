@@ -1,12 +1,25 @@
 "use client";
 
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { dummyData } from "@/dummy-data/dummy-data";
 import Image from "next/image";
 import styled, { css } from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
+import { useEffect } from "react";
+import { IndicatePost } from "@/store/post";
+import { RootState } from "@/store/store";
 
 export default function Page() {
+  const dispatch = useDispatch();
+  // const posts = useSelector((state: RootState) => state.post.posts);
+
+  // console.log(posts);
+
+  useEffect(() => {
+    dispatch(IndicatePost(5));
+  });
+
   return (
     <div>
       <h1>ホーム</h1>

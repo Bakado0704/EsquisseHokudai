@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useRef } from "react";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import Link from "next/link";
+import { getAllEvents } from "@/helpers/api-util";
 
 type Props = {
   params: Params;
@@ -38,8 +39,6 @@ function ProductDetailPage(props: Props) {
 
   function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     // event.preventDefault();
-
-
 
     router.push(`/esquisse/${postedId}`);
   }
@@ -97,24 +96,10 @@ function ProductDetailPage(props: Props) {
 //   return data;
 // }
 
-// export async function getStaticProps(context) {
-//   const { params } = context;
+// async function getStaticProps() {
+//   const allDatas = await getAllEvents();
 
-//   const productId = params.pid;
-
-//   const data = await getData();
-
-//   const product = data.products.find((product) => product.id === productId);
-
-//   if (!product) {
-//     return { notFound: true };
-//   }
-
-//   return {
-//     props: {
-//       loadedProduct: product,
-//     },
-//   };
+//   return allDatas;
 // }
 
 // export async function getStaticPaths() {

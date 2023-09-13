@@ -3,24 +3,8 @@
 import Link from "next/link";
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
-
-export async function getAllEvents() {
-  const response = await fetch(
-    "https://react-getting-started-2a850-default-rtdb.firebaseio.com/posts.json"
-  );
-  const data = await response.json();
-
-  const events = [];
-
-  for (const key in data) {
-    events.push({
-      id: key,
-      ...data[key],
-    });
-  }
-
-  return events;
-}
+import { getAllEvents } from "@/helpers/api-util";
+import { dummyData } from "@/dummy-data/dummy-data";
 
 export default function Login() {
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -33,6 +17,7 @@ export default function Login() {
     const allDatas = await getAllEvents();
 
     console.log(allDatas);
+    console.log(dummyData[0]);
 
     const enteredEmail = emailInputRef.current?.value;
     const enteredPassword = passwordInputRef.current?.value;
