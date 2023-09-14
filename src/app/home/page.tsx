@@ -3,58 +3,79 @@
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { dummyData } from "@/dummy-data/dummy-data";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import styled, { css } from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
 import { getAllEvents } from "@/helpers/api-util";
+import Post from "@/models/post";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+} from "firebase/storage";
+import storage from "@/helpers/firebase";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 export default function Page() {
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.post.posts);
+  let imageSources: {
+    imageSource: string;
+    id: string;
+  }[] = [];
 
   useEffect(() => {
     getAllEvents().then(function (result) {
       dispatch(IndicatePost(result));
     });
-  });
+  }, [dispatch]);
 
   if (!posts) {
     <p>Loading...</p>;
   }
+
+  // for (let i = 0; i < posts.length; i++) {
+  //   getDownloadURL(ref(storage, "image/" + posts[i].image))
+  //     .then((url) => {
+  //       imageSources.push({ imageSource: url, id: posts[i].id });
+  //     })
+  //     .catch((error) => {});
+  // }
 
   return (
     <div>
       <h1>ホーム</h1>
       {posts && (
         <ul>
-          {dummyData.map((dummyData) => {
+          {posts.map((post) => {
             let tags: (ProjectType | BuildingType | ToolType)[] = [];
 
             //集合配列tagについて
-            dummyData.category.projectType?.map((data) => {
+            post.category.projectType?.map((data) => {
               tags.push(data);
             });
 
-            dummyData.category.buildingType?.map((data) => {
+            post.category.buildingType?.map((data) => {
               tags.push(data);
             });
 
-            dummyData.category.toolType?.map((data) => {
+            post.category.toolType?.map((data) => {
               tags.push(data);
             });
 
             return (
-              <li key={dummyData.id}>
-                <Link href={`/esquisse/${dummyData.id}`}>
-                  <Image
-                    src={dummyData.image}
-                    alt=""
+              <li key={post.id}>
+                <Link href={`/esquisse/${post.id}`}>
+                  {/* <Image
+                    src={imageSources.find((source) => source.id === post.id)?.imageSource}
+                    alt={`${post.image}`}
                     width={300}
                     height={200}
-                  />
+                  /> */}
                   <ul>
                     {tags &&
                       tags.map((data) => {
@@ -67,9 +88,9 @@ export default function Page() {
                         }
                       })}
                   </ul>
-                  <p>{dummyData.title}</p>
-                  <p>{dummyData.user.username}</p>
-                  <p>{dummyData.createdAt}</p>
+                  <p>{post.title}</p>
+                  <p>{post.user.username}</p>
+                  <p>{post.createdAt}</p>
                 </Link>
               </li>
             );

@@ -1,4 +1,5 @@
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
+import { useState, useCallback } from 'react';
 
 //firebase上のpostsを取得
 export async function getAllEvents() {
@@ -36,7 +37,6 @@ export async function getEventById(id: string) {
 export async function getFilteredEvents(
   dataFilter: ProjectType | BuildingType | ToolType
 ) {
-
   const allPosts = await getAllEvents();
 
   let filteredPosts = allPosts.filter((post) => {
