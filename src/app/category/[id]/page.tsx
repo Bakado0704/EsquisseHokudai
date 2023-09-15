@@ -1,15 +1,31 @@
-import { buildingCategory, dummyData, projectCategory, toolCategory } from "@/dummy-data/dummy-data";
+"use client"
+
+import { buildingCategory, projectCategory, toolCategory } from "@/dummy-data/dummy-data";
+import { getAllEvents } from "@/helpers/api-util";
 import CategoryList from "@/models/categoryList";
+import { IndicatePost } from "@/store/post";
+import { RootState } from "@/store/store";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 type Props = {
   params: Params;
 };
 
 export default function Page(props: Props) {
+  const dispatch = useDispatch();
+  const posts = useSelector((state: RootState) => state.post.posts);
+
+  useEffect(() => {
+    getAllEvents().then(function (result) {
+      dispatch(IndicatePost(result));
+    });
+  }, [dispatch]);
+
   const postedId = props.params.id;
 
   let tags: (CategoryList)[] = [];
@@ -32,30 +48,30 @@ export default function Page(props: Props) {
     <div>
       <h1>{categoryTitle}</h1>
       <ul>
-        {dummyData.map((dummyData) => {
+        {posts.map((post) => {
           let tags: (ProjectType | BuildingType | ToolType)[] = [];
           let selectedtags: string[] = [];
 
           //集合配列tagについて
-          dummyData.category.projectType?.map((data) => {
+          post.category.projectType?.map((data) => {
             tags.push(data);
             selectedtags.push(data[0]);
           });
-          dummyData.category.buildingType?.map((data) => {
+          post.category.buildingType?.map((data) => {
             tags.push(data);
             selectedtags.push(data[0]);
           });
-          dummyData.category.toolType?.map((data) => {
+          post.category.toolType?.map((data) => {
             tags.push(data);
             selectedtags.push(data[0]);
           });
 
           if (selectedtags.includes(postedId)) {
             return (
-              <li key={dummyData.id}>
-                <Link href={`/esquisse/${dummyData.id}`}>
+              <li key={post.id}>
+                <Link href={`/esquisse/${post.id}`}>
                   <Image
-                    src={dummyData.image}
+                    src={post.imageSource}
                     alt=""
                     width={300}
                     height={200}
@@ -72,9 +88,9 @@ export default function Page(props: Props) {
                         }
                       })}
                   </ul>
-                  <p>{dummyData.title}</p>
-                  <p>{dummyData.user.username}</p>
-                  <p>{dummyData.createdAt}</p>
+                  <h1>{post.title}</h1>
+                  <p>{post.user.username}</p>
+                  <p>{post.createdAt}</p>
                 </Link>
               </li>
             );

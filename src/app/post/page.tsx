@@ -6,7 +6,6 @@ import {
   toolCategory,
 } from "@/dummy-data/dummy-data";
 import storage from "@/helpers/firebase";
-import CategoryList from "@/models/categoryList";
 import {
   getDownloadURL,
   ref,
@@ -226,7 +225,6 @@ export default function Page() {
           <label htmlFor="description">内容</label>
           <input type="text" id="description" ref={descriptionInputRef} />
         </div>
-
         <button>投稿する</button>
       </form>
     </div>

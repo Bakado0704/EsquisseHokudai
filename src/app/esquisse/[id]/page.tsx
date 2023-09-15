@@ -1,24 +1,40 @@
 "use client";
 
 import Image from "next/image";
-import { dummyData, esquisse } from "@/dummy-data/dummy-data";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { useRouter } from "next/navigation";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useEffect, useRef } from "react";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import Link from "next/link";
-import { getAllEvents } from "@/helpers/api-util";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { getAllEsquisses, getAllEvents } from "@/helpers/api-util";
+import { IndicateEsquisse, IndicatePost } from "@/store/post";
 
 type Props = {
   params: Params;
 };
 
-function ProductDetailPage(props: Props) {
+function Esquisse(props: Props) {
   const router = useRouter();
+  const dispatch = useDispatch();
   const textInputRef = useRef<HTMLInputElement | null>(null);
   const postedId = props.params.id;
+  const posts = useSelector((state: RootState) => state.post.posts);
+  const esquisses = useSelector((state: RootState) => state.post.esquisses);
+  const selectedPost = posts.find((post) => post.id === postedId);
+  const selectedEsquisse = esquisses.filter(
+    (esquisse) => esquisse.id === postedId
+  );
 
-  const selectedPost = dummyData.find((post) => post.id === postedId);
+  useEffect(() => {
+    getAllEvents().then(function (result) {
+      dispatch(IndicatePost(result));
+    });
+    getAllEsquisses().then(function (result) {
+      dispatch(IndicateEsquisse(result));
+    });
+  }, [dispatch]);
 
   if (!selectedPost) {
     return <p>Loading...</p>;
@@ -37,10 +53,37 @@ function ProductDetailPage(props: Props) {
     tags.push(data);
   });
 
-  function submitFormHandler(event: FormEvent<HTMLFormElement>) {
-    // event.preventDefault();
+  async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-    router.push(`/esquisse/${postedId}`);
+    const enteredText = textInputRef.current?.value;
+
+    const reqBody = {
+      id: props.params.id,
+      description: enteredText,
+      createdAt: new Date().toDateString(),
+      user: {
+        id: "c1",
+        username: "Bakado0704",
+        email: "kado_hiroki@yahoo.co.jp",
+        login: true,
+        emailVerified: true,
+        passwordHashed: "KadoHiroki",
+      },
+    };
+
+    console.log(reqBody);
+
+    await fetch(
+      "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisse.json",
+      {
+        method: "POST",
+        body: JSON.stringify(reqBody),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => response.json());
   }
 
   return (
@@ -62,19 +105,17 @@ function ProductDetailPage(props: Props) {
         <h1>{selectedPost.title}</h1>
         <p>{selectedPost.user.username}</p>
         <p>{selectedPost.createdAt}</p>
-        <Image src={selectedPost.image} alt="" width={500} height={300} />
+        <Image src={selectedPost.imageSource} alt="" width={500} height={300} />
         <p>{selectedPost.description}</p>
 
         <ul>
-          {esquisse.map((esquisse) => {
-            if (esquisse.id === postedId) {
-              return (
-                <li key={esquisse.createdAt}>
-                  <p>{esquisse.user.username}</p>
-                  <p>{esquisse.text}</p>
-                </li>
-              );
-            }
+          {selectedEsquisse.map((esquisse) => {
+            return (
+              <li key={esquisse.createdAt}>
+                <p>{esquisse.user.username}</p>
+                <p>{esquisse.description}</p>
+              </li>
+            );
           })}
         </ul>
 
@@ -88,31 +129,4 @@ function ProductDetailPage(props: Props) {
   );
 }
 
-// async function getData() {
-//   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
-//   const jsonData = await fs.readFile(filePath);
-//   const data = JSON.parse(jsonData);
-
-//   return data;
-// }
-
-// async function getStaticProps() {
-//   const allDatas = await getAllEvents();
-
-//   return allDatas;
-// }
-
-// export async function getStaticPaths() {
-//   const data = await getData();
-
-//   const ids = data.products.map((product) => product.id);
-
-//   const pathWithParams = ids.map((id) => ({ params: { pid: id } }));
-
-//   return {
-//     paths: pathWithParams,
-//     fallback: true,
-//   };
-// }
-
-export default ProductDetailPage;
+export default Esquisse;

@@ -12,6 +12,7 @@ export default class Post implements Post {
     public title: string,
     public category: Category,
     public image: StaticImageData,
+    public imageSource: string,
     public description: string
   ) {
     this.id = id;
@@ -20,6 +21,7 @@ export default class Post implements Post {
     this.title = title;
     this.category = category;
     this.image = image;
+    this.imageSource = imageSource
     this.description = description;
   }
 }

@@ -10,8 +10,12 @@ const PostRedux = createSlice({
     IndicatePost: (state, posts) => {
       state.posts = posts.payload;
     },
+    IndicateEsquisse: (state, esquisses) => {
+      state.esquisses = esquisses.payload;
+    },
   },
 });
 
 export const IndicatePost = PostRedux.actions.IndicatePost;
+export const IndicateEsquisse = PostRedux.actions.IndicateEsquisse;
 export default PostRedux.reducer;

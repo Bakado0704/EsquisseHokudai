@@ -9,5 +9,6 @@ export type Post = {
   title: string;
   category: Category;
   image: StaticImageData;
+  imageSource: string;
   description: string;
 }
