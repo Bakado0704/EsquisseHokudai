@@ -4,7 +4,7 @@ import {
   buildingCategory,
   projectCategory,
   toolCategory,
-} from "@/dummy-data/dummy-data";
+} from "@/categoryData/categoryData";
 import storage from "@/helpers/firebase";
 import {
   getDownloadURL,

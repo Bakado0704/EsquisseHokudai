@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "@/helpers/api-util";
 
 export default function Login() {
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -12,14 +13,14 @@ export default function Login() {
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-       const enteredEmail = emailInputRef.current?.value;
+    const enteredEmail = emailInputRef.current?.value;
     const enteredPassword = passwordInputRef.current?.value;
 
-    const reqBody = { email: enteredEmail, password: enteredPassword };
-
-    console.log(reqBody);
-
-    router.push("/home");
+    if (enteredEmail && enteredPassword) {
+      await signIn(enteredEmail, enteredPassword).then(() => {
+        router.push("/home");
+      });
+    }
   }
 
   return (

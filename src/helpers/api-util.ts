@@ -1,9 +1,81 @@
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { getDownloadURL, ref } from "firebase/storage";
-import { useState, useCallback } from "react";
 import storage from "./firebase";
-import Post from "@/models/post";
 import { StaticImageData } from "next/image";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+  updatePassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+const actionCodeSettings = {
+  url: "http://localhost:3000/register/email-send/email-verified",
+  handleCodeInApp: true,
+};
+
+//ユーザー情報取得
+export const getUser = async () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  if (user !== null) {
+    const displayName = user.displayName;
+    const email = user.email;
+    const emailVerified = user.emailVerified;
+    const uid = user.uid;
+
+    console.log({ displayName, email, emailVerified, uid });
+  }
+};
+
+//サインイン
+export const signIn = async (email: string, password: string) => {
+  const auth = getAuth();
+  await signInWithEmailAndPassword(auth, email, password);
+};
+
+//メール登録
+export const emailRegister = async (email: string, password: string) => {
+  const auth = getAuth();
+  await createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  if (auth.currentUser) {
+    await sendEmailVerification(auth.currentUser, actionCodeSettings);
+  }
+};
+
+//アカウント作成
+export const createAccount = async (displayName: string, password: string) => {
+  const auth = getAuth();
+  if (auth.currentUser) {
+    await updateProfile(auth.currentUser, {
+      displayName: displayName,
+    })
+      .then(() => {
+        console.log("ニックネーム登録できた");
+      })
+      .catch(() => {
+        console.log("ニックネーム登録できない");
+      });
+
+    await updatePassword(auth.currentUser, password)
+      .then(() => {
+        console.log("パスワード登録できた");
+      })
+      .catch(() => {
+        console.log("パスワード登録できない");
+      });
+  }
+};
 
 //firebase上のpostsを取得
 export async function getAllEvents() {

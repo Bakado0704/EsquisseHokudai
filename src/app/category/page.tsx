@@ -1,4 +1,4 @@
-import { buildingCategory } from "@/dummy-data/dummy-data";
+import { buildingCategory } from "@/categoryData/categoryData";
 import Image from "next/image";
 import Link from "next/link";
 

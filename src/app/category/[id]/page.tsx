@@ -1,6 +1,6 @@
 "use client"
 
-import { buildingCategory, projectCategory, toolCategory } from "@/dummy-data/dummy-data";
+import { buildingCategory, projectCategory, toolCategory } from "@/categoryData/categoryData";
 import { getAllEvents } from "@/helpers/api-util";
 import CategoryList from "@/models/categoryList";
 import { IndicatePost } from "@/store/post";

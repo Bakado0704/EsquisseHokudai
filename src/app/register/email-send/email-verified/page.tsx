@@ -2,23 +2,29 @@
 
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { styled } from "styled-components";
+import { createAccount } from "@/helpers/api-util";
 
 export default function Page() {
-  const emailInputRef = useRef<HTMLInputElement | null>(null);
+  const nameInputRef = useRef<HTMLInputElement | null>(null);
   const passwordInputRef = useRef<HTMLInputElement | null>(null);
   const passwordConfirmRef = useRef<HTMLInputElement | null>(null);
-
   const router = useRouter();
 
   function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const enteredName = nameInputRef.current?.value;
     const enteredInputPassword = passwordInputRef.current?.value;
     const enteredConfirmPassword = passwordConfirmRef.current?.value;
 
-    if (enteredInputPassword === enteredConfirmPassword) {
-      router.push("/home");
+    if (
+      enteredName &&
+      enteredInputPassword &&
+      enteredInputPassword === enteredConfirmPassword
+    ) {
+      createAccount(enteredName, enteredInputPassword).then(() => {
+        router.push("/home");
+      });
     }
   }
 
@@ -28,7 +34,7 @@ export default function Page() {
       <form onSubmit={submitFormHandler}>
         <div>
           <label htmlFor="name">ニックネーム</label>
-          <input type="text" id="name" ref={emailInputRef} />
+          <input type="text" id="name" ref={nameInputRef} />
         </div>
         <div>
           <label htmlFor="password">パスワード</label>

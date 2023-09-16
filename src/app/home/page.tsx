@@ -8,7 +8,7 @@ import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { useEffect } from "react";
 import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
-import { getAllEvents } from "@/helpers/api-util";
+import { getAllEvents, getUser } from "@/helpers/api-util";
 
 export default function Page() {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export default function Page() {
     <p>Loading...</p>;
   }
 
-  console.log(posts);
+  getUser();
 
   return (
     <div>
