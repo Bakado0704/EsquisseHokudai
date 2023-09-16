@@ -2,7 +2,8 @@
 
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { createAccount } from "@/helpers/api-util";
+import { createAccount, getUser } from "@/helpers/api-util";
+import NavHeader from "@/components/nav/NavHeader/NavHeader";
 
 export default function Page() {
   const nameInputRef = useRef<HTMLInputElement | null>(null);
@@ -10,7 +11,7 @@ export default function Page() {
   const passwordConfirmRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
 
-  function submitFormHandler(event: FormEvent<HTMLFormElement>) {
+  async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const enteredName = nameInputRef.current?.value;
@@ -23,13 +24,18 @@ export default function Page() {
       enteredInputPassword === enteredConfirmPassword
     ) {
       createAccount(enteredName, enteredInputPassword).then(() => {
-        router.push("/home");
+        getUser().then((user) => {
+          if (user?.displayName) {
+            router.push("/home");
+          }
+        });
       });
     }
   }
 
   return (
     <div>
+      <NavHeader />
       <h1>メールアドレスの受信が確認されました！</h1>
       <form onSubmit={submitFormHandler}>
         <div>

@@ -1,7 +1,8 @@
 "use client"
 
 import { buildingCategory, projectCategory, toolCategory } from "@/categoryData/categoryData";
-import { getAllEvents } from "@/helpers/api-util";
+import NavHeader from "@/components/nav/NavHeader/NavHeader";
+import { getAllPosts } from "@/helpers/api-util";
 import CategoryList from "@/models/categoryList";
 import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
@@ -21,7 +22,7 @@ export default function Page(props: Props) {
   const posts = useSelector((state: RootState) => state.post.posts);
 
   useEffect(() => {
-    getAllEvents().then(function (result) {
+    getAllPosts().then(function (result) {
       dispatch(IndicatePost(result));
     });
   }, [dispatch]);
@@ -46,6 +47,7 @@ export default function Page(props: Props) {
 
   return (
     <div>
+      <NavHeader />
       <h1>{categoryTitle}</h1>
       <ul>
         {posts.map((post) => {

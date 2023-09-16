@@ -3,7 +3,6 @@
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { FormEvent, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { getAllEvents } from "@/helpers/api-util";
 import { IndicatePost } from "@/store/post";
 
 type Props = {
@@ -16,7 +15,7 @@ export default function FormEsquisse(props: Props) {
   const enteredText = textInputRef.current?.value;
 
   //   useEffect(() => {
-  //     getAllEvents().then(function (result) {
+  //     getAllPosts().then(function (result) {
   //       dispatch(IndicatePost(result));
   //     });
   //   }, [dispatch]);

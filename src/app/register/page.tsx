@@ -3,6 +3,7 @@
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { emailRegister } from "@/helpers/api-util";
+import NavHeader from "@/components/nav/NavHeader/NavHeader";
 
 export default function Page() {
   const emailInputRef = useRef<HTMLInputElement | null>(null);
@@ -22,6 +23,7 @@ export default function Page() {
 
   return (
     <div>
+      <NavHeader />
       <h1>アカウントの作成</h1>
       <p>
         EsquisseChatのアカウントを作成するために、メールアドレスとパスワードをご入力下さい。

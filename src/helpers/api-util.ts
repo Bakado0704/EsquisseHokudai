@@ -9,6 +9,7 @@ import {
   updateProfile,
   updatePassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 const actionCodeSettings = {
@@ -20,20 +21,27 @@ const actionCodeSettings = {
 export const getUser = async () => {
   const auth = getAuth();
   const user = auth.currentUser;
-  if (user !== null) {
-    const displayName = user.displayName;
-    const email = user.email;
-    const emailVerified = user.emailVerified;
-    const uid = user.uid;
+  // if (user !== null) {
+  //   const displayName = user.displayName;
+  //   const email = user.email;
+  //   const emailVerified = user.emailVerified;
+  //   const uid = user.uid;
 
-    console.log({ displayName, email, emailVerified, uid });
-  }
+  //   console.log({ displayName, email, emailVerified, uid });
+  // }
+  return user;
 };
 
 //サインイン
 export const signIn = async (email: string, password: string) => {
   const auth = getAuth();
   await signInWithEmailAndPassword(auth, email, password);
+};
+
+//サインアウト
+export const signout = async () => {
+  const auth = getAuth();
+  await signOut(auth);
 };
 
 //メール登録
@@ -56,6 +64,7 @@ export const emailRegister = async (email: string, password: string) => {
 //アカウント作成
 export const createAccount = async (displayName: string, password: string) => {
   const auth = getAuth();
+
   if (auth.currentUser) {
     await updateProfile(auth.currentUser, {
       displayName: displayName,
@@ -77,8 +86,78 @@ export const createAccount = async (displayName: string, password: string) => {
   }
 };
 
+//投稿をsubmit
+export const postSubmit = async (
+  title: string,
+  category: {
+    projectType: ProjectType;
+    buildingType: BuildingType;
+    toolType: ToolType;
+  },
+  image: string,
+  description: string
+) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  if (user) {
+    await fetch(
+      "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisse.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          id: new Date().getTime().toString(),
+          createdAt: new Date().toDateString(),
+          title: title,
+          category: category,
+          image: image,
+          description: description,
+          user: {
+            username: user.displayName,
+            email: user.email,
+            emailVerified: user.emailVerified,
+            uid: user.uid,
+          },
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => response.json());
+  }
+};
+
+//エスキスをsubmit
+export const esquisseSubmit = async (id: string, description: string) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  if (user) {
+    await fetch(
+      "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisse.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          id: id,
+          description: description,
+          createdAt: new Date().toDateString(),
+          user: {
+            username: user.displayName,
+            email: user.email,
+            emailVerified: user.emailVerified,
+            uid: user.uid,
+          },
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => response.json());
+  }
+};
+
 //firebase上のpostsを取得
-export async function getAllEvents() {
+export async function getAllPosts() {
   const response = await fetch(
     "https://react-getting-started-2a850-default-rtdb.firebaseio.com/posts.json"
   );
@@ -120,33 +199,3 @@ export const getImage = async (image: StaticImageData) => {
   const res = await getDownloadURL(ref(storage, "image/" + image));
   return res;
 };
-
-//抽出されたpostを返す
-export async function getFeaturedEvents() {
-  const allPosts = await getAllEvents();
-  return allPosts.filter((post) => post.isFeatured);
-}
-
-//合致したpostを返す
-export async function getEventById(id: string) {
-  const allPosts = await getAllEvents();
-
-  return allPosts.find((post) => post.id === id);
-}
-
-//カテゴリに合うpostsを返す
-export async function getFilteredEvents(
-  dataFilter: ProjectType | BuildingType | ToolType
-) {
-  const allPosts = await getAllEvents();
-
-  let filteredPosts = allPosts.filter((post) => {
-    return (
-      post.ProjectType === dataFilter[0] ||
-      post.BuildingType === dataFilter[0] ||
-      post.ToolType === dataFilter[0]
-    );
-  });
-
-  return filteredPosts;
-}

@@ -5,6 +5,8 @@ import {
   projectCategory,
   toolCategory,
 } from "@/categoryData/categoryData";
+import NavHeader from "@/components/nav/NavHeader/NavHeader";
+import { postSubmit } from "@/helpers/api-util";
 import storage from "@/helpers/firebase";
 import {
   getDownloadURL,
@@ -63,39 +65,13 @@ export default function Page() {
       }
     }
 
-    const reqBody = {
-      id: new Date().getTime().toString(),
-      createdAt: new Date().toDateString(),
-      title: enteredTitle,
-      category: {
-        projectType: projectCategoryChecked,
-        buildingType: buildingCategoryChecked,
-        toolType: toolCategoryChecked,
-      },
-      image: imageName,
-      description: enteredDescription,
-      user: {
-        id: "c1",
-        username: "Bakado0704",
-        email: "kado_hiroki@yahoo.co.jp",
-        login: true,
-        emailVerified: true,
-        passwordHashed: "KadoHiroki",
-      },
-    };
-
-    await fetch(
-      "https://react-getting-started-2a850-default-rtdb.firebaseio.com/posts.json",
-      {
-        method: "POST",
-        body: JSON.stringify(reqBody),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => router.push("/home"));
+    await postSubmit(
+      //@ts-ignore
+      enteredTitle,
+      { projectCategoryChecked, buildingCategoryChecked, toolCategoryChecked },
+      imageName,
+      enteredDescription
+    ).then((data) => router.push("/home"));
   }
 
   const onFileUploadToFirebase = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -134,6 +110,7 @@ export default function Page() {
 
   return (
     <div>
+      <NavHeader />
       <p>投稿</p>
       <form onSubmit={submitFormHandler}>
         <div>

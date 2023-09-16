@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import initialState from "./initialState";
-import { getAllEvents } from "@/helpers/api-util";
 import Post from "@/models/post";
 
 const PostRedux = createSlice({

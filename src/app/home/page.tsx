@@ -8,14 +8,15 @@ import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { useEffect } from "react";
 import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
-import { getAllEvents, getUser } from "@/helpers/api-util";
+import { getAllPosts, getUser } from "@/helpers/api-util";
+import NavHeader from "@/components/nav/NavHeader/NavHeader";
 
 export default function Page() {
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.post.posts);
 
   useEffect(() => {
-    getAllEvents().then(function (result) {
+    getAllPosts().then(function (result) {
       dispatch(IndicatePost(result));
     });
   }, [dispatch]);
@@ -24,10 +25,13 @@ export default function Page() {
     <p>Loading...</p>;
   }
 
-  getUser();
+  const user = getUser();
+
+  console.log(user);
 
   return (
     <div>
+      <NavHeader />
       <h1>ホーム</h1>
       {posts && (
         <ul>

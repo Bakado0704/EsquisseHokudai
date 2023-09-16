@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/helpers/api-util";
+import NavHeader from "@/components/nav/NavHeader/NavHeader";
 
 export default function Login() {
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -25,6 +26,7 @@ export default function Login() {
 
   return (
     <div>
+      <NavHeader />
       <h1>ログイン</h1>
       <form onSubmit={submitFormHandler}>
         <div>

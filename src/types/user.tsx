@@ -4,5 +4,4 @@ export type User = {
   email: string;
   login: boolean;
   emailVerified: boolean;
-  passwordHashed: string;
 };

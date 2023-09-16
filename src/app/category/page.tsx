@@ -1,10 +1,12 @@
 import { buildingCategory } from "@/categoryData/categoryData";
+import NavHeader from "@/components/nav/NavHeader/NavHeader";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Page() {
   return (
     <div>
+      <NavHeader />
       <h1>カテゴリ</h1>
       <ul>
         {buildingCategory.map((category) => {

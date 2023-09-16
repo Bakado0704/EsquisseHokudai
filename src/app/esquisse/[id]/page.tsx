@@ -8,8 +8,14 @@ import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { getAllEsquisses, getAllEvents } from "@/helpers/api-util";
+import {
+  esquisseSubmit,
+  getAllEsquisses,
+  getAllPosts,
+  getUser,
+} from "@/helpers/api-util";
 import { IndicateEsquisse, IndicatePost } from "@/store/post";
+import NavHeader from "@/components/nav/NavHeader/NavHeader";
 
 type Props = {
   params: Params;
@@ -28,7 +34,7 @@ function Esquisse(props: Props) {
   );
 
   useEffect(() => {
-    getAllEvents().then(function (result) {
+    getAllPosts().then(function (result) {
       dispatch(IndicatePost(result));
     });
     getAllEsquisses().then(function (result) {
@@ -39,6 +45,8 @@ function Esquisse(props: Props) {
   if (!selectedPost) {
     return <p>Loading...</p>;
   }
+
+  console.log(selectedEsquisse);
 
   let tags: (ProjectType | BuildingType | ToolType)[] = [];
 
@@ -56,69 +64,57 @@ function Esquisse(props: Props) {
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const user = await getUser();
+
+    console.log(user);
+
     const enteredText = textInputRef.current?.value;
 
-    const reqBody = {
-      id: props.params.id,
-      description: enteredText,
-      createdAt: new Date().toDateString(),
-      user: {
-        id: "c1",
-        username: "Bakado0704",
-        email: "kado_hiroki@yahoo.co.jp",
-        login: true,
-        emailVerified: true,
-        passwordHashed: "KadoHiroki",
-      },
-    };
-
-    console.log(reqBody);
-
-    await fetch(
-      "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisse.json",
-      {
-        method: "POST",
-        body: JSON.stringify(reqBody),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then((response) => response.json());
+    await esquisseSubmit(
+      props.params.id,
+      //@ts-ignore
+      enteredText,
+    ).then(() => {
+      getAllEsquisses().then(function (result) {
+        dispatch(IndicateEsquisse(result));
+      });
+    });
   }
 
   return (
     <div>
-      <form onSubmit={submitFormHandler}>
-        <ul>
-          {tags.map((data) => {
-            if (data) {
-              return (
-                <li key={data[0]}>
-                  <Link href={`/category/${data[0]}`}>
-                    <p>{data[1]}</p>
-                  </Link>
-                </li>
-              );
-            }
-          })}
-        </ul>
-        <h1>{selectedPost.title}</h1>
-        <p>{selectedPost.user.username}</p>
-        <p>{selectedPost.createdAt}</p>
-        <Image src={selectedPost.imageSource} alt="" width={500} height={300} />
-        <p>{selectedPost.description}</p>
-
-        <ul>
-          {selectedEsquisse.map((esquisse) => {
+      <NavHeader />
+      <ul>
+        {tags.map((data) => {
+          if (data) {
             return (
-              <li key={esquisse.createdAt}>
-                <p>{esquisse.user.username}</p>
-                <p>{esquisse.description}</p>
+              <li key={data[0]}>
+                <Link href={`/category/${data[0]}`}>
+                  <p>{data[1]}</p>
+                </Link>
               </li>
             );
-          })}
-        </ul>
+          }
+        })}
+      </ul>
+      <h1>{selectedPost.title}</h1>
+      <p>{selectedPost.user.username}</p>
+      <p>{selectedPost.createdAt}</p>
+      <Image src={selectedPost.imageSource} alt="" width={500} height={300} />
+      <p>{selectedPost.description}</p>
 
+      <ul>
+        {selectedEsquisse.map((esquisse) => {
+          return (
+            <li key={esquisse.createdAt}>
+              <p>{esquisse.user.username}</p>
+              <p>{esquisse.description}</p>
+            </li>
+          );
+        })}
+      </ul>
+
+      <form onSubmit={submitFormHandler}>
         <div>
           <label htmlFor="text">コメントを追加する。</label>
           <input type="text" id="text" ref={textInputRef} />
