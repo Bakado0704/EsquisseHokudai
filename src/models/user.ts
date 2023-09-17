@@ -1,13 +1,13 @@
 export default class User implements User {
   constructor(
-    public id: string,
-    public username: string,
+    public uid: string,
+    public displayName: string,
     public email: string,
     public login: boolean,
     public emailVerified: boolean,
   ) {
-    this.username = username;
-    this.id = id;
+    this.displayName = displayName;
+    this.uid = uid;
     this.email = email;
     this.login = login;
     this.emailVerified = emailVerified;

@@ -6,14 +6,20 @@ import Image from "next/image";
 import styled, { css } from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { useEffect } from "react";
-import { IndicatePost } from "@/store/post";
+import { IndicatePost, IndicateUser } from "@/store/post";
 import { RootState } from "@/store/store";
-import { getAllPosts, getUser } from "@/helpers/api-util";
+import { getAllPosts, getUser, postGet } from "@/helpers/api-util";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
+// import { changePost } from "@/helpers/api-change";
 
 export default function Page() {
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.post.posts);
+  // const user = getUser();
+  // const changePostHandler = () => {};
+  // const deletePostHandler = () => {};
+
+  postGet();
 
   useEffect(() => {
     getAllPosts().then(function (result) {
@@ -24,10 +30,6 @@ export default function Page() {
   if (!posts) {
     <p>Loading...</p>;
   }
-
-  const user = getUser();
-
-  console.log(user);
 
   return (
     <div>
@@ -54,6 +56,12 @@ export default function Page() {
 
             return (
               <li key={post.id}>
+                {/* {user && post.user.uid === user.uid && (
+                  <button onClick={changePostHandler}>変更</button>
+                )}
+                {user && post.user.uid === user.uid && (
+                  <button onClick={deletePostHandler}>消去</button>
+                )} */}
                 <Link href={`/esquisse/${post.id}`}>
                   {post.image && (
                     <Image
@@ -76,7 +84,7 @@ export default function Page() {
                       })}
                   </ul>
                   <h1>{post.title}</h1>
-                  <p>{post.user.username}</p>
+                  <p>{post.user.displayName}</p>
                   <p>{post.createdAt}</p>
                 </Link>
               </li>

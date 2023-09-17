@@ -66,6 +66,7 @@ export default function Page() {
     }
 
     await postSubmit(
+      new Date().getTime().toString(),
       //@ts-ignore
       enteredTitle,
       { projectCategoryChecked, buildingCategoryChecked, toolCategoryChecked },
@@ -112,7 +113,7 @@ export default function Page() {
     <div>
       <NavHeader />
       <p>投稿</p>
-
+      
       <form onSubmit={submitFormHandler}>
         <div>
           <label htmlFor="title">タイトル</label>

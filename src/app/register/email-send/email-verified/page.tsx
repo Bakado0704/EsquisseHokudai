@@ -10,6 +10,7 @@ export default function Page() {
   const passwordInputRef = useRef<HTMLInputElement | null>(null);
   const passwordConfirmRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
+  const user = getUser();
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -24,11 +25,9 @@ export default function Page() {
       enteredInputPassword === enteredConfirmPassword
     ) {
       createAccount(enteredName, enteredInputPassword).then(() => {
-        getUser().then((user) => {
-          if (user?.displayName) {
-            router.push("/home");
-          }
-        });
+        if (user?.displayName) {
+          router.push("/home");
+        }
       });
     }
   }

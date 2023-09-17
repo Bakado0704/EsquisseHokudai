@@ -91,7 +91,7 @@ export default function Page(props: Props) {
                       })}
                   </ul>
                   <h1>{post.title}</h1>
-                  <p>{post.user.username}</p>
+                  <p>{post.user.displayName}</p>
                   <p>{post.createdAt}</p>
                 </Link>
               </li>

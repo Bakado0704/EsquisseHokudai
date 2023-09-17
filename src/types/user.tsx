@@ -1,6 +1,6 @@
 export type User = {
-  id: string;
-  username: string;
+  uid: string;
+  displayName: string;
   email: string;
   login: boolean;
   emailVerified: boolean;

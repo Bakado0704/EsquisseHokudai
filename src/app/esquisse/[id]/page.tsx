@@ -32,6 +32,11 @@ function Esquisse(props: Props) {
   const selectedEsquisse = esquisses.filter(
     (esquisse) => esquisse.id === postedId
   );
+  const user = getUser();
+  const changePostHandler = () => {};
+  const deletePostHandler = () => {};
+  const changeEsquisseHandler = () => {};
+  const deleteEsquisseHandler = () => {};
 
   useEffect(() => {
     getAllPosts().then(function (result) {
@@ -45,8 +50,6 @@ function Esquisse(props: Props) {
   if (!selectedPost) {
     return <p>Loading...</p>;
   }
-
-  console.log(selectedEsquisse);
 
   let tags: (ProjectType | BuildingType | ToolType)[] = [];
 
@@ -64,21 +67,18 @@ function Esquisse(props: Props) {
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const user = await getUser();
-
-    console.log(user);
-
     const enteredText = textInputRef.current?.value;
 
     await esquisseSubmit(
       props.params.id,
       //@ts-ignore
-      enteredText,
+      enteredText
     ).then(() => {
       getAllEsquisses().then(function (result) {
         dispatch(IndicateEsquisse(result));
       });
-    });
+      // router.push("/home");
+    })
   }
 
   return (
@@ -97,8 +97,14 @@ function Esquisse(props: Props) {
           }
         })}
       </ul>
+      {user && selectedPost.user.uid === user.uid && (
+        <button onClick={changePostHandler}>変更</button>
+      )}
+      {user && selectedPost.user.uid === user.uid && (
+        <button onClick={deletePostHandler}>消去</button>
+      )}
       <h1>{selectedPost.title}</h1>
-      <p>{selectedPost.user.username}</p>
+      <p>{selectedPost.user.displayName}</p>
       <p>{selectedPost.createdAt}</p>
       <Image src={selectedPost.imageSource} alt="" width={500} height={300} />
       <p>{selectedPost.description}</p>
@@ -106,8 +112,14 @@ function Esquisse(props: Props) {
       <ul>
         {selectedEsquisse.map((esquisse) => {
           return (
-            <li key={esquisse.createdAt}>
-              <p>{esquisse.user.username}</p>
+            <li key={esquisse.key}>
+              {user && esquisse.user.uid === user.uid && (
+                <button onClick={changeEsquisseHandler}>変更</button>
+              )}
+              {user && esquisse.user.uid === user.uid && (
+                <button onClick={deleteEsquisseHandler}>消去</button>
+              )}
+              <p>{esquisse.user.displayName}</p>
               <p>{esquisse.description}</p>
             </li>
           );

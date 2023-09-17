@@ -18,9 +18,8 @@ const actionCodeSettings = {
 };
 
 //ユーザー情報取得
-export const getUser = async () => {
-  const auth = getAuth();
-  const user = auth.currentUser;
+export const getUser = () => {
+  const user = getAuth().currentUser;
   // if (user !== null) {
   //   const displayName = user.displayName;
   //   const email = user.email;
@@ -102,7 +101,7 @@ export const postSubmit = async (
 
   if (user) {
     await fetch(
-      "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisse.json",
+      "https://react-getting-started-2a850-default-rtdb.firebaseio.com/posts.json",
       {
         method: "POST",
         body: JSON.stringify({
@@ -113,9 +112,8 @@ export const postSubmit = async (
           image: image,
           description: description,
           user: {
-            username: user.displayName,
+            displayName: user.displayName,
             email: user.email,
-            emailVerified: user.emailVerified,
             uid: user.uid,
           },
         }),
@@ -125,6 +123,21 @@ export const postSubmit = async (
       }
     ).then((response) => response.json());
   }
+};
+
+//投稿をget
+export const postGet = async () => {
+  const getPost = await fetch(
+    "https://react-getting-started-2a850-default-rtdb.firebaseio.com/posts.json",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  console.log(getPost.json());
 };
 
 //エスキスをsubmit
@@ -139,12 +152,12 @@ export const esquisseSubmit = async (id: string, description: string) => {
         method: "POST",
         body: JSON.stringify({
           id: id,
+          key: new Date().getTime().toString(),
           description: description,
           createdAt: new Date().toDateString(),
           user: {
-            username: user.displayName,
+            displayName: user.displayName,
             email: user.email,
-            emailVerified: user.emailVerified,
             uid: user.uid,
           },
         }),
