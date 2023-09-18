@@ -6,8 +6,9 @@ import {
   toolCategory,
 } from "@/categoryData/categoryData";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
-import { postSubmit } from "@/helpers/api-util";
+import { changePost } from "@/helpers/api-change";
 import storage from "@/helpers/firebase";
+import { RootState } from "@/store/store";
 import {
   getDownloadURL,
   ref,
@@ -15,11 +16,17 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
-export default function Page() {
+type Props = {
+  params: Params;
+};
+
+export default function Page(props: Props) {
   const titleInputRef = useRef<HTMLInputElement | null>(null);
   const descriptionInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -28,6 +35,12 @@ export default function Page() {
   const [isUploaded, setIsUploaded] = useState(false);
   const [imageSource, setImageSource] = useState<string | StaticImport>();
   const [imageName, setImageName] = useState<string>();
+
+  const postedId = props.params.id;
+  const posts = useSelector((state: RootState) => state.post.posts);
+  const selectedPost = posts.find((post) => post.id === postedId);
+  //@ts-ignore
+  const index = posts.indexOf(selectedPost);
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -65,14 +78,17 @@ export default function Page() {
       }
     }
 
-    await postSubmit(
-      new Date().getTime().toString(),
+    await changePost(
+      postedId,
+      index,
       //@ts-ignore
       enteredTitle,
       { projectCategoryChecked, buildingCategoryChecked, toolCategoryChecked },
       imageName,
       enteredDescription
-    ).then((data) => router.push("/home"));
+    ).then(() => {
+      router.push("/home");
+    });
   }
 
   const onFileUploadToFirebase = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,8 +128,7 @@ export default function Page() {
   return (
     <div>
       <NavHeader />
-      <p>投稿</p>
-      
+      <h1>投稿修正</h1>
       <form onSubmit={submitFormHandler}>
         <div>
           <label htmlFor="title">タイトル</label>

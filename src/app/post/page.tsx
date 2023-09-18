@@ -6,7 +6,7 @@ import {
   toolCategory,
 } from "@/categoryData/categoryData";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
-import { postSubmit } from "@/helpers/api-util";
+import { getImage, postSubmit } from "@/helpers/api-util";
 import storage from "@/helpers/firebase";
 import {
   getDownloadURL,
@@ -74,24 +74,22 @@ export default function Page() {
     ).then((data) => router.push("/home"));
   }
 
-  const onFileUploadToFirebase = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFileUploadToFirebase = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = e.target.files[0];
-
     const storageRef = ref(storage, "image/" + file.name);
 
     setImageName(file.name);
-
-    uploadBytes(storageRef, file).then((snapshot) => {
+    await uploadBytes(storageRef, file).then((snapshot) => {
       console.log("Uploaded a blob or file!");
+    }).then(() => {
+      getDownloadURL(ref(storage, "image/" + file.name)).then((url) => {
+        setImageSource(url);
+      });
     });
 
     const uploadImage = uploadBytesResumable(storageRef, file);
-
-    getDownloadURL(ref(storage, "image/" + file.name))
-      .then((url) => {
-        setImageSource(url);
-      })
-      .catch((error) => {});
 
     uploadImage.on(
       "state_changed",
@@ -111,8 +109,7 @@ export default function Page() {
   return (
     <div>
       <NavHeader />
-      <p>投稿</p>
-
+      <h1>投稿</h1>
       <form onSubmit={submitFormHandler}>
         <div>
           <label htmlFor="title">タイトル</label>

@@ -1,42 +1,123 @@
-// import { getDatabase, ref, child, push, update } from "firebase/database";
+import { BuildingType, ProjectType, ToolType } from "@/types/category";
+import { getAuth } from "firebase/auth";
+import { getDatabase, ref, child, update, get, set } from "firebase/database";
 
-// export async function writeNewPost(uid, username, picture, title, body) {
-//   const db = getDatabase();
+export async function changePost(
+  id: string,
+  index: number,
+  title: string,
+  category: {
+    ProjectType: ProjectType;
+    buildingType: BuildingType;
+    toolType: ToolType;
+  },
+  image: string,
+  description: string
+) {
+  const dbRef = ref(getDatabase());
+  const db = getDatabase();
+  const auth = getAuth();
+  const user = auth.currentUser;
 
-//   // A post entry.
-//   const postData = {
-//     author: username,
-//     uid: uid,
-//     body: body,
-//     title: title,
-//     starCount: 0,
-//     authorPic: picture,
-//   };
+  get(child(dbRef, `posts`))
+    .then((snapshot) => {
+      if (snapshot.exists() && user) {
+        const postData = {
+          id: id,
+          createdAt: new Date().toDateString(),
+          title: title,
+          category: category,
+          image: image,
+          description: description,
+          user: {
+            displayName: user.displayName,
+            email: user.email,
+            uid: user.uid,
+          },
+        };
 
-//   // Get a key for a new Post.
-//   const newPostKey = push(child(ref(db), "posts")).key;
+        const updates = {};
+        //@ts-ignore
+        updates[`/posts/${Object.keys(snapshot.val())[index]}`] = postData;
+        update(ref(db), updates);
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
-//   // Write the new post's data simultaneously in the posts list and the user's post list.
-//   const updates = {};
-//   updates["/posts/" + newPostKey] = postData;
-//   updates["/user-posts/" + uid + "/" + newPostKey] = postData;
+export async function deletePost(index: number) {
+  const dbRef = ref(getDatabase());
+  const db = getDatabase();
 
-//   return update(ref(db), updates);
-// }
+  get(child(dbRef, `posts`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        set(ref(db, `/posts/${Object.keys(snapshot.val())[index]}`), null);
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
-// import { getDatabase, ref, child, get } from "firebase/database";
+export async function changeEsquisse(
+  id: string,
+  key: string,
+  index: number,
+  description: string
+) {
+  const dbRef = ref(getDatabase());
+  const db = getDatabase();
+  const auth = getAuth();
+  const user = auth.currentUser;
 
-// export async function changePost() {
-//   const dbRef = ref(getDatabase());
-//   get(child(dbRef, `posts`))
-//     .then((snapshot) => {
-//       if (snapshot.exists()) {
-//         console.log(snapshot.val());
-//       } else {
-//         console.log("No data available");
-//       }
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// }
+  get(child(dbRef, `esquisses`))
+    .then((snapshot) => {
+      if (snapshot.exists() && user) {
+        const postData = {
+          id: id,
+          key: key,
+          createdAt: new Date().toDateString(),
+          description: description,
+          user: {
+            displayName: user.displayName,
+            email: user.email,
+            uid: user.uid,
+          },
+        };
+
+        const updates = {};
+        //@ts-ignore
+        updates[`/esquisses/${Object.keys(snapshot.val())[index]}`] = postData;
+        update(ref(db), updates);
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export async function deleteEsquisse(index: number) {
+  const dbRef = ref(getDatabase());
+  const db = getDatabase();
+
+  get(child(dbRef, `esquisses`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        set(ref(db, `/esquisses/${Object.keys(snapshot.val())[index]}`), null);
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}

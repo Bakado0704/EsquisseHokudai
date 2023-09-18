@@ -16,6 +16,7 @@ import {
 } from "@/helpers/api-util";
 import { IndicateEsquisse, IndicatePost } from "@/store/post";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
+import { deleteEsquisse, deletePost } from "@/helpers/api-change";
 
 type Props = {
   params: Params;
@@ -29,14 +30,19 @@ function Esquisse(props: Props) {
   const posts = useSelector((state: RootState) => state.post.posts);
   const esquisses = useSelector((state: RootState) => state.post.esquisses);
   const selectedPost = posts.find((post) => post.id === postedId);
-  const selectedEsquisse = esquisses.filter(
+  const selectedEsquisses = esquisses.filter(
     (esquisse) => esquisse.id === postedId
   );
   const user = getUser();
-  const changePostHandler = () => {};
-  const deletePostHandler = () => {};
-  const changeEsquisseHandler = () => {};
-  const deleteEsquisseHandler = () => {};
+  //@ts-ignore
+  const index = posts.indexOf(selectedPost);
+  const changePostHandler = () => {
+    router.push(`/changePost/${postedId}`);
+  };
+  const deletePostHandler = () => {
+    deletePost(index);
+    router.push("/home");
+  };
 
   useEffect(() => {
     getAllPosts().then(function (result) {
@@ -45,7 +51,7 @@ function Esquisse(props: Props) {
     getAllEsquisses().then(function (result) {
       dispatch(IndicateEsquisse(result));
     });
-  }, [dispatch]);
+  }, [dispatch, esquisses]);
 
   if (!selectedPost) {
     return <p>Loading...</p>;
@@ -77,8 +83,7 @@ function Esquisse(props: Props) {
       getAllEsquisses().then(function (result) {
         dispatch(IndicateEsquisse(result));
       });
-      // router.push("/home");
-    })
+    });
   }
 
   return (
@@ -110,7 +115,17 @@ function Esquisse(props: Props) {
       <p>{selectedPost.description}</p>
 
       <ul>
-        {selectedEsquisse.map((esquisse) => {
+        {selectedEsquisses.map((esquisse) => {
+          const esquisseIndex = selectedEsquisses.indexOf(esquisse);
+
+          const changeEsquisseHandler = () => {
+            router.push(`/changeEsquisse/${esquisse.key}`);
+          };
+          const deleteEsquisseHandler = () => {
+            deleteEsquisse(esquisseIndex);
+            router.push(`/esquisse/${esquisse.id}`);
+          };
+
           return (
             <li key={esquisse.key}>
               {user && esquisse.user.uid === user.uid && (

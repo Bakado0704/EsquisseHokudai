@@ -1,7 +1,6 @@
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { getDownloadURL, ref } from "firebase/storage";
 import storage from "./firebase";
-import { StaticImageData } from "next/image";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -20,14 +19,6 @@ const actionCodeSettings = {
 //ユーザー情報取得
 export const getUser = () => {
   const user = getAuth().currentUser;
-  // if (user !== null) {
-  //   const displayName = user.displayName;
-  //   const email = user.email;
-  //   const emailVerified = user.emailVerified;
-  //   const uid = user.uid;
-
-  //   console.log({ displayName, email, emailVerified, uid });
-  // }
   return user;
 };
 
@@ -106,6 +97,7 @@ export const postSubmit = async (
         method: "POST",
         body: JSON.stringify({
           id: new Date().getTime().toString(),
+          key: new Date().getTime().toString(),
           createdAt: new Date().toDateString(),
           title: title,
           category: category,
@@ -147,7 +139,7 @@ export const esquisseSubmit = async (id: string, description: string) => {
 
   if (user) {
     await fetch(
-      "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisse.json",
+      "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisses.json",
       {
         method: "POST",
         body: JSON.stringify({
@@ -192,7 +184,7 @@ export async function getAllPosts() {
 //firebase上のesquissesを取得
 export async function getAllEsquisses() {
   const response = await fetch(
-    "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisse.json"
+    "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisses.json"
   );
   const data = await response.json();
 
@@ -208,7 +200,7 @@ export async function getAllEsquisses() {
   return esquisses;
 }
 
-export const getImage = async (image: StaticImageData) => {
+export const getImage = async (image: string) => {
   const res = await getDownloadURL(ref(storage, "image/" + image));
   return res;
 };

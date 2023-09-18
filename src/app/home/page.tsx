@@ -6,20 +6,14 @@ import Image from "next/image";
 import styled, { css } from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { useEffect } from "react";
-import { IndicatePost, IndicateUser } from "@/store/post";
+import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
-import { getAllPosts, getUser, postGet } from "@/helpers/api-util";
+import { getAllPosts } from "@/helpers/api-util";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
-// import { changePost } from "@/helpers/api-change";
 
 export default function Page() {
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.post.posts);
-  // const user = getUser();
-  // const changePostHandler = () => {};
-  // const deletePostHandler = () => {};
-
-  postGet();
 
   useEffect(() => {
     getAllPosts().then(function (result) {

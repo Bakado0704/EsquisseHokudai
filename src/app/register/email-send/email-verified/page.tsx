@@ -2,7 +2,7 @@
 
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { createAccount, getUser } from "@/helpers/api-util";
+import { createAccount } from "@/helpers/api-util";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
 
 export default function Page() {
@@ -10,7 +10,6 @@ export default function Page() {
   const passwordInputRef = useRef<HTMLInputElement | null>(null);
   const passwordConfirmRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
-  const user = getUser();
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -25,9 +24,7 @@ export default function Page() {
       enteredInputPassword === enteredConfirmPassword
     ) {
       createAccount(enteredName, enteredInputPassword).then(() => {
-        if (user?.displayName) {
-          router.push("/home");
-        }
+        router.push("/home");
       });
     }
   }
