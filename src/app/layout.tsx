@@ -1,7 +1,9 @@
+import "destyle.css";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./provider";
+import NavHeader from "@/components/nav/NavHeader/NavHeader";
 
 const inter = Inter({ subsets: ["latin"] });
 

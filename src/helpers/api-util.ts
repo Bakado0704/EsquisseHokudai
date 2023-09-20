@@ -19,6 +19,8 @@ const actionCodeSettings = {
 //ユーザー情報取得
 export const getUser = () => {
   const user = getAuth().currentUser;
+  console.log(user);
+
   return user;
 };
 

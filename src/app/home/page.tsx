@@ -8,7 +8,7 @@ import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { useEffect } from "react";
 import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
-import { getAllPosts } from "@/helpers/api-util";
+import { getAllPosts, getUser } from "@/helpers/api-util";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
 
 export default function Page() {
@@ -24,6 +24,8 @@ export default function Page() {
   if (!posts) {
     <p>Loading...</p>;
   }
+
+  getUser();
 
   return (
     <div>
@@ -90,35 +92,3 @@ export default function Page() {
     </div>
   );
 }
-
-const Button = styled.button<{ $primary?: boolean }>`
-  --accent-color: red;
-
-  /* This renders the buttons above... Edit me! */
-  background: transparent;
-  border-radius: 3px;
-  border: 1px solid var(--accent-color);
-  color: var(--accent-color);
-  display: inline-block;
-  margin: 0.5rem 1rem;
-  padding: 0.5rem 0;
-  transition: all 200ms ease-in-out;
-  width: 11rem;
-
-  &:hover {
-    filter: brightness(0.85);
-  }
-
-  &:active {
-    filter: brightness(1);
-  }
-
-  /* The GitHub button is a primary button
-   * edit this to target it specifically! */
-  ${(props) =>
-    props.$primary &&
-    css`
-      background: var(--accent-color);
-      color: black;
-    `}
-`;
