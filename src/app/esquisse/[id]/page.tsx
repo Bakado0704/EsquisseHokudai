@@ -17,6 +17,8 @@ import {
 import { IndicateEsquisse, IndicatePost } from "@/store/post";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
 import { deleteEsquisse, deletePost } from "@/helpers/api-change";
+import styled from "styled-components";
+import NavFooter from "@/components/nav/NavFooter/NavFooter";
 
 type Props = {
   params: Params;
@@ -87,69 +89,97 @@ function Esquisse(props: Props) {
   }
 
   return (
-    <div>
+    <>
       <NavHeader />
-      <ul>
-        {tags.map((data) => {
-          if (data) {
-            return (
-              <li key={data[0]}>
-                <Link href={`/category/${data[0]}`}>
-                  <p>{data[1]}</p>
-                </Link>
-              </li>
-            );
-          }
-        })}
-      </ul>
-      {user && selectedPost.user.uid === user.uid && (
-        <button onClick={changePostHandler}>変更</button>
-      )}
-      {user && selectedPost.user.uid === user.uid && (
-        <button onClick={deletePostHandler}>消去</button>
-      )}
-      <h1>{selectedPost.title}</h1>
-      <p>{selectedPost.user.displayName}</p>
-      <p>{selectedPost.createdAt}</p>
-      <Image src={selectedPost.imageSource} alt="" width={500} height={300} />
-      <p>{selectedPost.description}</p>
+      <Wrapper>
+        <WrapperInner>
+          <ul>
+            {tags.map((data) => {
+              if (data) {
+                return (
+                  <li key={data[0]}>
+                    <Link href={`/category/${data[0]}`}>
+                      <p>{data[1]}</p>
+                    </Link>
+                  </li>
+                );
+              }
+            })}
+          </ul>
+          {user && selectedPost.user.uid === user.uid && (
+            <button onClick={changePostHandler}>変更</button>
+          )}
+          {user && selectedPost.user.uid === user.uid && (
+            <button onClick={deletePostHandler}>消去</button>
+          )}
+          <h1>{selectedPost.title}</h1>
+          <p>{selectedPost.user.displayName}</p>
+          <p>{selectedPost.createdAt}</p>
+          <Image
+            src={selectedPost.imageSource}
+            alt=""
+            width={500}
+            height={300}
+          />
+          <p>{selectedPost.description}</p>
 
-      <ul>
-        {selectedEsquisses.map((esquisse) => {
-          const esquisseIndex = selectedEsquisses.indexOf(esquisse);
+          <ul>
+            {selectedEsquisses.map((esquisse) => {
+              const esquisseIndex = selectedEsquisses.indexOf(esquisse);
 
-          const changeEsquisseHandler = () => {
-            router.push(`/changeEsquisse/${esquisse.key}`);
-          };
-          const deleteEsquisseHandler = () => {
-            deleteEsquisse(esquisseIndex);
-            router.push(`/esquisse/${esquisse.id}`);
-          };
+              const changeEsquisseHandler = () => {
+                router.push(`/changeEsquisse/${esquisse.key}`);
+              };
+              const deleteEsquisseHandler = () => {
+                deleteEsquisse(esquisseIndex);
+                router.push(`/esquisse/${esquisse.id}`);
+              };
 
-          return (
-            <li key={esquisse.key}>
-              {user && esquisse.user.uid === user.uid && (
-                <button onClick={changeEsquisseHandler}>変更</button>
-              )}
-              {user && esquisse.user.uid === user.uid && (
-                <button onClick={deleteEsquisseHandler}>消去</button>
-              )}
-              <p>{esquisse.user.displayName}</p>
-              <p>{esquisse.description}</p>
-            </li>
-          );
-        })}
-      </ul>
+              return (
+                <li key={esquisse.key}>
+                  {user && esquisse.user.uid === user.uid && (
+                    <button onClick={changeEsquisseHandler}>変更</button>
+                  )}
+                  {user && esquisse.user.uid === user.uid && (
+                    <button onClick={deleteEsquisseHandler}>消去</button>
+                  )}
+                  <p>{esquisse.user.displayName}</p>
+                  <p>{esquisse.description}</p>
+                </li>
+              );
+            })}
+          </ul>
 
-      <form onSubmit={submitFormHandler}>
-        <div>
-          <label htmlFor="text">コメントを追加する。</label>
-          <input type="text" id="text" ref={textInputRef} />
-        </div>
-        <button>メッセージを投稿する</button>
-      </form>
-    </div>
+          <form onSubmit={submitFormHandler}>
+            <div>
+              <label htmlFor="text">コメントを追加する。</label>
+              <input type="text" id="text" ref={textInputRef} />
+            </div>
+            <button>メッセージを投稿する</button>
+          </form>
+        </WrapperInner>
+      </Wrapper>
+      <NavFooter />
+    </>
   );
 }
 
 export default Esquisse;
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 90%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-right: 40px;
+  padding-left: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+`;
+
+const WrapperInner = styled.div`
+  width: 100%;
+  height: 100%;
+`;
