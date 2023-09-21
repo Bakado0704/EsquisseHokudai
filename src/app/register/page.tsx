@@ -66,12 +66,12 @@ const WrapperInner = styled.div`
 const P = styled.p<{ $title?: boolean }>`
   text-align: center;
   font-size: 16px;
-  margin-top: 8px;
+  margin-top: 16px;
 
   ${(props) =>
     props.$title &&
     css`
-      font-size: 24px;
+      font-size: 32px;
     `}
 `;
 
@@ -92,7 +92,6 @@ const Div = styled.div<{ $submit?: boolean }>`
   ${(props) =>
     props.$submit &&
     css`
-      margin-top: 0;
       display: flex;
       justify-content: center;
     `}
@@ -126,7 +125,6 @@ const Button = styled.button`
   padding-bottom: 8px;
   padding-right: 32px;
   padding-left: 32px;
-  margin-top: 20px;
   background-color: white;
   color: var(--text-color);
   border: solid 2px var(--border-color);

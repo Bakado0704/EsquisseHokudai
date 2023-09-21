@@ -8,6 +8,12 @@ export default function NavHeader() {
   const router = useRouter();
   const user = getUser();
 
+  async function loginHandler() {
+    await signout().then(() => {
+      router.push("/login");
+    });
+  }
+
   function homeHandler() {
     router.push("/home");
   }
@@ -28,21 +34,27 @@ export default function NavHeader() {
 
   return (
     <Wrapper>
-      {!user && (
+      {!user?.displayName && (
         <WrapperInner>
-          <Logo>EsquisseChat</Logo>
+          <Button $login={true} onClick={loginHandler}>
+            EsquisseChat
+          </Button>
           <Button $signin={true} onClick={signinHandler}>
             サインイン
           </Button>
         </WrapperInner>
       )}
-      {user && (
+      {user?.displayName && (
         <WrapperInner>
           <WrapperInner $primary={true}>
-            <Button onClick={homeHandler}>ホーム</Button>
+            <Button $home={true} onClick={homeHandler}>
+              ホーム
+            </Button>
             <Button onClick={categoryHandler}>カテゴリ</Button>
           </WrapperInner>
-          <Button onClick={logoutHandler}>ログアウト</Button>
+          <Button $logout={true} onClick={logoutHandler}>
+            ログアウト
+          </Button>
         </WrapperInner>
       )}
     </Wrapper>
@@ -53,14 +65,14 @@ const Wrapper = styled.div`
   --background-color: #595757;
 
   position: fixed;
-  top:0;
+  top: 0;
   height: 80px;
   width: 100%;
   align-items: center;
   display: flex;
   background-color: var(--background-color);
   padding-top: 0;
-  border-bottom: solid 2px white; 
+  border-bottom: solid 2px white;
 `;
 
 const WrapperInner = styled.div<{ $primary?: boolean }>`
@@ -79,19 +91,17 @@ const WrapperInner = styled.div<{ $primary?: boolean }>`
       width: 80%;
       justify-content: left;
       margin-left: 0;
+      padding-right: 0;
+      padding-left: 0;
     `}
 `;
 
-const Logo = styled.p`
-  --main-color: #f8b62d;
-
-  color: var(--main-color);
-  font-size: 20px;
-  padding: 16px;
-  transform: translate(-16px);
-`;
-
-const Button = styled.button<{ $signin?: boolean }>`
+const Button = styled.button<{
+  $signin?: boolean;
+  $login?: boolean;
+  $logout?: boolean;
+  $home?: boolean;
+}>`
   background: transparent;
   color: white;
   display: block;
@@ -105,5 +115,28 @@ const Button = styled.button<{ $signin?: boolean }>`
     props.$signin &&
     css`
       transform: translate(16px);
+    `}
+
+  ${(props) =>
+    props.$login &&
+    css`
+      --main-color: #f8b62d;
+
+      color: var(--main-color);
+      font-size: 20px;
+      padding: 16px;
+      transform: translate(-16px);
+    `}
+
+    ${(props) =>
+    props.$logout &&
+    css`
+      transform: translate(16px);
+    `}
+
+      ${(props) =>
+    props.$home &&
+    css`
+      transform: translate(-16px);
     `}
 `;
