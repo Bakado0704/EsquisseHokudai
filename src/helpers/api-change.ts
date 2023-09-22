@@ -19,6 +19,8 @@ export async function changePost(
   const auth = getAuth();
   const user = auth.currentUser;
 
+  console.log(category);
+
   get(child(dbRef, `posts`))
     .then((snapshot) => {
       if (snapshot.exists() && user) {

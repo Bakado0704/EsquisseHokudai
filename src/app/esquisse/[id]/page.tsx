@@ -43,9 +43,13 @@ function Esquisse(props: Props) {
   const changePostHandler = () => {
     router.push(`/changePost/${postedId}`);
   };
-  const deletePostHandler = () => {
-    deletePost(index);
-    router.push("/home");
+  const deletePostHandler = async () => {
+    await deletePost(index).then(() => {
+      getAllPosts().then(function (result) {
+        dispatch(IndicatePost(result));
+        router.push("/home");
+      });
+    });
   };
 
   useEffect(() => {
@@ -101,6 +105,13 @@ function Esquisse(props: Props) {
       <NavHeader />
       <Wrapper>
         <WrapperInner>
+          {user && selectedPost.user.uid === user.uid && (
+            <>
+              <button onClick={changePostHandler}>変更</button>
+              <span> | </span>
+              <button onClick={deletePostHandler}>消去</button>
+            </>
+          )}
           <Ul $article={true}>
             {tags.map((data) => {
               if (data) {
@@ -117,13 +128,6 @@ function Esquisse(props: Props) {
               }
             })}
           </Ul>
-          {user && selectedPost.user.uid === user.uid && (
-            <>
-              <button onClick={changePostHandler}>変更</button>
-              <span> | </span>
-              <button onClick={deletePostHandler}>消去</button>
-            </>
-          )}
           <P $title={true}>{selectedPost.title}</P>
           <P>{selectedPost.user.displayName}</P>
           <P>{selectedPost.createdAt}</P>
@@ -228,6 +232,7 @@ const Ul = styled.ul<{ $article?: boolean }>`
   ${(props) =>
     props.$article &&
     css`
+      margin-top: 10px;
       display: flex;
       align-items: center;
     `}
@@ -324,6 +329,7 @@ const P = styled.p<{
     ${(props) =>
     props.$title &&
     css`
+      margin-top: 0;
       font-size: 24px;
       text-decoration: underline;
       text-align: left;

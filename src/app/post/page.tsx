@@ -7,8 +7,9 @@ import {
 } from "@/categoryData/categoryData";
 import NavFooter from "@/components/nav/NavFooter/NavFooter";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
-import { postSubmit } from "@/helpers/api-util";
+import { getAllPosts, postSubmit } from "@/helpers/api-util";
 import storage from "@/helpers/firebase";
+import { IndicatePost } from "@/store/post";
 import {
   getDownloadURL,
   ref,
@@ -19,10 +20,12 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 
 export default function Page() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [imageSource, setImageSource] = useState<string | StaticImport>();
@@ -33,16 +36,16 @@ export default function Page() {
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    let projectCategoryChecked = [];
-    let buildingCategoryChecked = [];
-    let toolCategoryChecked = [];
+    let projectType = [];
+    let buildingType = [];
+    let toolType = [];
 
     for (let i = 0; i < projectCategory.length; i++) {
       const checkedItem = document.getElementsByName(
         `${projectCategory[i].id[0]}`
       );
       if (checkedItem.item(0).checked) {
-        projectCategoryChecked.push(projectCategory[i].id);
+        projectType.push(projectCategory[i].id);
       }
     }
 
@@ -51,7 +54,7 @@ export default function Page() {
         `${buildingCategory[i].id[0]}`
       );
       if (checkedItem.item(0).checked) {
-        buildingCategoryChecked.push(buildingCategory[i].id);
+        buildingType.push(buildingCategory[i].id);
       }
     }
 
@@ -60,17 +63,24 @@ export default function Page() {
         `${toolCategory[i].id[0]}`
       );
       if (checkedItem.item(0).checked) {
-        toolCategoryChecked.push(toolCategory[i].id);
+        toolType.push(toolCategory[i].id);
       }
     }
 
     await postSubmit(
       //@ts-ignore
       title,
-      { projectCategoryChecked, buildingCategoryChecked, toolCategoryChecked },
+      { projectType, buildingType, toolType },
       imageName,
       description
-    ).then((data) => router.push("/home"));
+    ).then(() => {
+      getAllPosts().then(function (result) {
+        dispatch(IndicatePost(result));
+        setTitle("");
+        setDescription("");
+        router.push("/home");
+      });
+    });
   }
 
   const onFileUploadToFirebase = async (
@@ -110,14 +120,12 @@ export default function Page() {
   const titleHandler = () => {
     //@ts-ignore
     const enteredTitle = document.getElementById("title").value;
-
     setTitle(enteredTitle);
   };
 
   const descriptionHandler = () => {
     //@ts-ignore
     const enteredDescription = document.getElementById("description").value;
-
     setDescription(enteredDescription);
   };
 
@@ -133,7 +141,7 @@ export default function Page() {
                 タイトル
               </Label>
               <Textarea
-                id="text"
+                id="title"
                 value={title}
                 rows={1}
                 onChange={titleHandler}
