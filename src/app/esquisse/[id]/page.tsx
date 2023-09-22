@@ -21,6 +21,8 @@ import styled, { css } from "styled-components";
 import NavFooter from "@/components/nav/NavFooter/NavFooter";
 import tagImg from "@/assets/icon/tag.svg";
 import personImg from "@/assets/icon/person.png";
+import ChangePost from "@/components/change/changePost";
+import ChangeEsquisse from "@/components/change/ChangeEsquisse";
 
 type Props = {
   params: Params;
@@ -38,10 +40,12 @@ function Esquisse(props: Props) {
     (esquisse) => esquisse.id === postedId
   );
   const user = getUser();
+  const [esquisseModal, setEsquisseModal] = useState<boolean>(false);
+  const [postModal, setPostModal] = useState<boolean>(false);
   //@ts-ignore
   const index = posts.indexOf(selectedPost);
   const changePostHandler = () => {
-    router.push(`/changePost/${postedId}`);
+    setPostModal(true);
   };
   const deletePostHandler = async () => {
     await deletePost(index).then(() => {
@@ -99,6 +103,14 @@ function Esquisse(props: Props) {
     });
   }
 
+  const postModalClose = () => {
+    setPostModal(false);
+  };
+
+  const esquisseModalClose = () => {
+    setEsquisseModal(false);
+  };
+
   return (
     <>
       <NavHeader />
@@ -146,7 +158,7 @@ function Esquisse(props: Props) {
               const esquisseIndex = selectedEsquisses.indexOf(esquisse);
 
               const changeEsquisseHandler = () => {
-                router.push(`/changeEsquisse/${esquisse.key}`);
+                setEsquisseModal(true);
               };
               const deleteEsquisseHandler = () => {
                 deleteEsquisse(esquisseIndex);
@@ -176,6 +188,12 @@ function Esquisse(props: Props) {
                     )}
                     <P $esquisse={true}>{esquisse.description}</P>
                   </Div>
+                  {esquisseModal && (
+                    <ChangeEsquisse
+                      id={esquisse.key}
+                      modalClose={esquisseModalClose}
+                    />
+                  )}
                 </Li>
               );
             })}
@@ -194,6 +212,7 @@ function Esquisse(props: Props) {
           </Form>
         </WrapperInner>
       </Wrapper>
+      {postModal && <ChangePost id={postedId} modalClose={postModalClose} />}
       <NavFooter />
     </>
   );
