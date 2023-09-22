@@ -19,8 +19,6 @@ const actionCodeSettings = {
 //ユーザー情報取得
 export const getUser = () => {
   const user = getAuth().currentUser;
-  console.log(user);
-
   return user;
 };
 
@@ -42,7 +40,6 @@ export const emailRegister = async (email: string, password: string) => {
   await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(user);
     })
     .catch((error) => {
       console.log(error);
@@ -130,8 +127,6 @@ export const postGet = async () => {
       },
     }
   );
-
-  console.log(getPost.json());
 };
 
 //エスキスをsubmit

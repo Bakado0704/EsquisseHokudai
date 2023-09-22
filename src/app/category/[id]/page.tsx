@@ -220,7 +220,7 @@ const Div = styled.div<{
 const P = styled.p<{
   $title?: boolean;
   $tag?: boolean;
-  $home: boolean;
+  $home?: boolean;
 }>`
   margin-top: 10px;
   font-size: 16px;

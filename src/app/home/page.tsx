@@ -180,7 +180,7 @@ const Div = styled.div<{
       margin-left: 16px;
       display: flex;
       align-items: center;
-      justifu-content: center;
+      justify-content: center;
     `}
 
     ${(props) =>

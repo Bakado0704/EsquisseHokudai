@@ -23,8 +23,6 @@ export default function FormEsquisse(props: Props) {
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log(enteredText);
-
     const reqBody = {
       id: props,
       description: enteredText,
@@ -38,8 +36,6 @@ export default function FormEsquisse(props: Props) {
         passwordHashed: "KadoHiroki",
       },
     };
-
-    console.log(reqBody);
 
     await fetch(
         "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisse.json",

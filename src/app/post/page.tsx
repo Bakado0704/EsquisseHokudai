@@ -5,6 +5,7 @@ import {
   projectCategory,
   toolCategory,
 } from "@/categoryData/categoryData";
+import NavFooter from "@/components/nav/NavFooter/NavFooter";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
 import { getImage, postSubmit } from "@/helpers/api-util";
 import storage from "@/helpers/firebase";
@@ -18,6 +19,7 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
+import styled from "styled-components";
 
 export default function Page() {
   const titleInputRef = useRef<HTMLInputElement | null>(null);
@@ -81,13 +83,15 @@ export default function Page() {
     const storageRef = ref(storage, "image/" + file.name);
 
     setImageName(file.name);
-    await uploadBytes(storageRef, file).then((snapshot) => {
-      console.log("Uploaded a blob or file!");
-    }).then(() => {
-      getDownloadURL(ref(storage, "image/" + file.name)).then((url) => {
-        setImageSource(url);
+    await uploadBytes(storageRef, file)
+      .then((snapshot) => {
+        console.log("Uploaded a blob or file!");
+      })
+      .then(() => {
+        getDownloadURL(ref(storage, "image/" + file.name)).then((url) => {
+          setImageSource(url);
+        });
       });
-    });
 
     const uploadImage = uploadBytesResumable(storageRef, file);
 
@@ -107,101 +111,124 @@ export default function Page() {
   };
 
   return (
-    <div>
+    <>
       <NavHeader />
-      <h1>投稿</h1>
-      <form onSubmit={submitFormHandler}>
-        <div>
-          <label htmlFor="title">タイトル</label>
-          <input type="text" id="title" ref={titleInputRef} />
-        </div>
-        <ul>
-          {projectCategory.map((category) => {
-            return (
-              <li key={category.id[0]}>
-                <label htmlFor="title">
-                  <input
-                    type="checkbox"
-                    id={category.id[0]}
-                    name={category.id[0]}
-                    value={category.id[0]}
-                  />
-                  {category.title}
-                </label>
-              </li>
-            );
-          })}
-        </ul>
-        <ul>
-          {buildingCategory.map((category) => {
-            return (
-              <li key={category.id[0]}>
-                <label htmlFor="title">
-                  <input
-                    type="checkbox"
-                    id={category.id[0]}
-                    name={category.id[0]}
-                    value={category.id[0]}
-                  />
-                  {category.title}
-                </label>
-              </li>
-            );
-          })}
-        </ul>
-        <ul>
-          {toolCategory.map((category) => {
-            return (
-              <li key={category.id[0]}>
-                <label htmlFor="title">
-                  <input
-                    type="checkbox"
-                    id={category.id[0]}
-                    name={category.id[0]}
-                    value={category.id[0]}
-                  />
-                  {category.title}
-                </label>
-              </li>
-            );
-          })}
-        </ul>
-        <div>
-          <label htmlFor="image">写真</label>
-          <input
-            className="imageUploadInput"
-            multiple
-            name="imageURL"
-            type="file"
-            accept=".png, .jpeg, .jpg"
-            onChange={onFileUploadToFirebase}
-          />
-        </div>
+      <Wrapper>
+        <WrapperInner>
+          <h1>投稿</h1>
+          <form onSubmit={submitFormHandler}>
+            <div>
+              <label htmlFor="title">タイトル</label>
+              <input type="text" id="title" ref={titleInputRef} />
+            </div>
+            <ul>
+              {projectCategory.map((category) => {
+                return (
+                  <li key={category.id[0]}>
+                    <label htmlFor="title">
+                      <input
+                        type="checkbox"
+                        id={category.id[0]}
+                        name={category.id[0]}
+                        value={category.id[0]}
+                      />
+                      {category.title}
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+            <ul>
+              {buildingCategory.map((category) => {
+                return (
+                  <li key={category.id[0]}>
+                    <label htmlFor="title">
+                      <input
+                        type="checkbox"
+                        id={category.id[0]}
+                        name={category.id[0]}
+                        value={category.id[0]}
+                      />
+                      {category.title}
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+            <ul>
+              {toolCategory.map((category) => {
+                return (
+                  <li key={category.id[0]}>
+                    <label htmlFor="title">
+                      <input
+                        type="checkbox"
+                        id={category.id[0]}
+                        name={category.id[0]}
+                        value={category.id[0]}
+                      />
+                      {category.title}
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+            <div>
+              <label htmlFor="image">写真</label>
+              <input
+                className="imageUploadInput"
+                multiple
+                name="imageURL"
+                type="file"
+                accept=".png, .jpeg, .jpg"
+                onChange={onFileUploadToFirebase}
+              />
+            </div>
 
-        {loading ? (
-          <h2>アップロード中・・・</h2>
-        ) : (
-          <>
-            {isUploaded && (
+            {loading ? (
+              <h2>アップロード中・・・</h2>
+            ) : (
               <>
-                {imageSource && (
-                  <Image
-                    src={imageSource}
-                    alt="chrch"
-                    width={300}
-                    height={200}
-                  />
+                {isUploaded && (
+                  <>
+                    {imageSource && (
+                      <Image
+                        src={imageSource}
+                        alt="chrch"
+                        width={300}
+                        height={200}
+                      />
+                    )}
+                  </>
                 )}
               </>
             )}
-          </>
-        )}
-        <div>
-          <label htmlFor="description">内容</label>
-          <input type="text" id="description" ref={descriptionInputRef} />
-        </div>
-        <button>投稿する</button>
-      </form>
-    </div>
+            <div>
+              <label htmlFor="description">内容</label>
+              <input type="text" id="description" ref={descriptionInputRef} />
+            </div>
+            <button>投稿する</button>
+          </form>
+        </WrapperInner>
+      </Wrapper>
+      <NavFooter />
+    </>
   );
 }
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 90%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-right: 40px;
+  padding-left: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+`;
+
+const WrapperInner = styled.div`
+  width: 100%;
+  height: 100%;
+`;

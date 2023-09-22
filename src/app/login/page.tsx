@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { getUser, signIn } from "@/helpers/api-util";
+import { signIn } from "@/helpers/api-util";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
 import styled, { css } from "styled-components";
 
