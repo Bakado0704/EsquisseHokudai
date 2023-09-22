@@ -1,9 +1,7 @@
 "use client";
 
 import { changeEsquisse } from "@/helpers/api-change";
-
 import { RootState } from "@/store/store";
-
 import { useRouter } from "next/navigation";
 import { FormEvent, useState, useRef } from "react";
 import { useSelector } from "react-redux";
@@ -15,8 +13,6 @@ type Props = {
 };
 
 export default function ChangeEsquisse(props: Props) {
-  const descriptionInputRef = useRef<HTMLInputElement | null>(null);
-
   const router = useRouter();
   const postedKey = props.id;
   const esquisses = useSelector((state: RootState) => state.post.esquisses);
@@ -29,16 +25,16 @@ export default function ChangeEsquisse(props: Props) {
   const [description, setDescription] = useState(selectedEsquisse?.description);
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const enteredDescription = descriptionInputRef.current?.value;
 
     await changeEsquisse(
       //@ts-ignore
       selectedPostId,
       postedKey,
       index,
-      enteredDescription
+      description
     ).then(() => {
       router.push(`/esquisse/${selectedPostId}`);
+      props.modalClose();
     });
   }
 
@@ -47,6 +43,8 @@ export default function ChangeEsquisse(props: Props) {
     const enteredDescription = document.getElementById("description").value;
     setDescription(enteredDescription);
   };
+
+  console.log(selectedEsquisse);
 
   return (
     <Wrapper>

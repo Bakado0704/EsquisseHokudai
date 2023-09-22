@@ -41,7 +41,7 @@ export default function Page() {
       <Wrapper>
         <WrapperInner>
           <P $home={true}>ホーム</P>
-          <Div $wrapper={true}>
+          <Content>
             {posts && (
               <Ul>
                 {posts.map((post) => {
@@ -104,7 +104,7 @@ export default function Page() {
                 })}
               </Ul>
             )}
-          </Div>
+          </Content>
           <Div $submit={true}>
             <Button onClick={postHandler}>投稿する</Button>
           </Div>
@@ -166,7 +166,6 @@ const Div = styled.div<{
   $text?: boolean;
   $item?: boolean;
   $submit?: boolean;
-  $wrapper?: boolean;
 }>`
   ${(props) =>
     props.$item &&
@@ -190,18 +189,16 @@ const Div = styled.div<{
       justify-content: center;
       padding-bottom: 32px;
     `}
+`;
 
-    ${(props) =>
-    props.$wrapper &&
-    css`
-      height: calc(100% - 171px);
-      overflow-y: scroll;
-      border-bottom: 1px solid white;
+const Content = styled.div`
+  height: calc(100% - 171px);
+  overflow-y: scroll;
+  border-bottom: 1px solid white;
 
-      &::-webkit-scrollbar{
-        display: none;
-      }
-    `}
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const P = styled.p<{
