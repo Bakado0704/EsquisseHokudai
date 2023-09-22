@@ -1,24 +1,15 @@
 "use client";
 
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-import { FormEvent, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { IndicatePost } from "@/store/post";
+import { FormEvent, useRef } from "react";
 
 type Props = {
   postedId: string;
 };
 
-export default function FormEsquisse(props: Props) {
+export default function EsquisseChange(props: Props) {
   //   const dispatch = useDispatch();
   const textInputRef = useRef<HTMLInputElement | null>(null);
   const enteredText = textInputRef.current?.value;
-
-  //   useEffect(() => {
-  //     getAllPosts().then(function (result) {
-  //       dispatch(IndicatePost(result));
-  //     });
-  //   }, [dispatch]);
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -36,18 +27,6 @@ export default function FormEsquisse(props: Props) {
         passwordHashed: "KadoHiroki",
       },
     };
-
-    await fetch(
-        "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisse.json",
-        {
-          method: "POST",
-          body: JSON.stringify(reqBody),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => response.json())
   }
 
   return (

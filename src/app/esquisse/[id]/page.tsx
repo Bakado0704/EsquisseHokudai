@@ -81,7 +81,6 @@ function Esquisse(props: Props) {
   const commentHandler = () => {
     //@ts-ignore
     const enteredText = document.getElementById("text").value;
-
     setComment(enteredText);
   };
 
@@ -329,7 +328,7 @@ const P = styled.p<{
     ${(props) =>
     props.$title &&
     css`
-      margin-top: 0;
+      margin-top: 8px;
       font-size: 24px;
       text-decoration: underline;
       text-align: left;
