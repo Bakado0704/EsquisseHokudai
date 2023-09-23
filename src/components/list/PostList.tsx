@@ -1,10 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import styled from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
-import tagImg from "@/assets/icon/tag.svg";
 import Post from "@/models/post";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
@@ -32,10 +28,7 @@ export default function PostList() {
               tags.push(data);
             });
 
-
-            return (
-              <PostItem key={post.id} post={post} tags={tags} />
-            );
+            return <PostItem key={post.id} post={post} tags={tags} />;
           })}
         </ul>
       )}

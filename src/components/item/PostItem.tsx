@@ -4,8 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
-import tagImg from "@/assets/icon/tag.svg";
 import Post from "@/models/post";
+import { TagList } from "../list/TagList";
 
 type Props = {
   post: Post;
@@ -13,39 +13,19 @@ type Props = {
 };
 
 export const PostItem = ({ post, tags }: Props) => {
-
   return (
     <Items key={post.id}>
       <Link href={`/esquisse/${post.id}`}>
         <PostWrap>
-          {post.image && (
-            <Image
-              src={post.imageSource}
-              alt={`${post.image}`}
-              width={300}
-              height={200}
-            />
-          )}
+          <Image
+            src={post.imageSource}
+            alt={`${post.image}`}
+            width={300}
+            height={200}
+          />
           <PostTextWrap>
             <PostTextWrapInner>
-              <TagList>
-                {tags &&
-                  tags.map((data) => {
-                    if (data) {
-                      return (
-                        <TagItem key={data[0]}>
-                          <Image
-                            src={tagImg}
-                            alt="tag"
-                            width={17}
-                            height={20}
-                          />
-                          <PostTag>{data[1]}</PostTag>
-                        </TagItem>
-                      );
-                    }
-                  })}
-              </TagList>
+              <TagList tags={tags} />
               <PostTitle>{post.title}</PostTitle>
               <PostText>{post.user.displayName}</PostText>
               <PostText>{post.createdAt}</PostText>
@@ -56,16 +36,6 @@ export const PostItem = ({ post, tags }: Props) => {
     </Items>
   );
 };
-
-const TagList = styled.ul`
-  display: flex;
-  align-items: center;
-`;
-
-const TagItem = styled.li`
-  display: flex;
-  margin-right: 10px;
-`;
 
 const Items = styled.li`
   display: flex;
@@ -87,13 +57,6 @@ const PostTextWrap = styled.div`
 `;
 
 const PostTextWrapInner = styled.div``;
-
-const PostTag = styled.p`
-  font-size: 16px;
-  margin-right: 10px;
-  margin-left: 5px;
-  margin-top: 0;
-`;
 
 const PostTitle = styled.p`
   margin-top: 10px;

@@ -23,6 +23,8 @@ import styled, { css } from "styled-components";
 import { Bg } from "../bg/Background";
 import { CloseButton } from "../button/CloseButton";
 import { SubmitButton } from "../button/SubmitButton";
+import { CategoryLists } from "../list/categoryList";
+import { BuildingType, ProjectType, ToolType } from "@/types/category";
 
 type Props = {
   id: string;
@@ -46,13 +48,12 @@ export default function ChangePost(props: Props) {
   const [imageSource, setImageSource] = useState<string | StaticImport>(
     selectedPost?.imageSource
   );
+  let projectType: (ProjectType | ToolType)[] = [];
+  let buildingType: (BuildingType | ProjectType | ToolType)[] = [];
+  let toolType: (BuildingType | ProjectType | ToolType)[] = [];
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    let projectType = [];
-    let buildingType = [];
-    let toolType = [];
 
     for (let i = 0; i < projectCategory.length; i++) {
       const checkedItem = document.getElementsByName(
@@ -128,6 +129,8 @@ export default function ChangePost(props: Props) {
     );
   };
 
+  console.log(projectType);
+
   const titleHandler = () => {
     //@ts-ignore
     const enteredTitle = document.getElementById("title").value;
@@ -161,23 +164,7 @@ export default function ChangePost(props: Props) {
             <Container>
               <P $left={true}>カテゴリ</P>
               <RightContainer>
-                <CategoryList>
-                  {projectCategory.map((category) => {
-                    return (
-                      <CategoryItem key={category.id[0]}>
-                        <label htmlFor="title">
-                          <Input
-                            type="checkbox"
-                            id={category.id[0]}
-                            name={category.id[0]}
-                            value={category.id[0]}
-                          />
-                          {category.title}
-                        </label>
-                      </CategoryItem>
-                    );
-                  })}
-                </CategoryList>
+                <CategoryLists projectType={projectType} />
                 <CategoryList>
                   {buildingCategory.map((category) => {
                     return (
