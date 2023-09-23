@@ -1,18 +1,15 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-import Link from "next/link";
-import Image from "next/image";
-import styled, { css } from "styled-components";
-import { BuildingType, ProjectType, ToolType } from "@/types/category";
+import styled  from "styled-components";
 import { useEffect } from "react";
 import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
 import { getAllPosts, getUser } from "@/helpers/api-util";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
 import NavFooter from "@/components/nav/NavFooter/NavFooter";
-import tagImg from "@/assets/icon/tag.svg";
 import { useRouter } from "next/navigation";
+import PostList from "@/components/list/PostList";
 
 export default function Page() {
   const dispatch = useDispatch();
@@ -40,74 +37,13 @@ export default function Page() {
       <NavHeader />
       <Wrapper>
         <WrapperInner>
-          <P $home={true}>ホーム</P>
+          <HomeTitle>ホーム</HomeTitle>
           <Content>
-            {posts && (
-              <Ul>
-                {posts.map((post) => {
-                  let tags: (ProjectType | BuildingType | ToolType)[] = [];
-
-                  //集合配列tagについて
-                  post.category.projectType?.map((data) => {
-                    tags.push(data);
-                  });
-
-                  post.category.buildingType?.map((data) => {
-                    tags.push(data);
-                  });
-
-                  post.category.toolType?.map((data) => {
-                    tags.push(data);
-                  });
-
-                  return (
-                    <Li $article={true} key={post.id}>
-                      <Link href={`/esquisse/${post.id}`}>
-                        <Div $item={true}>
-                          {post.image && (
-                            <Image
-                              src={post.imageSource}
-                              alt={`${post.image}`}
-                              width={300}
-                              height={200}
-                            />
-                          )}
-                          <Div $text={true}>
-                            <Div $list={true}>
-                              <Ul $article={true}>
-                                {tags &&
-                                  tags.map((data) => {
-                                    if (data) {
-                                      return (
-                                        <Li $tag={true} key={data[0]}>
-                                          <Image
-                                            src={tagImg}
-                                            alt="tag"
-                                            width={17}
-                                            height={20}
-                                          />
-                                          <P $tag={true}>{data[1]}</P>
-                                        </Li>
-                                      );
-                                    }
-                                  })}
-                              </Ul>
-                              <P $title={true}>{post.title}</P>
-                              <P>{post.user.displayName}</P>
-                              <P>{post.createdAt}</P>
-                            </Div>
-                          </Div>
-                        </Div>
-                      </Link>
-                    </Li>
-                  );
-                })}
-              </Ul>
-            )}
+            <PostList />
           </Content>
-          <Div $submit={true}>
+          <ButtonWrap>
             <Button onClick={postHandler}>投稿する</Button>
-          </Div>
+          </ButtonWrap>
         </WrapperInner>
       </Wrapper>
       <NavFooter />
@@ -133,62 +69,10 @@ const WrapperInner = styled.div`
   height: 100%;
 `;
 
-const Ul = styled.ul<{ $article?: boolean }>`
-  ${(props) =>
-    props.$article &&
-    css`
-      display: flex;
-      align-items: center;
-    `}
-`;
-
-const Li = styled.li<{ $tag?: boolean; $article?: boolean }>`
+const ButtonWrap = styled.div`
   display: flex;
-
-  ${(props) =>
-    props.$article &&
-    css`
-      width: 100%;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid white;
-    `}
-
-  ${(props) =>
-    props.$tag &&
-    css`
-      margin-right: 10px;
-    `}
-`;
-
-const Div = styled.div<{
-  $list?: boolean;
-  $text?: boolean;
-  $item?: boolean;
-  $submit?: boolean;
-}>`
-  ${(props) =>
-    props.$item &&
-    css`
-      display: flex;
-    `}
-
-  ${(props) =>
-    props.$text &&
-    css`
-      margin-left: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    `}
-
-    ${(props) =>
-    props.$submit &&
-    css`
-      display: flex;
-      justify-content: center;
-      padding-bottom: 32px;
-    `}
+  justify-content: center;
+  padding-bottom: 32px;
 `;
 
 const Content = styled.div`
@@ -201,39 +85,12 @@ const Content = styled.div`
   }
 `;
 
-const P = styled.p<{
-  $title?: boolean;
-  $tag?: boolean;
-  $home: boolean;
-}>`
-  margin-top: 10px;
-  font-size: 16px;
-
-  ${(props) =>
-    props.$home &&
-    css`
-      margin-top: 0;
-      font-size: 32px;
-      padding-top: 32px;
-      text-decoration: underline;
-      text-align: center;
-    `}
-
-  ${(props) =>
-    props.$tag &&
-    css`
-      margin-right: 10px;
-      margin-left: 5px;
-      margin-top: 0;
-    `}
-
-    ${(props) =>
-    props.$title &&
-    css`
-      font-size: 24px;
-      text-decoration: underline;
-      text-align: left;
-    `}
+const HomeTitle = styled.p`
+  margin-top: 0;
+  font-size: 32px;
+  padding-top: 32px;
+  text-decoration: underline;
+  text-align: center;
 `;
 
 const Button = styled.button`

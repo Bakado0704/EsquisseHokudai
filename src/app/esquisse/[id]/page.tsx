@@ -21,7 +21,7 @@ import styled, { css } from "styled-components";
 import NavFooter from "@/components/nav/NavFooter/NavFooter";
 import tagImg from "@/assets/icon/tag.svg";
 import personImg from "@/assets/icon/person.png";
-import ChangePost from "@/components/change/changePost";
+import ChangePost from "@/components/change/ChangePost";
 import ChangeEsquisse from "@/components/change/ChangeEsquisse";
 
 type Props = {
