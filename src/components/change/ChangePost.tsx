@@ -18,13 +18,15 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { Bg } from "../bg/Background";
 import { CloseButton } from "../button/CloseButton";
 import { SubmitButton } from "../button/SubmitButton";
-import { CategoryLists } from "../list/categoryList";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
+import { CategoryLists } from "../list/CategoryLists";
+import { getAllPosts } from "@/helpers/api-util";
+import { IndicatePost } from "@/store/post";
 
 type Props = {
   id: string;
@@ -33,6 +35,7 @@ type Props = {
 
 export default function ChangePost(props: Props) {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [imageName, setImageName] = useState<string>();
@@ -42,15 +45,12 @@ export default function ChangePost(props: Props) {
 
   const index = posts.indexOf(selectedPost);
   const [title, setTitle] = useState<string>(selectedPost?.title);
-  const [description, setDescription] = useState<string>(
-    selectedPost?.description
-  );
-  const [imageSource, setImageSource] = useState<string | StaticImport>(
-    selectedPost?.imageSource
-  );
-  let projectType: (ProjectType | ToolType)[] = [];
-  let buildingType: (BuildingType | ProjectType | ToolType)[] = [];
-  let toolType: (BuildingType | ProjectType | ToolType)[] = [];
+  const [description, setDescription] = useState<string>(selectedPost?.description);
+  const [imageSource, setImageSource] = useState<string | StaticImport>(selectedPost?.imageSource);
+
+  let projectType: (ProjectType | BuildingType | ToolType)[] = [];
+  let buildingType: (ProjectType | BuildingType | ToolType)[] = [];
+  let toolType: (ProjectType | BuildingType | ToolType)[] = [];
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -82,6 +82,8 @@ export default function ChangePost(props: Props) {
       }
     }
 
+    console.log(projectType);
+
     await changePost(
       postedId,
       index,
@@ -91,7 +93,13 @@ export default function ChangePost(props: Props) {
       imageName,
       description
     ).then(() => {
-      router.push("/home");
+      getAllPosts()
+        .then(function (result) {
+          dispatch(IndicatePost(result));
+        })
+        .then(() => {
+          router.push("/home");
+        });
     });
   }
 
@@ -129,8 +137,6 @@ export default function ChangePost(props: Props) {
     );
   };
 
-  console.log(projectType);
-
   const titleHandler = () => {
     //@ts-ignore
     const enteredTitle = document.getElementById("title").value;
@@ -149,7 +155,7 @@ export default function ChangePost(props: Props) {
       <WrapperInner>
         <Content>
           <CloseButton modalClose={props.modalClose} />
-          <P $title={true}>投稿修正</P>
+          <Title>投稿修正</Title>
           <form onSubmit={submitFormHandler}>
             <Container>
               <Label htmlFor="title">タイトル</Label>
@@ -164,41 +170,9 @@ export default function ChangePost(props: Props) {
             <Container>
               <P $left={true}>カテゴリ</P>
               <RightContainer>
-                <CategoryLists projectType={projectType} />
-                <CategoryList>
-                  {buildingCategory.map((category) => {
-                    return (
-                      <CategoryItem key={category.id[0]}>
-                        <label htmlFor="title">
-                          <Input
-                            type="checkbox"
-                            id={category.id[0]}
-                            name={category.id[0]}
-                            value={category.id[0]}
-                          />
-                          {category.title}
-                        </label>
-                      </CategoryItem>
-                    );
-                  })}
-                </CategoryList>
-                <CategoryList>
-                  {toolCategory.map((category) => {
-                    return (
-                      <CategoryItem key={category.id[0]}>
-                        <label htmlFor="title">
-                          <Input
-                            type="checkbox"
-                            id={category.id[0]}
-                            name={category.id[0]}
-                            value={category.id[0]}
-                          />
-                          {category.title}
-                        </label>
-                      </CategoryItem>
-                    );
-                  })}
-                </CategoryList>
+                <CategoryLists category={projectCategory} />
+                <CategoryLists category={buildingCategory} />
+                <CategoryLists category={toolCategory} />
               </RightContainer>
             </Container>
 
@@ -242,6 +216,7 @@ export default function ChangePost(props: Props) {
                 </PhotoContainer>
               </Div>
             </Container>
+
             <Container>
               <Label htmlFor="description">内容</Label>
               <Textarea
@@ -251,6 +226,7 @@ export default function ChangePost(props: Props) {
                 onChange={descriptionHandler}
               />
             </Container>
+
             <SubmitButton>投稿する</SubmitButton>
           </form>
         </Content>
@@ -290,7 +266,6 @@ const WrapperInner = styled.div`
 const Content = styled.div`
   height: calc(100% - 171px);
   overflow-y: scroll;
-  border-bottom: 1px solid white;
 
   &::-webkit-scrollbar {
     display: none;
@@ -393,54 +368,6 @@ const PhotoInner = styled.div`
 
 const RightContainer = styled.button``;
 
-const Button = styled.button<{ $close?: boolean; $submit?: boolean }>`
-  --border-color: #c9caca;
-  --text-color: #323131;
-
-  ${(props) =>
-    props.$close &&
-    css`
-      display: block;
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      top: 5px;
-      right: 5px;
-    `}
-
-  ${(props) =>
-    props.$submit &&
-    css`
-      display: block;
-      padding-top: 8px;
-      padding-bottom: 8px;
-      padding-right: 32px;
-      padding-left: 32px;
-      background-color: white;
-      color: var(--text-color);
-      border: solid 2px var(--border-color);
-      border-radius: 10px;
-      margin: 32px auto 0;
-    `}
-`;
-
-const Span = styled.span`
-  background-color: black;
-  position: absolute;
-  width: 24px;
-  height: 2px;
-  top: 50%;
-  left: 50%;
-
-  &:nth-child(1) {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-
-  &:nth-child(2) {
-    transform: translate(-50%, -50%) rotate(-45deg);
-  }
-`;
-
 const P = styled.p<{
   $title?: boolean;
   $left?: boolean;
@@ -465,62 +392,11 @@ const P = styled.p<{
     `}
 `;
 
-const CategoryList = styled.ul`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  &:first-child {
-    margin-top: 0;
-  }
-`;
-
-const CategoryItem = styled.li`
-  margin-top: 10px;
-`;
-
-const Input = styled.input`
-  --border-color: #9fa0a0;
-  --background-color: #dcdddd;
-
-  cursor: pointer;
-  padding-left: 30px;
-  vertical-align: middle;
-  position: relative;
-
-  &::before,
-  &::after {
-    content: "";
-    display: block;
-    position: absolute;
-  }
-
-  &::before {
-    border-color: var(--border-color);
-    background-color: var(--background-color);
-    border: 3px solid #666464;
-    width: 20px;
-    height: 20px;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-  }
-
-  &::after {
-    opacity: 0;
-    width: 10px;
-    height: 10px;
-    background-color: var(--border-color);
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-  }
-
-  &:checked::after {
-    opacity: 1;
-  }
+const Title = styled.p`
+  margin-top: 0;
+  font-size: 32px;
+  text-decoration: underline;
+  text-align: center;
 `;
 
 const Label = styled.label`

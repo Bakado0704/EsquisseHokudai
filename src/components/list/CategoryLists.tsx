@@ -1,29 +1,16 @@
 "use client";
 
-import {
-  projectCategory,
-} from "@/categoryData/categoryData";
-import { BuildingType, ProjectType, ToolType } from "@/types/category";
+import CategoryList from "@/models/categoryList";
 import styled from "styled-components";
 
 type Props = {
-  projectType: (ProjectType | BuildingType | ToolType)[];
+  category: CategoryList[];
 };
 
-export const CategoryLists = ({projectType}: Props) => {
-
-  for (let i = 0; i < projectCategory.length; i++) {
-    const checkedItem = document.getElementsByName(
-      `${projectCategory[i].id[0]}`
-    );
-    if (checkedItem.item(0).checked) {
-      projectType.push(projectCategory[i].id);
-    }
-  }
-
+export const CategoryLists = ({ category }: Props) => {
   return (
     <List>
-      {projectCategory.map((category) => {
+      {category.map((category) => {
         return (
           <CategoryItem key={category.id[0]}>
             <label htmlFor="title">
