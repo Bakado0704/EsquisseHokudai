@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/helpers/api-util";
-import NavHeader from "@/components/nav/NavHeader/NavHeader";
+import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled, { css } from "styled-components";
 
 export default function Login() {

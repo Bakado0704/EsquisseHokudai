@@ -5,8 +5,8 @@ import {
   projectCategory,
   toolCategory,
 } from "@/categoryData/categoryData";
-import NavFooter from "@/components/nav/NavFooter/NavFooter";
-import NavHeader from "@/components/nav/NavHeader/NavHeader";
+import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
+import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import { getAllPosts, postSubmit } from "@/helpers/api-util";
 import storage from "@/helpers/firebase";
 import { IndicatePost } from "@/store/post";

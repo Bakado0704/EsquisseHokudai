@@ -7,9 +7,9 @@ import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
 import { getAllPosts, getUser } from "@/helpers/api-util";
 import { useRouter } from "next/navigation";
-import NavHeader from "@/components/nav/NavHeader/NavHeader";
-import NavFooter from "@/components/nav/NavFooter/NavFooter";
-import PostList from "@/components/list/PostList";
+import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
+import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
+import { PostList } from "@/components/list/PostList";
 
 export default function Page() {
   const dispatch = useDispatch();

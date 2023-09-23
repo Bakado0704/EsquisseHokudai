@@ -1,11 +1,10 @@
 "use client";
 
 import { buildingCategory } from "@/categoryData/categoryData";
-import NavFooter from "@/components/nav/NavFooter/NavFooter";
-import NavHeader from "@/components/nav/NavHeader/NavHeader";
+import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
+import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import Image from "next/image";
 import Link from "next/link";
-import { relative } from "path";
 import styled, { css } from "styled-components";
 
 export default function Page() {

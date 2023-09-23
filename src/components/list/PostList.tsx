@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { PostItem } from "../item/PostItem";
 
-export default function PostList() {
+export const PostList = () => {
   const posts = useSelector((state: RootState) => state.post.posts);
 
   return (

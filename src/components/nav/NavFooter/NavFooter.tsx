@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function NavFooter() {
+export const NavFooter = () => {
   return (
     <Wrapper>
       <WrapperInner>

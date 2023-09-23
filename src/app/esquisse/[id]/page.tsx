@@ -15,10 +15,10 @@ import {
   getUser,
 } from "@/helpers/api-util";
 import { IndicateEsquisse, IndicatePost } from "@/store/post";
-import NavHeader from "@/components/nav/NavHeader/NavHeader";
+import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import { deleteEsquisse, deletePost } from "@/helpers/api-change";
 import styled, { css } from "styled-components";
-import NavFooter from "@/components/nav/NavFooter/NavFooter";
+import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import tagImg from "@/assets/icon/tag.svg";
 import personImg from "@/assets/icon/person.png";
 import ChangePost from "@/components/change/ChangePost";

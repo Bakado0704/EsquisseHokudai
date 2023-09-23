@@ -3,7 +3,7 @@
 import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { emailRegister } from "@/helpers/api-util";
-import NavHeader from "@/components/nav/NavHeader/NavHeader";
+import {NavHeader} from "@/components/nav/NavHeader/NavHeader";
 import styled, { css } from "styled-components";
 
 export default function Page() {

@@ -4,7 +4,7 @@ import { getUser, signout } from "@/helpers/api-util";
 import { useRouter } from "next/navigation";
 import styled, { css } from "styled-components";
 
-export default function NavHeader() {
+export const NavHeader = () => {
   const router = useRouter();
   const user = getUser();
 

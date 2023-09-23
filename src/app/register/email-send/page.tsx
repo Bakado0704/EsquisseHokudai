@@ -1,6 +1,6 @@
 "use client";
 
-import NavHeader from "@/components/nav/NavHeader/NavHeader";
+import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import { emailRegister, getUser } from "@/helpers/api-util";
 import { useRouter } from "next/navigation";
 import styled, { css } from "styled-components";
