@@ -7,11 +7,15 @@ import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import tagImg from "@/assets/icon/tag.svg";
 import Post from "@/models/post";
 
-export const PostItem = (post: Post, tags:[]) => {
-//   let tag = JSON.stringify(tags);
+type Props = {
+  post: Post;
+  tags: (ProjectType | BuildingType | ToolType)[];
+};
+
+export const PostItem = ({ post, tags }: Props) => {
 
   return (
-    <PostItems key={post.id}>
+    <Items key={post.id}>
       <Link href={`/esquisse/${post.id}`}>
         <PostWrap>
           {post.image && (
@@ -49,9 +53,9 @@ export const PostItem = (post: Post, tags:[]) => {
           </PostTextWrap>
         </PostWrap>
       </Link>
-    </PostItems>
+    </Items>
   );
-}
+};
 
 const TagList = styled.ul`
   display: flex;
@@ -63,7 +67,7 @@ const TagItem = styled.li`
   margin-right: 10px;
 `;
 
-const PostItems = styled.li`
+const Items = styled.li`
   display: flex;
   width: 100%;
   padding-top: 10px;

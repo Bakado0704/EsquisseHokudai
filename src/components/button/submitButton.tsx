@@ -11,10 +11,11 @@ export const SubmitButton = ({ children }: Props) => {
 };
 
 const Button = styled.button`
+  --border-color: #c9caca;
   --text-color: #323131;
 
   display: block;
-  padding-top: 8px 32px;
+  padding: 8px 32px;
   background-color: white;
   color: var(--text-color);
   border: solid 2px var(--border-color);
