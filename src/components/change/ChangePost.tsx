@@ -49,12 +49,8 @@ export default function ChangePost(props: Props) {
 
   const index = posts.indexOf(selectedPost);
   const [title, setTitle] = useState<string>(selectedPost?.title);
-  const [description, setDescription] = useState<string>(
-    selectedPost?.description
-  );
-  const [imageSource, setImageSource] = useState<string | StaticImport>(
-    selectedPost?.imageSource
-  );
+  const [description, setDescription] = useState<string>(selectedPost?.description);
+  const [imageSource, setImageSource] = useState<string | StaticImport>(selectedPost?.imageSource);
 
   let projectType: (ProjectType | BuildingType | ToolType)[] = [];
   let buildingType: (ProjectType | BuildingType | ToolType)[] = [];
