@@ -2,7 +2,11 @@
 
 import styled from "styled-components";
 
-export const SubmitButton = (children: React.ReactNode) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+export const SubmitButton = ({ children }: Props) => {
   return <Button>{children}</Button>;
 };
 

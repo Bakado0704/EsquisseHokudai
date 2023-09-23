@@ -2,9 +2,13 @@
 
 import styled from "styled-components";
 
-export const Bg = (modalClose: () => void) => {
+type Props = {
+  modalClose: () => void;
+};
+
+export const Bg = ({ modalClose }: Props) => {
   return <Background onClick={modalClose} />;
-}
+};
 
 const Background = styled.div`
   width: 100%;

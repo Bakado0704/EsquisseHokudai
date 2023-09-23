@@ -21,6 +21,8 @@ import { FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { Bg } from "../bg/Background";
+import { CloseButton } from "../button/CloseButton";
+import { SubmitButton } from "../button/SubmitButton";
 
 type Props = {
   id: string;
@@ -140,16 +142,14 @@ export default function ChangePost(props: Props) {
 
   return (
     <Wrapper>
-      <Bg modalClose={props.modalClose}/>
+      <Bg modalClose={props.modalClose} />
       <WrapperInner>
         <Content>
-          {/* <CloseButton modalClose={props.modalClose} /> */}
+          <CloseButton modalClose={props.modalClose} />
           <P $title={true}>投稿修正</P>
           <form onSubmit={submitFormHandler}>
             <Container>
-              <Label htmlFor="title">
-                タイトル
-              </Label>
+              <Label htmlFor="title">タイトル</Label>
               <Textarea
                 id="title"
                 value={title}
@@ -216,9 +216,7 @@ export default function ChangePost(props: Props) {
             </Container>
 
             <Container>
-              <Label htmlFor="image">
-                写真
-              </Label>
+              <Label htmlFor="image">写真</Label>
               <Div $right={true}>
                 <input
                   multiple
@@ -258,9 +256,7 @@ export default function ChangePost(props: Props) {
               </Div>
             </Container>
             <Container>
-              <Label htmlFor="description">
-                内容
-              </Label>
+              <Label htmlFor="description">内容</Label>
               <Textarea
                 id="description"
                 value={description}
@@ -268,7 +264,7 @@ export default function ChangePost(props: Props) {
                 onChange={descriptionHandler}
               />
             </Container>
-            <Button>投稿する</Button>
+            <SubmitButton>投稿する</SubmitButton>
           </form>
         </Content>
       </WrapperInner>

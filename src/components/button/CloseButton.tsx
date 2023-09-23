@@ -2,14 +2,18 @@
 
 import styled from "styled-components";
 
-export const CloseButton = (modalClose: () => void) => {
+type Props = {
+  modalClose: () => void;
+};
+
+export const CloseButton = ({ modalClose }: Props) => {
   return (
     <Button onClick={modalClose}>
       <Span />
       <Span />
     </Button>
   );
-}
+};
 
 const Button = styled.button`
   --border-color: #c9caca;
