@@ -15,18 +15,21 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Bg } from "../bg/Background";
 import { CloseButton } from "../button/CloseButton";
 import { SubmitButton } from "../button/SubmitButton";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
-import { CategoryLists } from "../list/CategoryLists";
 import { getAllPosts } from "@/helpers/api-util";
 import { IndicatePost } from "@/store/post";
+import { ChangePostTitle } from "./ChangePostTitle";
+import { ChangePostCategory } from "./ChangePostCategory";
+import { ChangePostPhoto } from "./ChangePostPhoto";
+import { ChangePostDescription } from "./ChangePostDescription";
+import { Uploading } from "../bg/Uploading";
 
 type Props = {
   id: string;
@@ -39,14 +42,19 @@ export default function ChangePost(props: Props) {
   const [loading, setLoading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [imageName, setImageName] = useState<string>();
+  const [uploading, setUploading] = useState(false);
   const postedId = props.id;
   const posts = useSelector((state: RootState) => state.post.posts);
   const selectedPost = posts.find((post) => post.id === postedId);
 
   const index = posts.indexOf(selectedPost);
   const [title, setTitle] = useState<string>(selectedPost?.title);
-  const [description, setDescription] = useState<string>(selectedPost?.description);
-  const [imageSource, setImageSource] = useState<string | StaticImport>(selectedPost?.imageSource);
+  const [description, setDescription] = useState<string>(
+    selectedPost?.description
+  );
+  const [imageSource, setImageSource] = useState<string | StaticImport>(
+    selectedPost?.imageSource
+  );
 
   let projectType: (ProjectType | BuildingType | ToolType)[] = [];
   let buildingType: (ProjectType | BuildingType | ToolType)[] = [];
@@ -54,6 +62,7 @@ export default function ChangePost(props: Props) {
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setUploading(true);
 
     for (let i = 0; i < projectCategory.length; i++) {
       const checkedItem = document.getElementsByName(
@@ -82,8 +91,6 @@ export default function ChangePost(props: Props) {
       }
     }
 
-    console.log(projectType);
-
     await changePost(
       postedId,
       index,
@@ -93,13 +100,11 @@ export default function ChangePost(props: Props) {
       imageName,
       description
     ).then(() => {
-      getAllPosts()
-        .then(function (result) {
-          dispatch(IndicatePost(result));
-        })
-        .then(() => {
-          router.push("/home");
-        });
+      getAllPosts().then(function (result) {
+        dispatch(IndicatePost(result));
+        setUploading(false);
+        router.push("/home");
+      });
     });
   }
 
@@ -152,81 +157,29 @@ export default function ChangePost(props: Props) {
   return (
     <Wrapper>
       <Bg modalClose={props.modalClose} />
+      {uploading && <Uploading />}
       <WrapperInner>
         <Content>
           <CloseButton modalClose={props.modalClose} />
           <Title>投稿修正</Title>
           <form onSubmit={submitFormHandler}>
-            <Container>
-              <Label htmlFor="title">タイトル</Label>
-              <Textarea
-                id="title"
-                value={title}
-                rows={1}
-                onChange={titleHandler}
-              />
-            </Container>
-
-            <Container>
-              <P $left={true}>カテゴリ</P>
-              <RightContainer>
-                <CategoryLists category={projectCategory} />
-                <CategoryLists category={buildingCategory} />
-                <CategoryLists category={toolCategory} />
-              </RightContainer>
-            </Container>
-
-            <Container>
-              <Label htmlFor="image">写真</Label>
-              <Div $right={true}>
-                <input
-                  multiple
-                  name="imageURL"
-                  type="file"
-                  accept=".png, .jpeg, .jpg"
-                  onChange={onFileUploadToFirebase}
-                />
-                <PhotoContainer>
-                  <PhotoInner>
-                    {loading ? (
-                      <h2>アップロード中・・・</h2>
-                    ) : (
-                      <>
-                        <Image
-                          src={selectedPost?.imageSource}
-                          alt="church"
-                          layout={"fill"}
-                          objectFit={"cover"}
-                        />
-                        {isUploaded && (
-                          <>
-                            {imageSource && (
-                              <Image
-                                src={imageSource}
-                                alt="church"
-                                layout={"fill"}
-                                objectFit={"cover"}
-                              />
-                            )}
-                          </>
-                        )}
-                      </>
-                    )}
-                  </PhotoInner>
-                </PhotoContainer>
-              </Div>
-            </Container>
-
-            <Container>
-              <Label htmlFor="description">内容</Label>
-              <Textarea
-                id="description"
-                value={description}
-                rows={5}
-                onChange={descriptionHandler}
-              />
-            </Container>
-
+            <ChangePostTitle title={title} titleHandler={titleHandler} />
+            <ChangePostCategory
+              projectCategory={projectCategory}
+              buildingCategory={buildingCategory}
+              toolCategory={toolCategory}
+            />
+            <ChangePostPhoto
+              onFileUploadToFirebase={onFileUploadToFirebase}
+              selectedPost={selectedPost}
+              isUploaded={isUploaded}
+              loading={loading}
+              imageSource={imageSource}
+            />
+            <ChangePostDescription
+              description={description}
+              descriptionHandler={descriptionHandler}
+            />
             <SubmitButton>投稿する</SubmitButton>
           </form>
         </Content>
@@ -272,153 +225,9 @@ const Content = styled.div`
   }
 `;
 
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid white;
-`;
-
-const Div = styled.div<{
-  $container?: boolean;
-  $bg?: boolean;
-  $wrapper?: boolean;
-  $photo?: boolean;
-  $photoinner?: boolean;
-  $right?: boolean;
-}>`
-  --color-background: #dcdddd;
-
-  ${(props) => props.$container && css``}
-
-  ${(props) =>
-    props.$bg &&
-    css`
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      background-color: black;
-      opacity: 60%;
-      top: 0;
-      left: 0;
-    `}
-
-    
-  ${(props) =>
-    props.$wrapper &&
-    css`
-      width: 100%;
-      display: flex;
-      align-items: center;
-      padding-top: 16px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid white;
-    `}
-
-    ${(props) =>
-    props.$photo &&
-    css`
-      width: 100%;
-      height: 400px;
-      padding-right: 80px;
-      padding-left: 80px;
-      margin-top: 8px;
-      background-color: var(--color-background);
-    `}
-  
-    ${(props) =>
-    props.$photoinner &&
-    css`
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    `}
-
-    ${(props) =>
-    props.$right &&
-    css`
-      width: 90%;
-    `}
-`;
-
-const PhotoContainer = styled.div`
-  --color-background: #dcdddd;
-
-  width: 100%;
-  height: 400px;
-  padding-right: 80px;
-  padding-left: 80px;
-  margin-top: 8px;
-  background-color: var(--color-background);
-`;
-
-const PhotoInner = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const RightContainer = styled.button``;
-
-const P = styled.p<{
-  $title?: boolean;
-  $left?: boolean;
-}>`
-  margin-top: 10px;
-  font-size: 16px;
-
-  ${(props) =>
-    props.$title &&
-    css`
-      margin-top: 0;
-      font-size: 32px;
-      text-decoration: underline;
-      text-align: center;
-    `}
-
-  ${(props) =>
-    props.$left &&
-    css`
-      width: 10%;
-      text-align: center;
-    `}
-`;
-
 const Title = styled.p`
   margin-top: 0;
   font-size: 32px;
   text-decoration: underline;
   text-align: center;
-`;
-
-const Label = styled.label`
-  width: 10%;
-  text-align: center;
-`;
-
-const Textarea = styled.textarea`
-  --border-color: #9fa0a0;
-  --background-color: #dcdddd;
-
-  display: block;
-  width: 90%;
-  padding: 6px;
-  font-size: 14px;
-  margin-top: 8px;
-  background-color: var(--background-color);
-  border: solid 3px var(--border-color);
-  border-radius: 8px;
-  overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `;

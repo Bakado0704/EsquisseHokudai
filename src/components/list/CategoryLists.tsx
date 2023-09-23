@@ -8,6 +8,7 @@ type Props = {
 };
 
 export const CategoryLists = ({ category }: Props) => {
+
   return (
     <List>
       {category.map((category) => {
