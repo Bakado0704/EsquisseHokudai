@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
+import { Bg } from "../bg/Background";
 
 type Props = {
   id: string;
@@ -34,7 +35,7 @@ export default function ChangePost(props: Props) {
   const postedId = props.id;
   const posts = useSelector((state: RootState) => state.post.posts);
   const selectedPost = posts.find((post) => post.id === postedId);
-  //@ts-ignore
+
   const index = posts.indexOf(selectedPost);
   const [title, setTitle] = useState<string>(selectedPost?.title);
   const [description, setDescription] = useState<string>(
@@ -139,17 +140,14 @@ export default function ChangePost(props: Props) {
 
   return (
     <Wrapper>
-      <Div $bg={true} onClick={props.modalClose}></Div>
+      <Bg modalClose={props.modalClose}/>
       <WrapperInner>
-        <Div $container={true}>
-          <Button $close={true} onClick={props.modalClose}>
-            <Span />
-            <Span />
-          </Button>
+        <Content>
+          {/* <CloseButton modalClose={props.modalClose} /> */}
           <P $title={true}>投稿修正</P>
           <form onSubmit={submitFormHandler}>
-            <Div $wrapper={true}>
-              <Label $left={true} htmlFor="title">
+            <Container>
+              <Label htmlFor="title">
                 タイトル
               </Label>
               <Textarea
@@ -158,15 +156,15 @@ export default function ChangePost(props: Props) {
                 rows={1}
                 onChange={titleHandler}
               />
-            </Div>
+            </Container>
 
-            <Div $wrapper={true}>
+            <Container>
               <P $left={true}>カテゴリ</P>
-              <Div>
-                <Ul>
+              <RightContainer>
+                <CategoryList>
                   {projectCategory.map((category) => {
                     return (
-                      <Li key={category.id[0]}>
+                      <CategoryItem key={category.id[0]}>
                         <label htmlFor="title">
                           <Input
                             type="checkbox"
@@ -176,14 +174,14 @@ export default function ChangePost(props: Props) {
                           />
                           {category.title}
                         </label>
-                      </Li>
+                      </CategoryItem>
                     );
                   })}
-                </Ul>
-                <Ul>
+                </CategoryList>
+                <CategoryList>
                   {buildingCategory.map((category) => {
                     return (
-                      <Li key={category.id[0]}>
+                      <CategoryItem key={category.id[0]}>
                         <label htmlFor="title">
                           <Input
                             type="checkbox"
@@ -193,14 +191,14 @@ export default function ChangePost(props: Props) {
                           />
                           {category.title}
                         </label>
-                      </Li>
+                      </CategoryItem>
                     );
                   })}
-                </Ul>
-                <Ul>
+                </CategoryList>
+                <CategoryList>
                   {toolCategory.map((category) => {
                     return (
-                      <Li key={category.id[0]}>
+                      <CategoryItem key={category.id[0]}>
                         <label htmlFor="title">
                           <Input
                             type="checkbox"
@@ -210,28 +208,27 @@ export default function ChangePost(props: Props) {
                           />
                           {category.title}
                         </label>
-                      </Li>
+                      </CategoryItem>
                     );
                   })}
-                </Ul>
-              </Div>
-            </Div>
+                </CategoryList>
+              </RightContainer>
+            </Container>
 
-            <Div $wrapper={true}>
-              <Label $left={true} htmlFor="image">
+            <Container>
+              <Label htmlFor="image">
                 写真
               </Label>
               <Div $right={true}>
                 <input
-                  className="imageUploadInput"
                   multiple
                   name="imageURL"
                   type="file"
                   accept=".png, .jpeg, .jpg"
                   onChange={onFileUploadToFirebase}
                 />
-                <Div $photo={true}>
-                  <Div $photoinner={true}>
+                <PhotoContainer>
+                  <PhotoInner>
                     {loading ? (
                       <h2>アップロード中・・・</h2>
                     ) : (
@@ -256,12 +253,12 @@ export default function ChangePost(props: Props) {
                         )}
                       </>
                     )}
-                  </Div>
-                </Div>
+                  </PhotoInner>
+                </PhotoContainer>
               </Div>
-            </Div>
-            <Div $wrapper={true}>
-              <Label $left={true} htmlFor="description">
+            </Container>
+            <Container>
+              <Label htmlFor="description">
                 内容
               </Label>
               <Textarea
@@ -270,10 +267,10 @@ export default function ChangePost(props: Props) {
                 rows={5}
                 onChange={descriptionHandler}
               />
-            </Div>
-            <Button $submit={true}>投稿する</Button>
+            </Container>
+            <Button>投稿する</Button>
           </form>
-        </Div>
+        </Content>
       </WrapperInner>
     </Wrapper>
   );
@@ -305,6 +302,25 @@ const WrapperInner = styled.div`
   border-radius: 20px;
   position: relative;
   padding: 40px;
+`;
+
+const Content = styled.div`
+  height: calc(100% - 171px);
+  overflow-y: scroll;
+  border-bottom: 1px solid white;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid white;
 `;
 
 const Div = styled.div<{
@@ -371,6 +387,28 @@ const Div = styled.div<{
       width: 90%;
     `}
 `;
+
+const PhotoContainer = styled.div`
+  --color-background: #dcdddd;
+
+  width: 100%;
+  height: 400px;
+  padding-right: 80px;
+  padding-left: 80px;
+  margin-top: 8px;
+  background-color: var(--color-background);
+`;
+
+const PhotoInner = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const RightContainer = styled.button``;
 
 const Button = styled.button<{ $close?: boolean; $submit?: boolean }>`
   --border-color: #c9caca;
@@ -444,7 +482,7 @@ const P = styled.p<{
     `}
 `;
 
-const Ul = styled.ul<{ $article?: boolean }>`
+const CategoryList = styled.ul`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -454,7 +492,7 @@ const Ul = styled.ul<{ $article?: boolean }>`
   }
 `;
 
-const Li = styled.li`
+const CategoryItem = styled.li`
   margin-top: 10px;
 `;
 
@@ -502,15 +540,9 @@ const Input = styled.input`
   }
 `;
 
-const Label = styled.label<{
-  $left?: boolean;
-}>`
-  ${(props) =>
-    props.$left &&
-    css`
-      width: 10%;
-      text-align: center;
-    `}
+const Label = styled.label`
+  width: 10%;
+  text-align: center;
 `;
 
 const Textarea = styled.textarea`

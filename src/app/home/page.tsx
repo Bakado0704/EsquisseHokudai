@@ -6,9 +6,9 @@ import { useEffect } from "react";
 import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
 import { getAllPosts, getUser } from "@/helpers/api-util";
+import { useRouter } from "next/navigation";
 import NavHeader from "@/components/nav/NavHeader/NavHeader";
 import NavFooter from "@/components/nav/NavFooter/NavFooter";
-import { useRouter } from "next/navigation";
 import PostList from "@/components/list/PostList";
 
 export default function Page() {

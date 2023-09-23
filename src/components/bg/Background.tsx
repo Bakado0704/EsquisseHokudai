@@ -1,0 +1,17 @@
+"use client";
+
+import styled from "styled-components";
+
+export const Bg = (modalClose: () => void) => {
+  return <Background onClick={modalClose} />;
+}
+
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: black;
+  opacity: 60%;
+  top: 0;
+  left: 0;
+`;
