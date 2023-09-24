@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Uploading } from "../bg/Uploading";
 import { SubmitButton } from "../button/SubmitButton";
-import { ChangeEsquisseForm } from "../form/ChangeEsquisseForm";
+import { ChangeEsquisseForm } from "../form/changeform/ChangeEsquisseForm";
 import { CloseButton } from "../button/CloseButton";
 import { Bg } from "../bg/Background";
 

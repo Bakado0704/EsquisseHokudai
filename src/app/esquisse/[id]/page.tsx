@@ -6,16 +6,10 @@ import { FormEvent, useEffect, useState } from "react";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import {
-  esquisseSubmit,
-  getAllEsquisses,
-  getAllPosts,
-  getUser,
-} from "@/helpers/api-util";
+import { esquisseSubmit, getAllEsquisses, getAllPosts, getUser } from "@/helpers/api-util";
 import { IndicateEsquisse, IndicatePost } from "@/store/post";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import { deletePost } from "@/helpers/api-change";
-import styled from "styled-components";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { ChangePostModal } from "@/components/modal/ChangePostModal";
 import { ChangePostButton } from "@/components/button/ChangePostButton";
@@ -24,6 +18,8 @@ import { EsquisseList } from "@/components/list/EsquisseList";
 import { EsquisseForm } from "@/components/form/EsquisseForm";
 import { ImageContainer } from "@/components/image/ImageContianer";
 import { TagLInkList } from "@/components/list/TagLinkList";
+import { DeleteModal } from "@/components/modal/DeleteModal";
+import styled from "styled-components";
 
 type Props = {
   params: Params;
@@ -43,10 +39,14 @@ function Esquisse(props: Props) {
   const user = getUser();
   const [esquisseModal, setEsquisseModal] = useState<boolean>(false);
   const [postModal, setPostModal] = useState<boolean>(false);
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
   //@ts-ignore
   const index = posts.indexOf(selectedPost);
   const changePostHandler = () => {
     setPostModal(true);
+  };
+  const alartHandler = () => {
+    setDeleteModal(true);
   };
   const deletePostHandler = async () => {
     await deletePost(index).then(() => {
@@ -100,6 +100,7 @@ function Esquisse(props: Props) {
 
   const postModalClose = () => {
     setPostModal(false);
+    setDeleteModal(false);
   };
 
   const esquisseModalClose = () => {
@@ -114,7 +115,7 @@ function Esquisse(props: Props) {
           {user && selectedPost.user.uid === user.uid && (
             <ChangePostButton
               onChange={changePostHandler}
-              onDelete={deletePostHandler}
+              onDelete={alartHandler}
             />
           )}
           <TagLInkList tags={tags} />
@@ -138,6 +139,7 @@ function Esquisse(props: Props) {
         </WrapperInner>
       </Wrapper>
       {postModal && <ChangePostModal id={postedId} modalClose={postModalClose} />}
+      {deleteModal && <DeleteModal modalClose={postModalClose} onDelete={deletePostHandler}/>}
       <NavFooter />
     </>
   );

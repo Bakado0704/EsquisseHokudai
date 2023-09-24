@@ -7,7 +7,8 @@ type Props = {
   category: CategoryList[];
 };
 
-export const CategoryLists = ({ category }: Props) => {
+export const ChangeCategoryLists = ({ category }: Props) => {
+
   return (
     <List>
       {category.map((category) => {
@@ -45,7 +46,7 @@ const CategoryItem = styled.li`
 
 const Input = styled.input`
   --border-color: #9fa0a0;
-  --background-color: #434141;
+  --background-color: #dcdddd;
 
   cursor: pointer;
   padding-left: 30px;

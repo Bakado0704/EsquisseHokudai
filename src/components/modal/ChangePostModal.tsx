@@ -25,10 +25,10 @@ import { SubmitButton } from "../button/SubmitButton";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { getAllPosts } from "@/helpers/api-util";
 import { IndicatePost } from "@/store/post";
-import { ChangePostTitleForm } from "../form/ChangePostTitleForm";
-import { ChangePostCategoryForm } from "../form/ChangePostCategoryForm";
-import { ChangePostPhotoForm } from "../form/ChangePostPhotoForm";
-import { ChangePostDescriptionForm } from "../form/ChangePostDescriptionForm";
+import { ChangePostTitleForm } from "../form/changeform/ChangePostTitleForm"; 
+import { ChangePostCategoryForm } from "../form/changeform/ChangePostCategoryForm"; 
+import { ChangePostPhotoForm } from "../form/changeform/ChangePostPhotoForm"; 
+import { ChangePostDescriptionForm } from "../form/changeform/ChangePostDescriptionForm"; 
 import { Uploading } from "../bg/Uploading";
 
 type Props = {

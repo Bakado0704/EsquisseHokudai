@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { CategoryLists } from "../list/CategoryLists";
+import { ChangeCategoryLists } from "@/components/list/ChangeCategoryLists"; 
 import CategoryList from "@/models/categoryList";
 
 type Props = {
@@ -19,9 +19,9 @@ export const ChangePostCategoryForm = ({
     <Container>
       <LeftText>カテゴリ</LeftText>
       <RightContainer>
-        <CategoryLists category={projectCategory} />
-        <CategoryLists category={buildingCategory} />
-        <CategoryLists category={toolCategory} />
+        <ChangeCategoryLists category={projectCategory} />
+        <ChangeCategoryLists category={buildingCategory} />
+        <ChangeCategoryLists category={toolCategory} />
       </RightContainer>
     </Container>
   );
