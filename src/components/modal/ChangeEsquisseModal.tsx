@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Uploading } from "../bg/Uploading";
 import { SubmitButton } from "../button/SubmitButton";
-import { ChangeEsquisseDescription } from "./ChangeEsquisseDescription";
+import { ChangeEsquisseForm } from "../form/ChangeEsquisseForm";
 import { CloseButton } from "../button/CloseButton";
 import { Bg } from "../bg/Background";
 
@@ -17,7 +17,7 @@ type Props = {
   modalClose: () => void;
 };
 
-export default function ChangeEsquisse(props: Props) {
+export const ChangeEsquisseModal = (props: Props) => {
   const router = useRouter();
   const postedKey = props.id;
   const esquisses = useSelector((state: RootState) => state.post.esquisses);
@@ -60,7 +60,7 @@ export default function ChangeEsquisse(props: Props) {
           <CloseButton modalClose={props.modalClose} />
           <Title>エスキス修正</Title>
           <form onSubmit={submitFormHandler}>
-            <ChangeEsquisseDescription
+            <ChangeEsquisseForm
               description={description}
               descriptionHandler={descriptionHandler}
             />

@@ -7,7 +7,7 @@ type Props = {
   descriptionHandler: () => void;
 };
 
-export const ChangeEsquisseDescription = ({
+export const ChangeEsquisseForm = ({
   description,
   descriptionHandler,
 }: Props) => {

@@ -17,9 +17,8 @@ import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import { deletePost } from "@/helpers/api-change";
 import styled from "styled-components";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
-import ChangePost from "@/components/modal/ChangePost";
+import { ChangePostModal } from "@/components/modal/ChangePostModal";
 import { ChangePostButton } from "@/components/button/ChangePostButton";
-import { TagList } from "@/components/list/TagList";
 import { SubmitButton } from "@/components/button/SubmitButton";
 import { EsquisseList } from "@/components/list/EsquisseList";
 import { EsquisseForm } from "@/components/form/EsquisseForm";
@@ -122,7 +121,7 @@ function Esquisse(props: Props) {
           <Title>{selectedPost.title}</Title>
           <Description>{selectedPost.user.displayName}</Description>
           <Description>{selectedPost.createdAt}</Description>
-          <ImageContainer selectedPost={selectedPost}/>
+          <ImageContainer selectedPost={selectedPost} />
           <Description>{selectedPost.description}</Description>
 
           <EsquisseList
@@ -138,7 +137,7 @@ function Esquisse(props: Props) {
           </Form>
         </WrapperInner>
       </Wrapper>
-      {postModal && <ChangePost id={postedId} modalClose={postModalClose} />}
+      {postModal && <ChangePostModal id={postedId} modalClose={postModalClose} />}
       <NavFooter />
     </>
   );

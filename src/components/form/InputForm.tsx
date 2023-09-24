@@ -11,7 +11,7 @@ type Props = {
   value: string | undefined;
 };
 
-export const InputFrom = ({ type, onChange, placeholder, title, value }: Props) => {
+export const InputForm = ({ type, onChange, placeholder, title, value }: Props) => {
   return (
     <Container>
       <Label htmlFor={`${type}`}>{title}</Label>

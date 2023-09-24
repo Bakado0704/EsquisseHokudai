@@ -7,7 +7,7 @@ type Props = {
   titleHandler: () => void;
 };
 
-export const ChangePostTitle = ({ title, titleHandler }: Props) => {
+export const ChangePostTitleForm = ({ title, titleHandler }: Props) => {
   return (
     <Container>
       <Label htmlFor="title">タイトル</Label>

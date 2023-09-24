@@ -7,7 +7,7 @@ import { signIn } from "@/helpers/api-util";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
 import { SubmitButton } from "@/components/button/SubmitButton";
-import { InputFrom } from "@/components/form/InputForm";
+import { InputForm } from "@/components/form/InputForm"; 
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 
 export default function Login() {
@@ -32,14 +32,14 @@ export default function Login() {
         <WrapperInner>
           <Title>ログイン</Title>
           <Form onSubmit={submitFormHandler}>
-            <InputFrom
+            <InputForm
               type="email"
               title="メールアドレス"
               placeholder="メールアドレスを入力"
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
-            <InputFrom
+            <InputForm
               type="password"
               title="パスワード"
               placeholder="パスワードを入力"

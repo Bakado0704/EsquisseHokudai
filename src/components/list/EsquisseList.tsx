@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { deleteEsquisse } from "@/helpers/api-change";
 import Esquisse from "@/models/esquisse";
@@ -9,12 +9,12 @@ import styled from "styled-components";
 import personImg from "@/assets/icon/person.png";
 import { getUser } from "@/helpers/api-util";
 import { ChangeEsquisseButton } from "../button/ChangeEsquisseButton";
-import ChangeEsquisse from "../modal/ChangeEsquisse";
+import { ChangeEsquisseModal } from "../modal/ChangeEsquisseModal"; 
 
 type Props = {
   selectedEsquisses: Esquisse[];
+  esquisseModal: boolean;
   setEsquisseModal: (value: SetStateAction<boolean>) => void;
-  esquisseModal: boolean,
   esquisseModalClose: () => void;
 };
 
@@ -22,7 +22,7 @@ export const EsquisseList = ({
   selectedEsquisses,
   esquisseModal,
   setEsquisseModal,
-  esquisseModalClose
+  esquisseModalClose,
 }: Props) => {
   const router = useRouter();
   const user = getUser();
@@ -58,7 +58,7 @@ export const EsquisseList = ({
               <EsquisseComment>{esquisse.description}</EsquisseComment>
             </EsquisseContainer>
             {esquisseModal && (
-              <ChangeEsquisse
+              <ChangeEsquisseModal
                 id={esquisse.key}
                 modalClose={esquisseModalClose}
               />

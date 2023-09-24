@@ -10,7 +10,7 @@ type Props = {
   toolCategory: CategoryList[];
 };
 
-export const ChangePostCategory = ({
+export const ChangePostCategoryForm = ({
   projectCategory,
   buildingCategory,
   toolCategory,

@@ -25,10 +25,10 @@ import { SubmitButton } from "../button/SubmitButton";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { getAllPosts } from "@/helpers/api-util";
 import { IndicatePost } from "@/store/post";
-import { ChangePostTitle } from "./ChangePostTitle";
-import { ChangePostCategory } from "./ChangePostCategory";
-import { ChangePostPhoto } from "./ChangePostPhoto";
-import { ChangePostDescription } from "./ChangePostDescription";
+import { ChangePostTitleForm } from "../form/ChangePostTitleForm";
+import { ChangePostCategoryForm } from "../form/ChangePostCategoryForm";
+import { ChangePostPhotoForm } from "../form/ChangePostPhotoForm";
+import { ChangePostDescriptionForm } from "../form/ChangePostDescriptionForm";
 import { Uploading } from "../bg/Uploading";
 
 type Props = {
@@ -36,7 +36,7 @@ type Props = {
   modalClose: () => void;
 };
 
-export default function ChangePost(props: Props) {
+export const ChangePostModal = (props: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -159,20 +159,20 @@ export default function ChangePost(props: Props) {
           <CloseButton modalClose={props.modalClose} />
           <Title>投稿修正</Title>
           <form onSubmit={submitFormHandler}>
-            <ChangePostTitle title={title} titleHandler={titleHandler} />
-            <ChangePostCategory
+            <ChangePostTitleForm title={title} titleHandler={titleHandler} />
+            <ChangePostCategoryForm
               projectCategory={projectCategory}
               buildingCategory={buildingCategory}
               toolCategory={toolCategory}
             />
-            <ChangePostPhoto
+            <ChangePostPhotoForm
               onFileUploadToFirebase={onFileUploadToFirebase}
               selectedPost={selectedPost}
               isUploaded={isUploaded}
               loading={loading}
               imageSource={imageSource}
             />
-            <ChangePostDescription
+            <ChangePostDescriptionForm
               description={description}
               descriptionHandler={descriptionHandler}
             />

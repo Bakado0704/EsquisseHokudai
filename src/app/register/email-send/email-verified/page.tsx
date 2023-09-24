@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { createAccount } from "@/helpers/api-util";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
-import { InputFrom } from "@/components/form/InputForm";
+import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 import { SubmitButton } from "@/components/button/SubmitButton";
 
@@ -32,21 +32,21 @@ export default function Page() {
         <WrapperInner>
           <Title>メールアドレスの受信が確認されました！</Title>
           <Form onSubmit={submitFormHandler}>
-            <InputFrom
+            <InputForm
               type="name"
               title="ニックネーム"
               placeholder="ニックネームを入力"
               value={name}
               onChange={e => setName(e.target.value)}
             />
-            <InputFrom
+            <InputForm
               type="password"
               title="パスワード"
               placeholder="パスワードを入力"
               value={passwordInput}
               onChange={e => setPasswordInput(e.target.value)}
             />
-            <InputFrom
+            <InputForm
               type="password"
               title="パスワード"
               placeholder="パスワードを入力(確認用)"

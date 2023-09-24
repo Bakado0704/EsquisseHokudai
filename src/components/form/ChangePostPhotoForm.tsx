@@ -13,7 +13,7 @@ type Props = {
   imageSource: string | StaticImport;
 };
 
-export const ChangePostPhoto = ({
+export const ChangePostPhotoForm = ({
   onFileUploadToFirebase,
   selectedPost,
   loading,
