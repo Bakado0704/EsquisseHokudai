@@ -5,7 +5,9 @@ import { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/helpers/api-util";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import { SubmitButton } from "@/components/button/SubmitButton";
+import { InputFrom } from "@/components/register/inputForm";
 
 export default function Login() {
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -32,31 +34,23 @@ export default function Login() {
         <WrapperInner>
           <P>ログイン</P>
           <form onSubmit={submitFormHandler}>
-            <Div>
-              <Label htmlFor="email">メールアドレス</Label>
-              <Input
-                type="email"
-                id="email"
-                placeholder="メールアドレスを入力"
-                ref={emailInputRef}
-              />
-            </Div>
-            <Div>
-              <Label htmlFor="password">パスワード</Label>
-              <Input
-                type="password"
-                id="password"
-                placeholder="パスワードを入力"
-                ref={passwordInputRef}
-              />
-            </Div>
-            <Div $login={true}>
-              <Button>ログイン</Button>
-            </Div>
+            <InputFrom
+              type="email"
+              title="メールアドレス"
+              placeholder="メールアドレスを入力"
+              ref={emailInputRef}
+            />
+            <InputFrom
+              type="password"
+              title="パスワード"
+              placeholder="パスワードを入力"
+              ref={passwordInputRef}
+            />
+            <SubmitButton>ログイン</SubmitButton>
           </form>
-          <Div $account={true}>
+          <LinkBox>
             <Link href="/register">アカウントを作成する</Link>
-          </Div>
+          </LinkBox>
         </WrapperInner>
       </Wrapper>
       <Footer />
@@ -94,57 +88,10 @@ const Footer = styled.div`
   background-color: var(--background-color);
 `;
 
-const Button = styled.button`
-  --border-color: #c9caca;
-  --text-color: #323131;
 
-  display: block;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-right: 32px;
-  padding-left: 32px;
-  margin-top: 20px;
-  background-color: white;
-  color: var(--text-color);
-  border: solid 2px var(--border-color);
-  border-radius: 10px;
-`;
-
-const Div = styled.div<{ $login?: boolean; $account?: boolean }>`
-  display: block;
+const LinkBox = styled.div`
   width: 100%;
   margin-top: 16px;
-
-  ${(props) =>
-    props.$login &&
-    css`
-      display: flex;
-      justify-content: center;
-    `}
-
-  ${(props) =>
-    props.$account &&
-    css`
-      display: flex;
-      justify-content: center;
-    `}
-`;
-
-const Label = styled.label`
-  align: top;
-`;
-
-const Input = styled.input`
-  --border-color: #c9caca;
-  --text-color: #323131;
-
-  display: block;
-  width: 100%;
-  padding: 6px;
-  font-size: 12px;
-  margin-top: 2px;
-  background-color: white;
-  color: var(--text-color);
-  border: solid 2px var(--border-color);
-  border-radius: 4px;
+  display: flex;
+  justify-content: center;
 `;
