@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
@@ -15,18 +14,16 @@ import {
 } from "@/helpers/api-util";
 import { IndicateEsquisse, IndicatePost } from "@/store/post";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import { deleteEsquisse, deletePost } from "@/helpers/api-change";
+import { deletePost } from "@/helpers/api-change";
 import styled from "styled-components";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
-import personImg from "@/assets/icon/person.png";
 import ChangePost from "@/components/change/ChangePost";
-import ChangeEsquisse from "@/components/change/ChangeEsquisse";
 import { ChangePostButton } from "@/components/button/ChangePostButton";
 import { TagList } from "@/components/list/TagList";
 import { SubmitButton } from "@/components/button/SubmitButton";
-import { ChangeEsquisseButton } from "@/components/button/ChangeEsquisseButton";
 import { EsquisseContent } from "@/components/esquisse/EsquisseContent";
 import { EsquisseForm } from "@/components/esquisse/EsquisseForm";
+import { PhotoContainer } from "@/components/photo/PhotoContianer";
 
 type Props = {
   params: Params;
@@ -124,17 +121,7 @@ function Esquisse(props: Props) {
           <Title>{selectedPost.title}</Title>
           <Description>{selectedPost.user.displayName}</Description>
           <Description>{selectedPost.createdAt}</Description>
-
-          <Photo>
-            <PhotoInner>
-              <Image
-                src={selectedPost.imageSource}
-                alt=""
-                layout={"fill"}
-                objectFit={"cover"}
-              />
-            </PhotoInner>
-          </Photo>
+          <PhotoContainer selectedPost={selectedPost}/>
           <Description>{selectedPost.description}</Description>
 
           <EsquisseContent
@@ -184,7 +171,6 @@ const WrapperInner = styled.div`
   }
 `;
 
-
 const Title = styled.p`
   --border-color: #9fa0a0;
   --background-color: #434141;
@@ -198,26 +184,6 @@ const Title = styled.p`
 const Description = styled.p`
   margin-top: 10px;
   font-size: 16px;
-`;
-
-const Photo = styled.div`
-  --color-background: #c9caca;
-
-  width: 100%;
-  height: 600px;
-  padding-right: 80px;
-  padding-left: 80px;
-  margin-top: 8px;
-  background-color: var(--color-background);
-`;
-
-const PhotoInner = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const Form = styled.form`
