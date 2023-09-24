@@ -21,9 +21,10 @@ import ChangePost from "@/components/change/ChangePost";
 import { ChangePostButton } from "@/components/button/ChangePostButton";
 import { TagList } from "@/components/list/TagList";
 import { SubmitButton } from "@/components/button/SubmitButton";
-import { EsquisseContent } from "@/components/esquisse/EsquisseContent";
+import { EsquisseList } from "@/components/list/EsquisseList";
 import { EsquisseForm } from "@/components/esquisse/EsquisseForm";
-import { PhotoContainer } from "@/components/photo/PhotoContianer";
+import { ImageContainer } from "@/components/image/ImageContianer";
+import { TagLInkList } from "@/components/list/TagLinkList";
 
 type Props = {
   params: Params;
@@ -117,14 +118,14 @@ function Esquisse(props: Props) {
               onDelete={deletePostHandler}
             />
           )}
-          <TagList tags={tags} />
+          <TagLInkList tags={tags} />
           <Title>{selectedPost.title}</Title>
           <Description>{selectedPost.user.displayName}</Description>
           <Description>{selectedPost.createdAt}</Description>
-          <PhotoContainer selectedPost={selectedPost}/>
+          <ImageContainer selectedPost={selectedPost}/>
           <Description>{selectedPost.description}</Description>
 
-          <EsquisseContent
+          <EsquisseList
             selectedEsquisses={selectedEsquisses}
             setEsquisseModal={setEsquisseModal}
             esquisseModal={esquisseModal}

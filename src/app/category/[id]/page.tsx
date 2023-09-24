@@ -57,8 +57,8 @@ export default function Page(props: Props) {
       <NavHeader />
       <Wrapper>
         <WrapperInner>
-          <P $home={true}>{categoryTitle}</P>
-          <Div $wrapper={true}>
+          <CategoryTitle>{categoryTitle}</CategoryTitle>
+          <Content>
             <Ul>
               {posts.map((post) => {
                 let tags: (ProjectType | BuildingType | ToolType)[] = [];
@@ -121,7 +121,7 @@ export default function Page(props: Props) {
                 }
               })}
             </Ul>
-          </Div>
+          </Content>
         </WrapperInner>
       </Wrapper>
       <NavFooter />
@@ -146,6 +146,25 @@ const WrapperInner = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+const CategoryTitle = styled.p`
+  margin-top: 0;
+  font-size: 32px;
+  padding-top: 32px;
+  text-decoration: underline;
+  text-align: center;
+`;
+
+const Content = styled.div`
+  height: calc(100% - 171px);
+  overflow-y: scroll;
+  border-bottom: 1px solid white;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 
 const Ul = styled.ul<{ $article?: boolean }>`
   ${(props) =>

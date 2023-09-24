@@ -9,7 +9,7 @@ type Props = {
   };
   
 
-export const PhotoContainer = ({selectedPost}: Props) => {
+export const ImageContainer = ({selectedPost}: Props) => {
   return (
     <Photo>
       <PhotoInner>
