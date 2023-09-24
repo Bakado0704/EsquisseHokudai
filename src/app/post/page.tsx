@@ -36,10 +36,10 @@ export default function Page() {
     let toolType = [];
 
     for (let i = 0; i < projectCategory.length; i++) {
-      const checkedItem = document.getElementsByName(
+      const checkedItem = document.getElementById(
         `${projectCategory[i].id[0]}`
       );
-      if (checkedItem.item(0).checked) {
+      if ((checkedItem as HTMLElement).checked) {
         projectType.push(projectCategory[i].id);
       }
     }
