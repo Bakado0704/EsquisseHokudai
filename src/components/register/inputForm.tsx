@@ -6,11 +6,12 @@ import styled from "styled-components";
 type Props = {
   title: string;
   type: string;
-  ref: LegacyRef<HTMLInputElement> | undefined;
   placeholder: string;
+  onChange: () => void;
+  value: string | undefined;
 };
 
-export const InputFrom = ({ type, ref, placeholder, title }: Props) => {
+export const InputFrom = ({ type, onChange, placeholder, title, value }: Props) => {
   return (
     <Container>
       <Label htmlFor={`${type}`}>{title}</Label>
@@ -18,7 +19,8 @@ export const InputFrom = ({ type, ref, placeholder, title }: Props) => {
         type={`${type}`}
         id={`${type}`}
         placeholder={`${placeholder}`}
-        ref={ref}
+        onChange={onChange}
+        value={value}
       />
     </Container>
   );

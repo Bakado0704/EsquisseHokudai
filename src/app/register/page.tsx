@@ -1,48 +1,58 @@
 "use client";
 
-import { FormEvent, useRef } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { emailRegister } from "@/helpers/api-util";
-import {NavHeader} from "@/components/nav/NavHeader/NavHeader";
-import styled, { css } from "styled-components";
+import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
+import styled from "styled-components";
+import { SubmitButton } from "@/components/button/SubmitButton";
+import { InputFrom } from "@/components/register/inputForm";
+import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 
 export default function Page() {
-  const emailInputRef = useRef<HTMLInputElement | null>(null);
+  const [email, setEmail] = useState<string>();
   const router = useRouter();
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const enteredEmail = emailInputRef.current?.value;
-
-    if (enteredEmail) {
-      await emailRegister(enteredEmail, "testPassword").then(() => {
+    if (email) {
+      await emailRegister(email, "testPassword").then(() => {
         router.push("/register/email-send");
       });
     }
   }
+
+  const emailHandler = () => {
+    //@ts-ignore
+    const enteredEmail = document.getElementById("email").value;
+    setEmail(enteredEmail);
+  };
 
   return (
     <>
       <NavHeader />
       <Wrapper>
         <WrapperInner>
-          <P $title={true}>アカウントの作成</P>
-          <P>
+          <Title>アカウントの作成</Title>
+          <Description>
             EsquisseChatのアカウントを作成するために、メールアドレスとパスワードをご入力下さい。
-          </P>
+          </Description>
           <form onSubmit={submitFormHandler}>
-            <Div>
-              <Label htmlFor="email">メールアドレス</Label>
-              <Input type="email" id="email" ref={emailInputRef} />
-            </Div>
-            <Div $submit={true}>
-              <Button>メールを送信する</Button>
-            </Div>
+            <FormContainer>
+              <InputFrom
+                type="email"
+                title="メールアドレス"
+                placeholder="メールアドレスを入力"
+                onChange={emailHandler}
+                value={email}
+              />
+            </FormContainer>
+            <SubmitButton>メールを送信する</SubmitButton>
           </form>
         </WrapperInner>
       </Wrapper>
-      <Footer />
+      <NavRegisterFooter />
     </>
   );
 }
@@ -63,70 +73,19 @@ const WrapperInner = styled.div`
   width: 100%;
 `;
 
-const P = styled.p<{ $title?: boolean }>`
+const FormContainer = styled.div`
+  max-width: 500px;
+  margin: 0 auto;
+`;
+
+const Title = styled.p`
   text-align: center;
-  font-size: 16px;
   margin-top: 16px;
-
-  ${(props) =>
-    props.$title &&
-    css`
-      font-size: 32px;
-    `}
+  font-size: 32px;
 `;
 
-const Footer = styled.div`
-  --background-color: #323131;
-
-  width: 100%;
-  height: 20%;
-  background-color: var(--background-color);
-`;
-
-const Div = styled.div<{ $submit?: boolean }>`
-  display: block;
-  width: 100%;
-  max-width: 400px;
-  margin: 32px auto 0;
-
-  ${(props) =>
-    props.$submit &&
-    css`
-      display: flex;
-      justify-content: center;
-    `}
-`;
-
-const Label = styled.label`
-  align: top;
-`;
-
-const Input = styled.input`
-  --border-color: #c9caca;
-  --text-color: #323131;
-
-  display: block;
-  width: 100%;
-  padding: 6px;
-  font-size: 12px;
-  margin-top: 2px;
-  background-color: white;
-  color: var(--text-color);
-  border: solid 2px var(--border-color);
-  border-radius: 4px;
-`;
-
-const Button = styled.button`
-  --border-color: #c9caca;
-  --text-color: #323131;
-
-  display: block;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-right: 32px;
-  padding-left: 32px;
-  background-color: white;
-  color: var(--text-color);
-  border: solid 2px var(--border-color);
-  border-radius: 10px;
+const Description = styled.p`
+  text-align: center;
+  margin-top: 16px;
+  font-size: 16px;
 `;

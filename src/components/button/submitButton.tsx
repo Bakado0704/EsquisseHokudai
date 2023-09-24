@@ -4,10 +4,11 @@ import styled from "styled-components";
 
 type Props = {
   children: React.ReactNode;
+  onClick?: () => {};
 };
 
-export const SubmitButton = ({ children }: Props) => {
-  return <Button>{children}</Button>;
+export const SubmitButton = ({ children, onClick }: Props) => {
+  return <Button onClick={onClick}>{children}</Button>;
 };
 
 const Button = styled.button`

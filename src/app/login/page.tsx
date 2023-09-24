@@ -1,59 +1,71 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/helpers/api-util";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
 import { SubmitButton } from "@/components/button/SubmitButton";
 import { InputFrom } from "@/components/register/inputForm";
+import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 
 export default function Login() {
-  const emailInputRef = useRef<HTMLInputElement>(null);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
   const router = useRouter();
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const enteredEmail = emailInputRef.current?.value;
-    const enteredPassword = passwordInputRef.current?.value;
-
-    if (enteredEmail && enteredPassword) {
-      await signIn(enteredEmail, enteredPassword).then(() => {
+    if (email && password) {
+      await signIn(email, password).then(() => {
         router.push("/home");
       });
     }
   }
+
+  const emailHandler = () => {
+    //@ts-ignore
+    const enteredEmail = document.getElementById("email").value;
+    setEmail(enteredEmail);
+  };
+
+  const passwordHandler = () => {
+    //@ts-ignore
+    const enteredPassword = document.getElementById("password").value;
+    setPassword(enteredPassword);
+  };
 
   return (
     <>
       <NavHeader />
       <Wrapper>
         <WrapperInner>
-          <P>ログイン</P>
-          <form onSubmit={submitFormHandler}>
+          <Title>ログイン</Title>
+          <Form onSubmit={submitFormHandler}>
             <InputFrom
               type="email"
               title="メールアドレス"
               placeholder="メールアドレスを入力"
-              ref={emailInputRef}
+              onChange={emailHandler}
+              value={email}
             />
             <InputFrom
               type="password"
               title="パスワード"
               placeholder="パスワードを入力"
-              ref={passwordInputRef}
+              onChange={passwordHandler}
+              value={password}
             />
             <SubmitButton>ログイン</SubmitButton>
-          </form>
+          </Form>
           <LinkBox>
             <Link href="/register">アカウントを作成する</Link>
           </LinkBox>
         </WrapperInner>
       </Wrapper>
-      <Footer />
+      <NavRegisterFooter />
     </>
   );
 }
@@ -75,23 +87,19 @@ const WrapperInner = styled.div`
   max-width: 400px;
 `;
 
-const P = styled.p`
+const Title = styled.p`
   text-align: center;
   font-size: 24px;
 `;
-
-const Footer = styled.div`
-  --background-color: #323131;
-
-  width: 100%;
-  height: 20%;
-  background-color: var(--background-color);
-`;
-
 
 const LinkBox = styled.div`
   width: 100%;
   margin-top: 16px;
   display: flex;
   justify-content: center;
+`;
+
+const Form = styled.form`
+  max-width: 400px;
+  margin: 0 auto;
 `;
