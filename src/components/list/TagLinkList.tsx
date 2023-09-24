@@ -10,7 +10,7 @@ type Props = {
   tags: (ProjectType | BuildingType | ToolType)[];
 };
 
-export const TagLInkList = ({ tags }: Props) => {
+export const TagLinkList = ({ tags }: Props) => {
   return (
     <List>
       {tags &&

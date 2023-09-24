@@ -17,6 +17,7 @@ import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import storage from "@/helpers/firebase";
 import styled from "styled-components";
+import { BuildingType, ProjectType, ToolType } from "@/types/category";
 
 export default function Page() {
   const router = useRouter();
@@ -25,49 +26,48 @@ export default function Page() {
   const [isUploaded, setIsUploaded] = useState(false);
   const [imageSource, setImageSource] = useState<string | StaticImport>();
   const [imageName, setImageName] = useState<string>();
-  const [title, setTitle] = useState<string | undefined>();
+  const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>();
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    let projectType = [];
-    let buildingType = [];
-    let toolType = [];
+    let projectType: (ProjectType | BuildingType | ToolType)[] = [];
+    let buildingType: (ProjectType | BuildingType | ToolType)[] = [];
+    let toolType:(ProjectType | BuildingType | ToolType)[] = [];
 
     for (let i = 0; i < projectCategory.length; i++) {
       const checkedItem = document.getElementById(
         `${projectCategory[i].id[0]}`
       );
-      if ((checkedItem as HTMLElement).checked) {
+      if ((checkedItem as HTMLInputElement).checked) {
         projectType.push(projectCategory[i].id);
       }
     }
 
     for (let i = 0; i < buildingCategory.length; i++) {
-      const checkedItem = document.getElementsByName(
+      const checkedItem = document.getElementById(
         `${buildingCategory[i].id[0]}`
       );
-      if (checkedItem.item(0).checked) {
+      if ((checkedItem as HTMLInputElement).checked) {
         buildingType.push(buildingCategory[i].id);
       }
     }
 
     for (let i = 0; i < toolCategory.length; i++) {
-      const checkedItem = document.getElementsByName(
+      const checkedItem = document.getElementById(
         `${toolCategory[i].id[0]}`
       );
-      if (checkedItem.item(0).checked) {
+      if ((checkedItem as HTMLInputElement).checked) {
         toolType.push(toolCategory[i].id);
       }
     }
 
     await postSubmit(
-      //@ts-ignore
       title,
       { projectType, buildingType, toolType },
-      imageName,
-      description
+      imageName!,
+      description!
     ).then(() => {
       getAllPosts().then(function (result) {
         dispatch(IndicatePost(result));
@@ -78,10 +78,8 @@ export default function Page() {
     });
   }
 
-  const onFileUploadToFirebase = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = e.target.files[0];
+  const onFileUploadToFirebase = async ( e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files![0];
     const storageRef = ref(storage, "image/" + file.name);
 
     setImageName(file.name);

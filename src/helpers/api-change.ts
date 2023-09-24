@@ -7,9 +7,9 @@ export async function changePost(
   index: number,
   title: string,
   category: {
-    ProjectType: ProjectType;
-    buildingType: BuildingType;
-    toolType: ToolType;
+    projectType: (ProjectType | BuildingType | ToolType)[];
+    buildingType: (ProjectType | BuildingType | ToolType)[];
+    toolType: (ProjectType | BuildingType | ToolType)[];
   },
   image: string,
   description: string
@@ -18,8 +18,6 @@ export async function changePost(
   const db = getDatabase();
   const auth = getAuth();
   const user = auth.currentUser;
-
-  console.log(category);
 
   get(child(dbRef, `posts`))
     .then((snapshot) => {

@@ -79,9 +79,9 @@ export const createAccount = async (displayName: string, password: string) => {
 export const postSubmit = async (
   title: string,
   category: {
-    projectType: ProjectType;
-    buildingType: BuildingType;
-    toolType: ToolType;
+    projectType: (ProjectType | BuildingType | ToolType)[];
+    buildingType: (ProjectType | BuildingType | ToolType)[];
+    toolType: (ProjectType | BuildingType | ToolType)[];
   },
   image: string,
   description: string
@@ -114,19 +114,6 @@ export const postSubmit = async (
       }
     ).then((response) => response.json());
   }
-};
-
-//投稿をget
-export const postGet = async () => {
-  const getPost = await fetch(
-    "https://react-getting-started-2a850-default-rtdb.firebaseio.com/posts.json",
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
 };
 
 //エスキスをsubmit
@@ -199,5 +186,6 @@ export async function getAllEsquisses() {
 
 export const getImage = async (image: string) => {
   const res = await getDownloadURL(ref(storage, "image/" + image));
+
   return res;
 };

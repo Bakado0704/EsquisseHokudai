@@ -17,7 +17,7 @@ import { SubmitButton } from "@/components/button/SubmitButton";
 import { EsquisseList } from "@/components/list/EsquisseList";
 import { EsquisseForm } from "@/components/form/EsquisseForm";
 import { ImageContainer } from "@/components/image/ImageContianer";
-import { TagLInkList } from "@/components/list/TagLinkList";
+import { TagLinkList } from "@/components/list/TagLinkList";
 import { DeleteModal } from "@/components/modal/DeleteModal";
 import styled from "styled-components";
 
@@ -118,7 +118,7 @@ function Esquisse(props: Props) {
               onDelete={alartHandler}
             />
           )}
-          <TagLInkList tags={tags} />
+          <TagLinkList tags={tags} />
           <Title>{selectedPost.title}</Title>
           <Description>{selectedPost.user.displayName}</Description>
           <Description>{selectedPost.createdAt}</Description>

@@ -13,6 +13,7 @@ type Props = {
 };
 
 export const PostItem = ({ post, tags }: Props) => {
+  console.log(tags);
   return (
     <Items key={post.id}>
       <Link href={`/esquisse/${post.id}`}>

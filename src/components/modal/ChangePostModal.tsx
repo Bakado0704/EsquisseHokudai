@@ -25,10 +25,10 @@ import { SubmitButton } from "../button/SubmitButton";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { getAllPosts } from "@/helpers/api-util";
 import { IndicatePost } from "@/store/post";
-import { ChangePostTitleForm } from "../form/changeform/ChangePostTitleForm"; 
-import { ChangePostCategoryForm } from "../form/changeform/ChangePostCategoryForm"; 
-import { ChangePostPhotoForm } from "../form/changeform/ChangePostPhotoForm"; 
-import { ChangePostDescriptionForm } from "../form/changeform/ChangePostDescriptionForm"; 
+import { ChangePostTitleForm } from "../form/changeform/ChangePostTitleForm";
+import { ChangePostCategoryForm } from "../form/changeform/ChangePostCategoryForm";
+import { ChangePostPhotoForm } from "../form/changeform/ChangePostPhotoForm";
+import { ChangePostDescriptionForm } from "../form/changeform/ChangePostDescriptionForm";
 import { Uploading } from "../bg/Uploading";
 
 type Props = {
@@ -47,42 +47,45 @@ export const ChangePostModal = (props: Props) => {
   const posts = useSelector((state: RootState) => state.post.posts);
   const selectedPost = posts.find((post) => post.id === postedId);
 
-  const index = posts.indexOf(selectedPost);
-  const [title, setTitle] = useState<string>(selectedPost?.title);
-  const [description, setDescription] = useState<string>(selectedPost?.description);
-  const [imageSource, setImageSource] = useState<string | StaticImport>(selectedPost?.imageSource);
-
-  let projectType: (ProjectType | BuildingType | ToolType)[] = [];
-  let buildingType: (ProjectType | BuildingType | ToolType)[] = [];
-  let toolType: (ProjectType | BuildingType | ToolType)[] = [];
+  const index = posts.indexOf(selectedPost!);
+  const [title, setTitle] = useState<string>(selectedPost!.title);
+  const [description, setDescription] = useState<string>(
+    selectedPost!.description
+  );
+  const [imageSource, setImageSource] = useState<string | StaticImport>(
+    selectedPost!.imageSource
+  );
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    let projectType: (ProjectType | BuildingType | ToolType)[] = [];
+    let buildingType: (ProjectType | BuildingType | ToolType)[] = [];
+    let toolType:(ProjectType | BuildingType | ToolType)[] = [];
+
     setUploading(true);
 
     for (let i = 0; i < projectCategory.length; i++) {
-      const checkedItem = document.getElementsByName(
+      const checkedItem = document.getElementById(
         `${projectCategory[i].id[0]}`
       );
-      if (checkedItem.item(0).checked) {
+      if ((checkedItem as HTMLInputElement).checked) {
         projectType.push(projectCategory[i].id);
       }
     }
 
     for (let i = 0; i < buildingCategory.length; i++) {
-      const checkedItem = document.getElementsByName(
+      const checkedItem = document.getElementById(
         `${buildingCategory[i].id[0]}`
       );
-      if (checkedItem.item(0).checked) {
+      if ((checkedItem as HTMLInputElement).checked) {
         buildingType.push(buildingCategory[i].id);
       }
     }
 
     for (let i = 0; i < toolCategory.length; i++) {
-      const checkedItem = document.getElementsByName(
-        `${toolCategory[i].id[0]}`
-      );
-      if (checkedItem.item(0).checked) {
+      const checkedItem = document.getElementById(`${toolCategory[i].id[0]}`);
+      if ((checkedItem as HTMLInputElement).checked) {
         toolType.push(toolCategory[i].id);
       }
     }
@@ -90,10 +93,9 @@ export const ChangePostModal = (props: Props) => {
     await changePost(
       postedId,
       index,
-      //@ts-ignore
       title,
       { projectType, buildingType, toolType },
-      imageName,
+      imageName!,
       description
     ).then(() => {
       getAllPosts().then(function (result) {
@@ -105,7 +107,7 @@ export const ChangePostModal = (props: Props) => {
   }
 
   const onFileUploadToFirebase = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files[0];
+    const file = e.target.files![0];
 
     const storageRef = ref(storage, "image/" + file.name);
 
@@ -182,7 +184,7 @@ export const ChangePostModal = (props: Props) => {
       </WrapperInner>
     </Wrapper>
   );
-}
+};
 
 const Wrapper = styled.div`
   --text-color: #3e3a39;
