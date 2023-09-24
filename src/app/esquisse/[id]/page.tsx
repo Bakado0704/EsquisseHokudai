@@ -17,12 +17,12 @@ import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import { deletePost } from "@/helpers/api-change";
 import styled from "styled-components";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
-import ChangePost from "@/components/change/ChangePost";
+import ChangePost from "@/components/modal/ChangePost";
 import { ChangePostButton } from "@/components/button/ChangePostButton";
 import { TagList } from "@/components/list/TagList";
 import { SubmitButton } from "@/components/button/SubmitButton";
 import { EsquisseList } from "@/components/list/EsquisseList";
-import { EsquisseForm } from "@/components/esquisse/EsquisseForm";
+import { EsquisseForm } from "@/components/form/EsquisseForm";
 import { ImageContainer } from "@/components/image/ImageContianer";
 import { TagLInkList } from "@/components/list/TagLinkList";
 

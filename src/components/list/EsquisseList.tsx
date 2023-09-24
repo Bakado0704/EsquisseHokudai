@@ -9,7 +9,7 @@ import styled from "styled-components";
 import personImg from "@/assets/icon/person.png";
 import { getUser } from "@/helpers/api-util";
 import { ChangeEsquisseButton } from "../button/ChangeEsquisseButton";
-import ChangeEsquisse from "../change/ChangeEsquisse";
+import ChangeEsquisse from "../modal/ChangeEsquisse";
 
 type Props = {
   selectedEsquisses: Esquisse[];
@@ -20,8 +20,8 @@ type Props = {
 
 export const EsquisseList = ({
   selectedEsquisses,
-  setEsquisseModal,
   esquisseModal,
+  setEsquisseModal,
   esquisseModalClose
 }: Props) => {
   const router = useRouter();

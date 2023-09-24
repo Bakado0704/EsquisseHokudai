@@ -1,6 +1,6 @@
 "use client";
 
-import { CategoryLinkList } from "@/components/category/CategoryLinkList";
+import { CategoryLinkList } from "@/components/list/CategoryLinkList";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
