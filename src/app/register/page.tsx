@@ -23,12 +23,6 @@ export default function Page() {
     }
   }
 
-  const emailHandler = () => {
-    //@ts-ignore
-    const enteredEmail = document.getElementById("email").value;
-    setEmail(enteredEmail);
-  };
-
   return (
     <>
       <NavHeader />
@@ -38,18 +32,16 @@ export default function Page() {
           <Description>
             EsquisseChatのアカウントを作成するために、メールアドレスとパスワードをご入力下さい。
           </Description>
-          <form onSubmit={submitFormHandler}>
-            <FormContainer>
-              <InputFrom
-                type="email"
-                title="メールアドレス"
-                placeholder="メールアドレスを入力"
-                onChange={emailHandler}
-                value={email}
-              />
-            </FormContainer>
+          <Form onSubmit={submitFormHandler}>
+            <InputFrom
+              type="email"
+              title="メールアドレス"
+              placeholder="メールアドレスを入力"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <SubmitButton>メールを送信する</SubmitButton>
-          </form>
+          </Form>
         </WrapperInner>
       </Wrapper>
       <NavRegisterFooter />
@@ -73,7 +65,7 @@ const WrapperInner = styled.div`
   width: 100%;
 `;
 
-const FormContainer = styled.div`
+const Form = styled.form`
   max-width: 500px;
   margin: 0 auto;
 `;

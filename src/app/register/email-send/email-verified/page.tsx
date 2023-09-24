@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createAccount } from "@/helpers/api-util";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { InputFrom } from "@/components/register/inputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 import { SubmitButton } from "@/components/button/SubmitButton";
@@ -25,24 +25,6 @@ export default function Page() {
     }
   }
 
-  const nameHandler = () => {
-    //@ts-ignore
-    const enteredName = document.getElementById("name").value;
-    setName(enteredName);
-  };
-
-  const passwordInputHandler = () => {
-    //@ts-ignore
-    const enteredPassword = document.getElementById("passwordInput").value;
-    setPasswordInput(enteredPassword);
-  };
-
-  const passwordConfirmHandler = () => {
-    //@ts-ignore
-    const enteredPassword = document.getElementById("passwordInput").value;
-    setPasswordConfirm(enteredPassword);
-  };
-
   return (
     <>
       <NavHeader />
@@ -54,21 +36,21 @@ export default function Page() {
               type="name"
               title="ニックネーム"
               placeholder="ニックネームを入力"
-              onChange={nameHandler}
               value={name}
+              onChange={e => setName(e.target.value)}
             />
             <InputFrom
-              type="passwordInput"
+              type="password"
               title="パスワード"
               placeholder="パスワードを入力"
-              onChange={passwordInputHandler}
               value={passwordInput}
+              onChange={e => setPasswordInput(e.target.value)}
             />
             <InputFrom
-              type="passwordInput"
+              type="password"
               title="パスワード"
               placeholder="パスワードを入力(確認用)"
-              onChange={passwordConfirmHandler}
+              onChange={e => setPasswordConfirm(e.target.value)}
               value={passwordConfirm}
             />
             <SubmitButton>アカウントを作成</SubmitButton>

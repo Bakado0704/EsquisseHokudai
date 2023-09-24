@@ -1,13 +1,13 @@
 "use client";
 
-import { LegacyRef } from "react";
+import { SetStateAction } from "react";
 import styled from "styled-components";
 
 type Props = {
   title: string;
   type: string;
   placeholder: string;
-  onChange: () => void;
+  onChange: (e: { target: { value: SetStateAction<string | undefined>; }; }) => void;
   value: string | undefined;
 };
 

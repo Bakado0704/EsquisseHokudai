@@ -25,18 +25,6 @@ export default function Login() {
     }
   }
 
-  const emailHandler = () => {
-    //@ts-ignore
-    const enteredEmail = document.getElementById("email").value;
-    setEmail(enteredEmail);
-  };
-
-  const passwordHandler = () => {
-    //@ts-ignore
-    const enteredPassword = document.getElementById("password").value;
-    setPassword(enteredPassword);
-  };
-
   return (
     <>
       <NavHeader />
@@ -48,15 +36,15 @@ export default function Login() {
               type="email"
               title="メールアドレス"
               placeholder="メールアドレスを入力"
-              onChange={emailHandler}
               value={email}
+              onChange={e => setEmail(e.target.value)}
             />
             <InputFrom
               type="password"
               title="パスワード"
               placeholder="パスワードを入力"
-              onChange={passwordHandler}
               value={password}
+              onChange={e => setPassword(e.target.value)}
             />
             <SubmitButton>ログイン</SubmitButton>
           </Form>
