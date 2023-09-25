@@ -38,7 +38,7 @@ export const ChangePostPhotoForm = ({
             ) : (
               <>
                 <Image
-                  src={selectedPost?.imageSource}
+                  src={selectedPost!.imageSource}
                   alt="church"
                   layout={"fill"}
                   objectFit={"cover"}

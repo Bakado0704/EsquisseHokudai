@@ -13,7 +13,7 @@ export default function Page() {
 
   async function resubmitHandler() {
     if (user) {
-      await emailRegister(user?.email, "testPassword").then(() => {
+      await emailRegister(user.email!, "testPassword").then(() => {
         router.push("/register/email-send");
       });
     }

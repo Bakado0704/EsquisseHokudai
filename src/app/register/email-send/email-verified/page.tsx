@@ -7,7 +7,7 @@ import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
 import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
-import { SubmitButton } from "@/components/button/SubmitButton";
+import { SubmitButton } from "@/components/button/SubmitButton"; 
 
 export default function Page() {
   const router = useRouter();

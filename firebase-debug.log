@@ -1,0 +1,502 @@
+[debug] [2023-09-25T06:43:52.044Z] ----------------------------------------------------------------------
+[debug] [2023-09-25T06:43:52.047Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\kado_\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-09-25T06:43:52.047Z] CLI Version:   12.5.4
+[debug] [2023-09-25T06:43:52.047Z] Platform:      win32
+[debug] [2023-09-25T06:43:52.048Z] Node Version:  v16.14.2
+[debug] [2023-09-25T06:43:52.049Z] Time:          Mon Sep 25 2023 15:43:52 GMT+0900 (日本標準時)
+[debug] [2023-09-25T06:43:52.050Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-09-25T06:43:52.145Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-09-25T06:43:52.146Z] > authorizing via signed-in user (kado_hiroki@yahoo.co.jp)
+[debug] [2023-09-25T06:43:52.146Z] [iam] checking project react-getting-started-2a850 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-09-25T06:43:52.148Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions [none]
+[debug] [2023-09-25T06:43:52.149Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:43:52.149Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-09-25T06:43:52.848Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions 200
+[debug] [2023-09-25T06:43:52.848Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-09-25T06:43:52.851Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850 [none]
+[debug] [2023-09-25T06:43:53.180Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850 200
+[debug] [2023-09-25T06:43:53.181Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850 {"projectId":"react-getting-started-2a850","projectNumber":"166068049854","displayName":"react-getting-started","name":"projects/react-getting-started-2a850","resources":{"hostingSite":"react-getting-started-2a850","realtimeDatabaseInstance":"react-getting-started-2a850-default-rtdb","storageBucket":"react-getting-started-2a850.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_2a66bd7f-7984-4e5a-9222-08b98ee8d14e"}
+[debug] [2023-09-25T06:43:59.623Z] defaultcredentials: writing to file C:\Users\kado_\AppData\Roaming\firebase\kado_hiroki_yahoo_co.jp_application_default_credentials.json
+[debug] [2023-09-25T06:43:59.625Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/react-getting-started-2a850/sites pageToken=&pageSize=10
+[debug] [2023-09-25T06:44:00.262Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/react-getting-started-2a850/sites 200
+[debug] [2023-09-25T06:44:00.263Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/react-getting-started-2a850/sites {"sites":[{"name":"projects/react-getting-started-2a850/sites/react-getting-started-2a850","defaultUrl":"https://react-getting-started-2a850.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2023-09-25T06:44:00.263Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/react-getting-started-2a850/sites 
+[debug] [2023-09-25T06:44:00.848Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/react-getting-started-2a850/sites 200
+[debug] [2023-09-25T06:44:00.849Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/react-getting-started-2a850/sites {"sites":[{"name":"projects/react-getting-started-2a850/sites/react-getting-started-2a850","defaultUrl":"https://react-getting-started-2a850.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2023-09-25T06:44:00.849Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850/webApps/-/config [none]
+[debug] [2023-09-25T06:44:02.056Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850/webApps/-/config 200
+[debug] [2023-09-25T06:44:02.056Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850/webApps/-/config {"projectId":"react-getting-started-2a850","appId":"1:166068049854:web:bfb3c7e36958e80ab08bef","databaseURL":"https://react-getting-started-2a850-default-rtdb.firebaseio.com","storageBucket":"react-getting-started-2a850.appspot.com","locationId":"us-central","apiKey":"AIzaSyAw4nzxiqSZGYg6D6XTAvAl2IFnwp84--I","authDomain":"react-getting-started-2a850.firebaseapp.com","messagingSenderId":"166068049854","measurementId":"G-MYWGCK79FE"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[info] - info Creating an optimized production build...
+
+[info] - warn Compiled with warnings
+
+
+[info] ./node_modules/node-fetch/lib/index.js
+Module not found: Can't resolve 'encoding' in 'C:\Users\kado_\NextProject\esquissechat\node_modules\node-fetch\lib'
+
+Import trace for requested module:
+./node_modules/node-fetch/lib/index.js
+./node_modules/@firebase/storage/dist/node-esm/index.node.esm.js
+./node_modules/firebase/storage/dist/index.mjs
+./src/app/post/page.tsx
+
+
+[info] - info Linting and checking validity of types...
+
+[info] - info Collecting page data...
+
+[info] - info Generating static pages (0/10)
+
+[info] - info Generating static pages (2/10)
+
+[info] - info Generating static pages (4/10)
+
+[info] - info Generating static pages (7/10)
+
+[info] (node:2732) ExperimentalWarning: buffer.Blob is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[info] - info Generating static pages (10/10)
+
+[info] - info Finalizing page optimization...
+
+[info] 
+
+[info] Route (app)                                Size     First Load JS
+┌ ○ /category                              983 B           152 kB
+├ λ /category/[id]                         1.82 kB         165 kB
+├ λ /esquisse/[id]                         44.1 kB         207 kB
+├ ○ /favicon.ico                           0 B                0 B
+├ ○ /home                                  3.52 kB         162 kB
+├ ○ /login                                 2.86 kB         145 kB
+├ ○ /post                                  2.92 kB         160 kB
+├ ○ /register                              2.86 kB         139 kB
+├ ○ /register/email-send                   2.63 kB         139 kB
+└ ○ /register/email-send/email-verified    2.85 kB         139 kB
++ First Load JS shared by all              78.6 kB
+  ├ chunks/596-d9b13ad50b47a91d.js         26.2 kB
+  ├ chunks/fd9d1056-d8f5e6ec3ff59217.js    50.5 kB
+  ├ chunks/main-app-2ed0596a07d175aa.js    219 B
+  └ chunks/webpack-6bd674fa0bea2e56.js     1.74 kB
+
+Route (pages)                              Size     First Load JS
+─ ○ /404                                   182 B          76.6 kB
++ First Load JS shared by all              76.4 kB
+  ├ chunks/framework-8883d1e9be70c3da.js   45.1 kB
+  ├ chunks/main-6e6f218b536bb3fb.js        29.4 kB
+  ├ chunks/pages/_app-52924524f99094ab.js  195 B
+  └ chunks/webpack-6bd674fa0bea2e56.js     1.74 kB
+
+
+[info] λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • non-static component /category/[id]/page
+[info]  • non-static component /esquisse/[id]/page
+[info] 
+[debug] [2023-09-25T06:45:30.612Z] [web frameworks] effective firebase.json:  {
+  "hosting": [
+    {
+      "source": ".",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "frameworksBackend": {
+        "region": "asia-east1"
+      },
+      "site": "react-getting-started-2a850",
+      "rewrites": [
+        {
+          "source": "**",
+          "function": {
+            "functionId": "ssrreactgettingstarted2a850",
+            "region": "asia-east1",
+            "pinTag": true
+          }
+        }
+      ],
+      "redirects": [],
+      "headers": [
+        {
+          "source": "/favicon.ico",
+          "headers": [
+            {
+              "key": "cache-control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "content-type",
+              "value": "image/x-icon"
+            },
+            {
+              "key": "x-next-cache-tags",
+              "value": "/favicon.ico/route"
+            }
+          ]
+        },
+        {
+          "source": "**/*.[jt]s",
+          "headers": [
+            {
+              "key": "Set-Cookie",
+              "value": "__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoicmVhY3QtZ2V0dGluZy1zdGFydGVkLTJhODUwIiwiYXBwSWQiOiIxOjE2NjA2ODA0OTg1NDp3ZWI6YmZiM2M3ZTM2OTU4ZTgwYWIwOGJlZiIsImRhdGFiYXNlVVJMIjoiaHR0cHM6Ly9yZWFjdC1nZXR0aW5nLXN0YXJ0ZWQtMmE4NTAtZGVmYXVsdC1ydGRiLmZpcmViYXNlaW8uY29tIiwic3RvcmFnZUJ1Y2tldCI6InJlYWN0LWdldHRpbmctc3RhcnRlZC0yYTg1MC5hcHBzcG90LmNvbSIsImxvY2F0aW9uSWQiOiJ1cy1jZW50cmFsIiwiYXBpS2V5IjoiQUl6YVN5QXc0bnp4aXFTWkdZZzZENlhUQXZBbDJJRm53cDg0LS1JIiwiYXV0aERvbWFpbiI6InJlYWN0LWdldHRpbmctc3RhcnRlZC0yYTg1MC5maXJlYmFzZWFwcC5jb20iLCJtZXNzYWdpbmdTZW5kZXJJZCI6IjE2NjA2ODA0OTg1NCIsIm1lYXN1cmVtZW50SWQiOiJHLU1ZV0dDSzc5RkUifSwiX2F1dGhUb2tlblN5bmNVUkwiOiIvX19zZXNzaW9uIn0; SameSite=Strict; Expires=2025-08-19T17:25:30.612Z; Path=/;"
+            }
+          ]
+        }
+      ],
+      "cleanUrls": true,
+      "trailingSlash": false,
+      "public": ".firebase\\react-getting-started-2a850\\hosting",
+      "webFramework": "next_ssr"
+    }
+  ],
+  "functions": [
+    {
+      "source": ".firebase\\react-getting-started-2a850\\functions",
+      "codebase": "firebase-frameworks-react-getting-started-2a850"
+    }
+  ]
+}
+[debug] [2023-09-25T06:45:30.614Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-09-25T06:45:30.615Z] > authorizing via signed-in user (kado_hiroki@yahoo.co.jp)
+[debug] [2023-09-25T06:45:30.615Z] [iam] checking project react-getting-started-2a850 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2023-09-25T06:45:30.617Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions [none]
+[debug] [2023-09-25T06:45:30.617Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:30.617Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2023-09-25T06:45:31.292Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions 200
+[debug] [2023-09-25T06:45:31.292Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[info] 
+[info] === Deploying to 'react-getting-started-2a850'...
+[info] 
+[info] i  deploying functions, hosting 
+[debug] [2023-09-25T06:45:31.295Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850 [none]
+[debug] [2023-09-25T06:45:31.618Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850 200
+[debug] [2023-09-25T06:45:31.618Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850 {"projectId":"react-getting-started-2a850","projectNumber":"166068049854","displayName":"react-getting-started","name":"projects/react-getting-started-2a850","resources":{"hostingSite":"react-getting-started-2a850","realtimeDatabaseInstance":"react-getting-started-2a850-default-rtdb","storageBucket":"react-getting-started-2a850.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_2a66bd7f-7984-4e5a-9222-08b98ee8d14e"}
+[info] i  functions: preparing codebase firebase-frameworks-react-getting-started-2a850 for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2023-09-25T06:45:31.622Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-09-25T06:45:31.622Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:31.623Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/runtimeconfig.googleapis.com [none]
+[debug] [2023-09-25T06:45:31.623Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:31.624Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com [none]
+[debug] [2023-09-25T06:45:31.624Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:31.625Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com [none]
+[debug] [2023-09-25T06:45:31.626Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:32.664Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/runtimeconfig.googleapis.com 200
+[debug] [2023-09-25T06:45:32.665Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2023-09-25T06:45:32.670Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com 200
+[debug] [2023-09-25T06:45:32.670Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com [omitted]
+[warn] !  artifactregistry: missing required API artifactregistry.googleapis.com. Enabling now... 
+[debug] [2023-09-25T06:45:32.671Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com:enable [none]
+[debug] [2023-09-25T06:45:32.672Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com:enable x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:32.675Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com 200
+[debug] [2023-09-25T06:45:32.675Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com [omitted]
+[warn] !  functions: missing required API cloudbuild.googleapis.com. Enabling now... 
+[debug] [2023-09-25T06:45:32.676Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com:enable [none]
+[debug] [2023-09-25T06:45:32.676Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com:enable x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:32.717Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com 200
+[debug] [2023-09-25T06:45:32.717Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com [omitted]
+[warn] !  functions: missing required API cloudfunctions.googleapis.com. Enabling now... 
+[debug] [2023-09-25T06:45:32.718Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com:enable [none]
+[debug] [2023-09-25T06:45:32.719Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com:enable x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:35.815Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com:enable 200
+[debug] [2023-09-25T06:45:35.815Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com:enable [omitted]
+[debug] [2023-09-25T06:45:35.927Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com:enable 200
+[debug] [2023-09-25T06:45:35.927Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com:enable [omitted]
+[debug] [2023-09-25T06:45:36.019Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com:enable 200
+[debug] [2023-09-25T06:45:36.019Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com:enable [omitted]
+[debug] [2023-09-25T06:45:45.817Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com [none]
+[debug] [2023-09-25T06:45:45.817Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:45.929Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-09-25T06:45:45.929Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:46.020Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com [none]
+[debug] [2023-09-25T06:45:46.020Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:46.852Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com 200
+[debug] [2023-09-25T06:45:46.852Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudbuild.googleapis.com [omitted]
+[info] +  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2023-09-25T06:45:46.956Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com 200
+[debug] [2023-09-25T06:45:46.957Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/cloudfunctions.googleapis.com [omitted]
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2023-09-25T06:45:47.029Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com 200
+[debug] [2023-09-25T06:45:47.029Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/artifactregistry.googleapis.com [omitted]
+[info] +  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2023-09-25T06:45:47.032Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850/adminSdkConfig [none]
+[debug] [2023-09-25T06:45:47.347Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850/adminSdkConfig 200
+[debug] [2023-09-25T06:45:47.347Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850/adminSdkConfig {"projectId":"react-getting-started-2a850","databaseURL":"https://react-getting-started-2a850-default-rtdb.firebaseio.com","storageBucket":"react-getting-started-2a850.appspot.com","locationId":"us-central"}
+[debug] [2023-09-25T06:45:47.347Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/react-getting-started-2a850/configs [none]
+[debug] [2023-09-25T06:45:48.676Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/react-getting-started-2a850/configs 200
+[debug] [2023-09-25T06:45:48.676Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/react-getting-started-2a850/configs {}
+[debug] [2023-09-25T06:45:48.678Z] Validating nodejs source
+[debug] [2023-09-25T06:45:50.524Z] > [functions] package.json contents: {
+  "name": "esquissechat",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/node": "20.5.9",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7",
+    "destyle.css": "^4.0.0",
+    "eslint": "8.48.0",
+    "eslint-config-next": "13.4.19",
+    "firebase": "^10.3.1",
+    "firebase-admin": "^11.10.1",
+    "next": "13.4.19",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-redux": "^8.1.2",
+    "sharp": "^0.32.6",
+    "styled-components": "^6.0.7",
+    "typescript": "5.2.2",
+    "firebase-frameworks": "^0.10.4",
+    "firebase-functions": "^4.3.0"
+  },
+  "main": "server.js",
+  "engines": {
+    "node": "16"
+  }
+}
+[debug] [2023-09-25T06:45:50.524Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase firebase-frameworks-react-getting-started-2a850 to determine what to deploy 
+[debug] [2023-09-25T06:45:50.526Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-09-25T06:45:50.541Z] Found firebase-functions binary at 'C:\Users\kado_\NextProject\esquissechat\.firebase\react-getting-started-2a850\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8125
+
+[debug] [2023-09-25T06:45:51.213Z] Got response from /__/functions.yaml {"endpoints":{"ssrreactgettingstarted2a850":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["asia-east1"],"labels":{},"httpsTrigger":{},"entryPoint":"ssrreactgettingstarted2a850"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] i  functions: Loaded environment variables from .env. 
+[info] i  functions: preparing .firebase\react-getting-started-2a850\functions directory for uploading... 
+[info] i  functions: packaged C:\Users\kado_\NextProject\esquissechat\.firebase\react-getting-started-2a850\functions (60.96 MB) for uploading 
+[debug] [2023-09-25T06:45:55.937Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/react-getting-started-2a850/locations/-/functions [none]
+[debug] [2023-09-25T06:45:56.683Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/react-getting-started-2a850/locations/-/functions 200
+[debug] [2023-09-25T06:45:56.683Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/react-getting-started-2a850/locations/-/functions {}
+[debug] [2023-09-25T06:45:56.684Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2023-09-25T06:45:58.057Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/-/functions 200
+[debug] [2023-09-25T06:45:58.057Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/-/functions {}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[debug] [2023-09-25T06:45:58.060Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com [none]
+[debug] [2023-09-25T06:45:58.060Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:58.061Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com [none]
+[debug] [2023-09-25T06:45:58.061Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:58.063Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/pubsub.googleapis.com [none]
+[debug] [2023-09-25T06:45:58.063Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/pubsub.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:58.064Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/storage.googleapis.com [none]
+[debug] [2023-09-25T06:45:58.064Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/storage.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:59.066Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com 200
+[debug] [2023-09-25T06:45:59.066Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com [omitted]
+[warn] !  functions: missing required API eventarc.googleapis.com. Enabling now... 
+[debug] [2023-09-25T06:45:59.067Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com:enable [none]
+[debug] [2023-09-25T06:45:59.067Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com:enable x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:59.068Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/pubsub.googleapis.com 200
+[debug] [2023-09-25T06:45:59.068Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/pubsub.googleapis.com [omitted]
+[info] +  functions: required API pubsub.googleapis.com is enabled 
+[debug] [2023-09-25T06:45:59.084Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com 200
+[debug] [2023-09-25T06:45:59.084Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com [omitted]
+[warn] !  functions: missing required API run.googleapis.com. Enabling now... 
+[debug] [2023-09-25T06:45:59.085Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com:enable [none]
+[debug] [2023-09-25T06:45:59.085Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com:enable x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:45:59.092Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/storage.googleapis.com 200
+[debug] [2023-09-25T06:45:59.092Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/storage.googleapis.com [omitted]
+[info] +  functions: required API storage.googleapis.com is enabled 
+[debug] [2023-09-25T06:46:00.255Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com:enable 200
+[debug] [2023-09-25T06:46:00.256Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com:enable [omitted]
+[debug] [2023-09-25T06:46:00.283Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com:enable 200
+[debug] [2023-09-25T06:46:00.283Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com:enable [omitted]
+[debug] [2023-09-25T06:46:10.257Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com [none]
+[debug] [2023-09-25T06:46:10.257Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:46:10.283Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com [none]
+[debug] [2023-09-25T06:46:10.284Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:46:11.276Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com 200
+[debug] [2023-09-25T06:46:11.276Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/run.googleapis.com [omitted]
+[info] +  functions: required API run.googleapis.com is enabled 
+[debug] [2023-09-25T06:46:11.309Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com 200
+[debug] [2023-09-25T06:46:11.309Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/react-getting-started-2a850/services/eventarc.googleapis.com [omitted]
+[info] +  functions: required API eventarc.googleapis.com is enabled 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2023-09-25T06:46:11.313Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/166068049854/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2023-09-25T06:46:11.314Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/166068049854/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2023-09-25T06:46:12.440Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/166068049854/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2023-09-25T06:46:12.440Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/166068049854/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-166068049854@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"101043826220609210987"}}
+[debug] [2023-09-25T06:46:12.753Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/166068049854/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2023-09-25T06:46:12.753Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/166068049854/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-166068049854@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"106696979505162085162"}}
+[debug] [2023-09-25T06:46:12.756Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850 [none]
+[debug] [2023-09-25T06:46:13.153Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850 200
+[debug] [2023-09-25T06:46:13.153Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/react-getting-started-2a850 {"projectId":"react-getting-started-2a850","projectNumber":"166068049854","displayName":"react-getting-started","name":"projects/react-getting-started-2a850","resources":{"hostingSite":"react-getting-started-2a850","realtimeDatabaseInstance":"react-getting-started-2a850-default-rtdb","storageBucket":"react-getting-started-2a850.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_2a66bd7f-7984-4e5a-9222-08b98ee8d14e"}
+[debug] [2023-09-25T06:46:13.156Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/react-getting-started-2a850/versions [none]
+[debug] [2023-09-25T06:46:13.157Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/react-getting-started-2a850/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase","firebase-web-framework":"next_ssr"}}
+[debug] [2023-09-25T06:46:13.957Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/react-getting-started-2a850/versions 200
+[debug] [2023-09-25T06:46:13.957Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/react-getting-started-2a850/versions {"name":"projects/166068049854/sites/react-getting-started-2a850/versions/b40c89bc5bc95882","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase","firebase-web-framework":"next_ssr"}}
+[debug] [2023-09-25T06:46:13.958Z] [functions] found 1 new HTTP functions, testing setIamPolicy permission...
+[debug] [2023-09-25T06:46:13.958Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions [none]
+[debug] [2023-09-25T06:46:13.959Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions x-goog-quota-user=projects/react-getting-started-2a850
+[debug] [2023-09-25T06:46:13.959Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions {"permissions":["cloudfunctions.functions.setIamPolicy"]}
+[debug] [2023-09-25T06:46:14.608Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions 200
+[debug] [2023-09-25T06:46:14.609Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-getting-started-2a850:testIamPermissions {"permissions":["cloudfunctions.functions.setIamPolicy"]}
+[debug] [2023-09-25T06:46:14.609Z] [functions] found setIamPolicy permission, proceeding with deploy
+[debug] [2023-09-25T06:46:14.609Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/functions:generateUploadUrl [none]
+[debug] [2023-09-25T06:46:16.873Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/functions:generateUploadUrl 200
+[debug] [2023-09-25T06:46:16.874Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/gcf-v2-uploads-166068049854-asia-east1/4dbdc880-1dff-4207-84f9-bbe8d64f6588.zip?GoogleAccessId=service-166068049854@gcf-admin-robot.iam.gserviceaccount.com&Expires=1695626177&Signature=gYLU%2BNfc1oi0FVQEScQcSu4h%2BffuobilgkHk9zqELzACrKZbODWjuqhlkY4GUWZl7EyTCL1OWI7pSY7l8F8KacDZHjMHvaGoHD6eTfD0kyILs334INwd58jSA39KT4aqdPPpLnmWryjIosgyie5shtY0qEdigJNPtlLU8eQZkzRWTgz1F33fW58QoOZTuiZBLZPEdeJQPcBabZRSeluqvMKmysBu0vldVRzRVjDPo%2FMiScb9PUdaHeiOmByvV7Yt8h1K8xhDDFz%2Fjb1PZY2%2B0iV6KmU3A8NPDRxJex9AHNQ1AJT5NObEK5sgWOt2k0itKU4IeS4tOwLsPYVJ3EU6fQ%3D%3D","storageSource":{"bucket":"gcf-v2-uploads-166068049854-asia-east1","object":"4dbdc880-1dff-4207-84f9-bbe8d64f6588.zip"}}
+[debug] [2023-09-25T06:46:16.875Z] >>> [apiv2][query] PUT https://storage.googleapis.com/gcf-v2-uploads-166068049854-asia-east1/4dbdc880-1dff-4207-84f9-bbe8d64f6588.zip GoogleAccessId=service-166068049854%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1695626177&Signature=gYLU%2BNfc1oi0FVQEScQcSu4h%2BffuobilgkHk9zqELzACrKZbODWjuqhlkY4GUWZl7EyTCL1OWI7pSY7l8F8KacDZHjMHvaGoHD6eTfD0kyILs334INwd58jSA39KT4aqdPPpLnmWryjIosgyie5shtY0qEdigJNPtlLU8eQZkzRWTgz1F33fW58QoOZTuiZBLZPEdeJQPcBabZRSeluqvMKmysBu0vldVRzRVjDPo%2FMiScb9PUdaHeiOmByvV7Yt8h1K8xhDDFz%2Fjb1PZY2%2B0iV6KmU3A8NPDRxJex9AHNQ1AJT5NObEK5sgWOt2k0itKU4IeS4tOwLsPYVJ3EU6fQ%3D%3D
+[debug] [2023-09-25T06:46:16.875Z] >>> [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-166068049854-asia-east1/4dbdc880-1dff-4207-84f9-bbe8d64f6588.zip [stream]
+[debug] [2023-09-25T06:46:18.468Z] <<< [apiv2][status] PUT https://storage.googleapis.com/gcf-v2-uploads-166068049854-asia-east1/4dbdc880-1dff-4207-84f9-bbe8d64f6588.zip 200
+[debug] [2023-09-25T06:46:18.468Z] <<< [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-166068049854-asia-east1/4dbdc880-1dff-4207-84f9-bbe8d64f6588.zip [omitted]
+[info] +  functions: .firebase\react-getting-started-2a850\functions folder uploaded successfully 
+[info] i  hosting[react-getting-started-2a850]: beginning deploy... 
+[info] i  hosting[react-getting-started-2a850]: found 58 files in .firebase\react-getting-started-2a850\hosting 
+[debug] [2023-09-25T06:46:18.520Z] [hosting] uploading with 200 concurrency
+[debug] [2023-09-25T06:46:18.521Z] [hosting] hash cache [LmZpcmViYXNlXHJlYWN0LWdldHRpbmctc3RhcnRlZC0yYTg1MFxob3N0aW5n] not populated
+[debug] [2023-09-25T06:46:18.653Z] [hosting] hash cache [LmZpcmViYXNlXHJlYWN0LWdldHRpbmctc3RhcnRlZC0yYTg1MFxob3N0aW5n] stored for 58 files
+[debug] [2023-09-25T06:46:18.654Z] [hosting][hash queue][FINAL] {"max":111,"min":16,"avg":59.172413793103445,"active":0,"complete":58,"success":58,"errored":0,"retried":0,"total":58,"elapsed":131}
+[debug] [2023-09-25T06:46:18.654Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/166068049854/sites/react-getting-started-2a850/versions/b40c89bc5bc95882:populateFiles [none]
+[debug] [2023-09-25T06:46:18.655Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/166068049854/sites/react-getting-started-2a850/versions/b40c89bc5bc95882:populateFiles {"files":{"/vercel.svg":"1c03fbc03ff9ecf3469972d378778b1aea296f8ab9cb540af9d42c7848f52888","/404.html":"0c0e15a8b1966514ab0764dcce4437541aed39ce8c8b272a8da99e963d2bc26a","/next.svg":"dd6837ad10912a1f5820eb31ad506e500d83be91a8635fcfa59b04d06f671fdc","/home.html":"3c2eba99154e089e1c9a555d377c70520db146f75bf315411708b4fdb890ac6e","/category.html":"00fc45d44fe72201b79f6659c733098d509785499705558b91eabc54285863c0","/login.html":"6bf8559a58531b699cca539c3d561e460915ca5a53167c9d67d7c1a36638eee1","/register.html":"75124ec6ce8549e583c2150eef76c73d9e94e4c07579629d1a59c1b20f5f5ee4","/register/email-send.html":"dff42851a3ba7b550e6ed671d5cf2b2337fd6dee1651e4eac50cf000c37d6c63","/post.html":"f0d5db19b0d522129342bad63b873c27e30cb2a1856cc76671292854852d242f","/register/email-send/email-verified.html":"eaec0a79486c739692571a3254141d8c178bf19be919a5e57f3dbc4c7a8d2ae5","/_next/static/chunks/389-5e31743fe6c1a1d3.js":"81d76aa425509b21885b40ae06d0c7ba9818f0c2b9541bdcd0f507213db2e681","/_next/static/chunks/396-4345764eecbade21.js":"58c0bb407f90a5087fcac9ea1f2cf8801a8ef226a5dda5f816c5d3ff4c25907b","/_next/static/chunks/691-5e44f258ea3d194c.js":"67f0a030e02105106b9ecfdd82245348d866909fe28a88a27e4740566961ff7f","/_next/static/chunks/141-fb70b5db13d7ae52.js":"a6008e710fd953de90848f30d83ec11e4265e31075f98eeb06a6b567a8d4ba58","/_next/static/chunks/main-app-2ed0596a07d175aa.js":"16131f869b2a34fd7ce1a3821e6897930d5d6fe14fecb3fd924f9bd0d19ae570","/favicon.ico":"43127f4210c52bcd0f30f291f1ee296ab41ddd1566905dc27fe1129e0175c8f1","/_next/static/chunks/app/category/page-8e3775a2154576cb.js":"55ebc02de723c4f5049e3d1afccde1c811f8f6895b9dcaa165f7a37c374e95ad","/_next/static/chunks/app/category/[id]/page-21aa669033ce6499.js":"6c79bd69041600272f37131f03bb32de711103b8f1890847188a66dda44e49f8","/_next/static/chunks/webpack-6bd674fa0bea2e56.js":"920d20bab102c403c10b54bfc10010835e22bb9e83de4f307c168594f8ee650e","/_next/static/chunks/app/home/page-9108cc970e752ae9.js":"25615f5772fbb48d44dfccd581a996613a8bb365b5afd31122728f00700f6968","/_next/static/chunks/app/layout-60faf04acc653711.js":"3a3819a711698d9d781b4f77515f55842be92155eeeb7103be94c0d717b71400","/_next/static/chunks/app/register/email-send/page-9fdac26fb76821c1.js":"c98a9474997fcee590a5be15d6000640d51d6ab768cdded96fdae5dcaf393934","/_next/static/chunks/app/post/page-b582fa21c63a4d58.js":"10818783f39380179f5f262f87021e6ef19b3b536408b07565b50038b937929c","/_next/static/chunks/pages/_app-52924524f99094ab.js":"25f0e57f29b8d53b1e63d9e08df9d063dd50c84633a0fc66ef47350779c7ed41","/_next/static/chunks/pages/_error-c92d5c4bb2b49926.js":"2c86592bf57245e63ddaa1303d91245f5f8b4bbb0ac0f57e488e638eb4cf0964","/_next/static/j5cUqZ88O3btXtbRLLYdt/_ssgManifest.js":"dc28a4dc92fe352ed5d2201bd3972ce47691bc8e89e0400a68d1541d0567c6d5","/_next/static/chunks/app/login/page-492a1ccb30ce9455.js":"d7c22dd1edee5d4a2e8d50c3442d8ef4378569942f635d35432e89949cf9f283","/_next/static/j5cUqZ88O3btXtbRLLYdt/_buildManifest.js":"614b97202f9a54f964da446ee8b30479cc6c7e79c79337bf131b7488da175ca4","/_next/static/css/53a56a835506a2a6.css":"ed67c7980022d9c085368af9110ce49828462c61f9809ec7d54a1185e441d896","/_next/static/chunks/app/register/page-022a1a741a28ed47.js":"5af8ce93e1b2536df0ab14abfc334d6b9d6d8aa397bab440376d3fd92c84e147","/_next/static/chunks/app/esquisse/[id]/page-f23861ca854445a7.js":"4e6aba55ac5d1e5f92ad4ebb3e407a23e4ac5f78e647836d0397a16007b1d24d","/_next/static/chunks/app/register/email-send/email-verified/page-597d429a450f8b9e.js":"f9786022908e8f1209f0e0323f1c4e36331287af8968919b12a7b5686c925e12","/_next/static/media/05a31a2ca4975f99-s.woff2":"533588b3634aea8a5dd8c7bf534655dae95caac158832a7773bd92d075a5827a","/_next/static/media/fd4db3eb5472fc27-s.woff2":"d3230447a362642f82e299b97d5c995a05d8e9840b5576d0205fda781bc33d49","/_next/static/media/housing.1992173b.jpg":"f43b11a4e97b1d5586f993104b1706e7eee23a7b5ee429a888ed9b8e45eec663","/_next/static/media/513657b02c5c193f-s.woff2":"9d9b6a8b650d12bf4046815f5643e359b6efc20d61b1e62ef03c6b9f70a3e67c","/_next/static/media/51ed15f9841b9f9d-s.woff2":"7d9731b45ac283755aad51cbff3e137255246d42f646adb89232a85ed350850c","/_next/static/media/ec159349637c90ad-s.woff2":"daee9bc2217989d049c17ac36e121551b105fa8aac6b8446b40dc4ee8af34438","/_next/static/chunks/596-d9b13ad50b47a91d.js":"c7e0384efa76792e25efd1221f27ea2603e57f69f0114b1fea4434ab025216be","/_next/static/chunks/72-59a42d165616e5e9.js":"78b42c71283bc1c4d9159ed34702f17495b19541ac2b34fff25e09d95d418412","/_next/static/media/c9a5bc6a7c948fb0-s.p.woff2":"47ca69d0576f11c07a333cd24dbb1bcc485c2f5177ea07f4cc1f84541a2d6635","/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js":"e03eafd0ebda24c0d0ec94e727fcce15281add86d3a3da865b9dccd05ddbb0ba","/_next/static/chunks/main-6e6f218b536bb3fb.js":"d70e5c8a751d31acf27a27f48325a89876a3592c00e1d7c106db0d195622fc0c","/_next/static/chunks/82deed28-7c47e6064a359392.js":"52a7b013e8a9e3955692057c9731e55e6acd98d8c89c4c59373eec09eb063986","/_next/static/media/person.14af44a2.png":"bfe39b2042d1ee419e7c8e6a9c43cd0271723bd2bb63e8f4e603853135e4ec34","/_next/static/media/tag.4d6710da.svg":"ae441ab20d1f4d900db71ce2bd8671792d9a312bf91c2ea0d45f2da8dc462e6d","/_next/static/chunks/457b8330-4f984fb593d494f2.js":"40d8630a8c9966265b1f5dd6c72eca046aa4d5fdca1a51480d61e4b18a0919ae","/_next/static/chunks/framework-8883d1e9be70c3da.js":"56d86a8b51c6cfcc715a9a6a286cd7ebd239f8866e4eef4750191569aea39d56","/_next/static/chunks/fd9d1056-d8f5e6ec3ff59217.js":"d751eb2494549546567529aafc2bc33645ca9616f9ce29c9d47047922f7de254","/_next/static/media/museum.9e763684.jpg":"024b88a005876c6e99c03f828b5441a215d4ae5115fa4cf1d6b6aeb05369de21","/_next/static/media/d6b16ce4a6175f26-s.woff2":"9651fe7ea6d125d2fb964a558065dd350e45e75cc18be21bd36997fc4e1c9d16","/_next/static/media/kindergarten.e850a21f.jpg":"4b31001db9bdbf25b02f95fa7133da2edb90905009117af3a1a03c96bca194be","/_next/static/media/school.373470b2.jpg":"134a05fc48a11aed01c98b9b6702889afa062d9ff61486cd3867c6fb9d2f9b63","/_next/static/media/housing-comp.ec40c02d.jpg":"500b67d36ff3cbcf12bfffc70215e0d42e6148140aba01bacc99bb18c43edad0","/_next/static/media/university.75825625.jpg":"07dba2effdcdc2ac228ca2094de48adb1f022dc7a563a62e9457e6717365d541","/_next/static/media/renovation.d6d3e7a9.jpg":"176fbd5fe71715fab1b7a5892825eedfa63cb60178dbf445c9a2a1fca8d97cad","/_next/static/media/library.288786ab.jpg":"06c7e3be512310365953f62290edb5925c17e1cd61bc147e2552770679d4a1fe","/_next/static/media/church.175b4f06.jpg":"23357c76f8af053f5f3003760dccd7f0778d644bc1a7e9fdad15d6d95f96e215"}}
+[debug] [2023-09-25T06:46:19.339Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/166068049854/sites/react-getting-started-2a850/versions/b40c89bc5bc95882:populateFiles 200
+[debug] [2023-09-25T06:46:19.339Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/166068049854/sites/react-getting-started-2a850/versions/b40c89bc5bc95882:populateFiles {"uploadRequiredHashes":["f0d5db19b0d522129342bad63b873c27e30cb2a1856cc76671292854852d242f","dff42851a3ba7b550e6ed671d5cf2b2337fd6dee1651e4eac50cf000c37d6c63","00fc45d44fe72201b79f6659c733098d509785499705558b91eabc54285863c0","6bf8559a58531b699cca539c3d561e460915ca5a53167c9d67d7c1a36638eee1","0c0e15a8b1966514ab0764dcce4437541aed39ce8c8b272a8da99e963d2bc26a","eaec0a79486c739692571a3254141d8c178bf19be919a5e57f3dbc4c7a8d2ae5","3c2eba99154e089e1c9a555d377c70520db146f75bf315411708b4fdb890ac6e","75124ec6ce8549e583c2150eef76c73d9e94e4c07579629d1a59c1b20f5f5ee4"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files"}
+[debug] [2023-09-25T06:46:19.343Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/f0d5db19b0d522129342bad63b873c27e30cb2a1856cc76671292854852d242f [none]
+[debug] [2023-09-25T06:46:19.344Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/f0d5db19b0d522129342bad63b873c27e30cb2a1856cc76671292854852d242f [stream]
+[debug] [2023-09-25T06:46:19.345Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/dff42851a3ba7b550e6ed671d5cf2b2337fd6dee1651e4eac50cf000c37d6c63 [none]
+[debug] [2023-09-25T06:46:19.345Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/dff42851a3ba7b550e6ed671d5cf2b2337fd6dee1651e4eac50cf000c37d6c63 [stream]
+[debug] [2023-09-25T06:46:19.346Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/00fc45d44fe72201b79f6659c733098d509785499705558b91eabc54285863c0 [none]
+[debug] [2023-09-25T06:46:19.346Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/00fc45d44fe72201b79f6659c733098d509785499705558b91eabc54285863c0 [stream]
+[debug] [2023-09-25T06:46:19.349Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/6bf8559a58531b699cca539c3d561e460915ca5a53167c9d67d7c1a36638eee1 [none]
+[debug] [2023-09-25T06:46:19.349Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/6bf8559a58531b699cca539c3d561e460915ca5a53167c9d67d7c1a36638eee1 [stream]
+[debug] [2023-09-25T06:46:19.350Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/0c0e15a8b1966514ab0764dcce4437541aed39ce8c8b272a8da99e963d2bc26a [none]
+[debug] [2023-09-25T06:46:19.350Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/0c0e15a8b1966514ab0764dcce4437541aed39ce8c8b272a8da99e963d2bc26a [stream]
+[debug] [2023-09-25T06:46:19.351Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/eaec0a79486c739692571a3254141d8c178bf19be919a5e57f3dbc4c7a8d2ae5 [none]
+[debug] [2023-09-25T06:46:19.351Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/eaec0a79486c739692571a3254141d8c178bf19be919a5e57f3dbc4c7a8d2ae5 [stream]
+[debug] [2023-09-25T06:46:19.352Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/3c2eba99154e089e1c9a555d377c70520db146f75bf315411708b4fdb890ac6e [none]
+[debug] [2023-09-25T06:46:19.352Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/3c2eba99154e089e1c9a555d377c70520db146f75bf315411708b4fdb890ac6e [stream]
+[debug] [2023-09-25T06:46:19.352Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/75124ec6ce8549e583c2150eef76c73d9e94e4c07579629d1a59c1b20f5f5ee4 [none]
+[debug] [2023-09-25T06:46:19.352Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/75124ec6ce8549e583c2150eef76c73d9e94e4c07579629d1a59c1b20f5f5ee4 [stream]
+[debug] [2023-09-25T06:46:19.353Z] [hosting][populate queue][FINAL] {"max":693,"min":693,"avg":693,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":703}
+[debug] [2023-09-25T06:46:19.354Z] [hosting] uploads queued: 8
+[debug] [2023-09-25T06:46:20.355Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/00fc45d44fe72201b79f6659c733098d509785499705558b91eabc54285863c0 200
+[debug] [2023-09-25T06:46:20.356Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/00fc45d44fe72201b79f6659c733098d509785499705558b91eabc54285863c0 [stream]
+[debug] [2023-09-25T06:46:20.375Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/f0d5db19b0d522129342bad63b873c27e30cb2a1856cc76671292854852d242f 200
+[debug] [2023-09-25T06:46:20.375Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/f0d5db19b0d522129342bad63b873c27e30cb2a1856cc76671292854852d242f [stream]
+[debug] [2023-09-25T06:46:20.413Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/6bf8559a58531b699cca539c3d561e460915ca5a53167c9d67d7c1a36638eee1 200
+[debug] [2023-09-25T06:46:20.413Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/6bf8559a58531b699cca539c3d561e460915ca5a53167c9d67d7c1a36638eee1 [stream]
+[debug] [2023-09-25T06:46:20.417Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/dff42851a3ba7b550e6ed671d5cf2b2337fd6dee1651e4eac50cf000c37d6c63 200
+[debug] [2023-09-25T06:46:20.417Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/dff42851a3ba7b550e6ed671d5cf2b2337fd6dee1651e4eac50cf000c37d6c63 [stream]
+[debug] [2023-09-25T06:46:20.418Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/0c0e15a8b1966514ab0764dcce4437541aed39ce8c8b272a8da99e963d2bc26a 200
+[debug] [2023-09-25T06:46:20.418Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/0c0e15a8b1966514ab0764dcce4437541aed39ce8c8b272a8da99e963d2bc26a [stream]
+[debug] [2023-09-25T06:46:20.451Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/3c2eba99154e089e1c9a555d377c70520db146f75bf315411708b4fdb890ac6e 200
+[debug] [2023-09-25T06:46:20.451Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/3c2eba99154e089e1c9a555d377c70520db146f75bf315411708b4fdb890ac6e [stream]
+[debug] [2023-09-25T06:46:20.463Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/eaec0a79486c739692571a3254141d8c178bf19be919a5e57f3dbc4c7a8d2ae5 200
+[debug] [2023-09-25T06:46:20.463Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/eaec0a79486c739692571a3254141d8c178bf19be919a5e57f3dbc4c7a8d2ae5 [stream]
+[debug] [2023-09-25T06:46:20.480Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/75124ec6ce8549e583c2150eef76c73d9e94e4c07579629d1a59c1b20f5f5ee4 200
+[debug] [2023-09-25T06:46:20.480Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/react-getting-started-2a850/versions/b40c89bc5bc95882/files/75124ec6ce8549e583c2150eef76c73d9e94e4c07579629d1a59c1b20f5f5ee4 [stream]
+[debug] [2023-09-25T06:46:20.480Z] [hosting][upload queue][FINAL] {"max":1137,"min":1014,"avg":1079.875,"active":0,"complete":8,"success":8,"errored":0,"retried":0,"total":8,"elapsed":1141}
+[info] +  hosting[react-getting-started-2a850]: file upload complete 
+[debug] [2023-09-25T06:46:20.482Z] [hosting] deploy completed after 2008ms
+[info] i  functions: creating Node.js 16 (2nd Gen) function firebase-frameworks-react-getting-started-2a850:ssrreactgettingstarted2a850(asia-east1)... 
+[debug] [2023-09-25T06:46:20.486Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/functions functionId=ssrreactgettingstarted2a850
+[debug] [2023-09-25T06:46:20.487Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/functions {"name":"projects/react-getting-started-2a850/locations/asia-east1/functions/ssrreactgettingstarted2a850","buildConfig":{"runtime":"nodejs16","entryPoint":"ssrreactgettingstarted2a850","source":{"storageSource":{"bucket":"gcf-v2-uploads-166068049854-asia-east1","object":"4dbdc880-1dff-4207-84f9-bbe8d64f6588.zip"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"environmentVariables":{"__FIREBASE_FRAMEWORKS_ENTRY__":"next.js","__FIREBASE_DEFAULTS__":"{\"config\":{\"projectId\":\"react-getting-started-2a850\",\"appId\":\"1:166068049854:web:bfb3c7e36958e80ab08bef\",\"databaseURL\":\"https://react-getting-started-2a850-default-rtdb.firebaseio.com\",\"storageBucket\":\"react-getting-started-2a850.appspot.com\",\"locationId\":\"us-central\",\"apiKey\":\"AIzaSyAw4nzxiqSZGYg6D6XTAvAl2IFnwp84--I\",\"authDomain\":\"react-getting-started-2a850.firebaseapp.com\",\"messagingSenderId\":\"166068049854\",\"measurementId\":\"G-MYWGCK79FE\"},\"_authTokenSyncURL\":\"/__session\"}","FIREBASE_CONFIG":"{\"projectId\":\"react-getting-started-2a850\",\"databaseURL\":\"https://react-getting-started-2a850-default-rtdb.firebaseio.com\",\"storageBucket\":\"react-getting-started-2a850.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"react-getting-started-2a850","EVENTARC_CLOUD_EVENT_SOURCE":"projects/react-getting-started-2a850/locations/asia-east1/services/ssrreactgettingstarted2a850"},"ingressSettings":null,"timeoutSeconds":null,"serviceAccountEmail":null,"availableMemory":"256Mi","minInstanceCount":null,"maxInstanceCount":null,"maxInstanceRequestConcurrency":80,"availableCpu":"1","vpcConnector":null,"vpcConnectorEgressSettings":null},"labels":{"deployment-tool":"cli-firebase","firebase-functions-codebase":"firebase-frameworks-react-getting-started-2a850","firebase-functions-hash":"c880f5e2492a6a345bc1628dabde8359a48f2592"}}
+[debug] [2023-09-25T06:46:23.299Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/functions 200
+[debug] [2023-09-25T06:46:23.299Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/functions {"name":"projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2023-09-25T06:46:24.239962275Z","target":"projects/react-getting-started-2a850/locations/asia-east1/functions/ssrreactgettingstarted2a850","verb":"create","cancelRequested":false,"apiVersion":"v2"},"done":false}
+[debug] [2023-09-25T06:46:23.300Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 [none]
+[debug] [2023-09-25T06:46:23.422Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 200
+[debug] [2023-09-25T06:46:23.422Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 {"name":"projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2023-09-25T06:46:24.239962275Z","target":"projects/react-getting-started-2a850/locations/asia-east1/functions/ssrreactgettingstarted2a850","verb":"create","cancelRequested":false,"apiVersion":"v2"},"done":false}
+[debug] [2023-09-25T06:46:23.923Z] [create-firebase-frameworks-react-getting-started-2a850-asia-east1-ssrreactgettingstarted2a850] Retrying task index 0
+[debug] [2023-09-25T06:46:23.923Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 [none]
+[debug] [2023-09-25T06:46:24.059Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 200
+[debug] [2023-09-25T06:46:24.059Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 {"name":"projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2023-09-25T06:46:24.239962275Z","target":"projects/react-getting-started-2a850/locations/asia-east1/functions/ssrreactgettingstarted2a850","verb":"create","cancelRequested":false,"apiVersion":"v2","requestResource":{"@type":"type.googleapis.com/google.cloud.functions.v2.Function","name":"projects/react-getting-started-2a850/locations/asia-east1/functions/ssrreactgettingstarted2a850","buildConfig":{"runtime":"nodejs16","entryPoint":"ssrreactgettingstarted2a850","source":{"storageSource":{"bucket":"gcf-v2-sources-166068049854-asia-east1","object":"ssrreactgettingstarted2a850/function-source.zip","generation":"1695624383518989"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"service":"projects/react-getting-started-2a850/locations/asia-east1/services/ssrreactgettingstarted2a850","timeoutSeconds":60,"environmentVariables":{"__FIREBASE_FRAMEWORKS_ENTRY__":"next.js","__FIREBASE_DEFAULTS__":"{\"config\":{\"projectId\":\"react-getting-started-2a850\",\"appId\":\"1:166068049854:web:bfb3c7e36958e80ab08bef\",\"databaseURL\":\"https://react-getting-started-2a850-default-rtdb.firebaseio.com\",\"storageBucket\":\"react-getting-started-2a850.appspot.com\",\"locationId\":\"us-central\",\"apiKey\":\"AIzaSyAw4nzxiqSZGYg6D6XTAvAl2IFnwp84--I\",\"authDomain\":\"react-getting-started-2a850.firebaseapp.com\",\"messagingSenderId\":\"166068049854\",\"measurementId\":\"G-MYWGCK79FE\"},\"_authTokenSyncURL\":\"/__session\"}","FIREBASE_CONFIG":"{\"projectId\":\"react-getting-started-2a850\",\"databaseURL\":\"https://react-getting-started-2a850-default-rtdb.firebaseio.com\",\"storageBucket\":\"react-getting-started-2a850.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"react-getting-started-2a850","EVENTARC_CLOUD_EVENT_SOURCE":"projects/react-getting-started-2a850/locations/asia-east1/services/ssrreactgettingstarted2a850"},"maxInstanceCount":100,"ingressSettings":"ALLOW_ALL","serviceAccountEmail":"166068049854-compute@developer.gserviceaccount.com","availableMemory":"256Mi","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"labels":{"deployment-tool":"cli-firebase","firebase-functions-codebase":"firebase-frameworks-react-getting-started-2a850","firebase-functions-hash":"c880f5e2492a6a345bc1628dabde8359a48f2592"},"environment":"GEN_2"},"stages":[{"name":"BUILD","state":"NOT_STARTED"},{"name":"SERVICE","state":"NOT_STARTED"}]},"done":false}
+[debug] [2023-09-25T06:46:25.060Z] [create-firebase-frameworks-react-getting-started-2a850-asia-east1-ssrreactgettingstarted2a850] Retrying task index 0
+[debug] [2023-09-25T06:46:25.060Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 [none]
+[debug] [2023-09-25T06:46:25.169Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 200
+[debug] [2023-09-25T06:46:25.169Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 {"name":"projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2023-09-25T06:46:24.239962275Z","target":"projects/react-getting-started-2a850/locations/asia-east1/functions/ssrreactgettingstarted2a850","verb":"create","cancelRequested":false,"apiVersion":"v2","requestResource":{"@type":"type.googleapis.com/google.cloud.functions.v2.Function","name":"projects/react-getting-started-2a850/locations/asia-east1/functions/ssrreactgettingstarted2a850","buildConfig":{"runtime":"nodejs16","entryPoint":"ssrreactgettingstarted2a850","source":{"storageSource":{"bucket":"gcf-v2-sources-166068049854-asia-east1","object":"ssrreactgettingstarted2a850/function-source.zip","generation":"1695624383518989"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"service":"projects/react-getting-started-2a850/locations/asia-east1/services/ssrreactgettingstarted2a850","timeoutSeconds":60,"environmentVariables":{"__FIREBASE_FRAMEWORKS_ENTRY__":"next.js","__FIREBASE_DEFAULTS__":"{\"config\":{\"projectId\":\"react-getting-started-2a850\",\"appId\":\"1:166068049854:web:bfb3c7e36958e80ab08bef\",\"databaseURL\":\"https://react-getting-started-2a850-default-rtdb.firebaseio.com\",\"storageBucket\":\"react-getting-started-2a850.appspot.com\",\"locationId\":\"us-central\",\"apiKey\":\"AIzaSyAw4nzxiqSZGYg6D6XTAvAl2IFnwp84--I\",\"authDomain\":\"react-getting-started-2a850.firebaseapp.com\",\"messagingSenderId\":\"166068049854\",\"measurementId\":\"G-MYWGCK79FE\"},\"_authTokenSyncURL\":\"/__session\"}","FIREBASE_CONFIG":"{\"projectId\":\"react-getting-started-2a850\",\"databaseURL\":\"https://react-getting-started-2a850-default-rtdb.firebaseio.com\",\"storageBucket\":\"react-getting-started-2a850.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"react-getting-started-2a850","EVENTARC_CLOUD_EVENT_SOURCE":"projects/react-getting-started-2a850/locations/asia-east1/services/ssrreactgettingstarted2a850"},"maxInstanceCount":100,"ingressSettings":"ALLOW_ALL","serviceAccountEmail":"166068049854-compute@developer.gserviceaccount.com","availableMemory":"256Mi","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"labels":{"deployment-tool":"cli-firebase","firebase-functions-codebase":"firebase-frameworks-react-getting-started-2a850","firebase-functions-hash":"c880f5e2492a6a345bc1628dabde8359a48f2592"},"environment":"GEN_2"},"stages":[{"name":"ARTIFACT_REGISTRY","state":"NOT_STARTED"},{"name":"SERVICE","message":"Deleting Cloud Run service","state":"IN_PROGRESS","resource":"projects/react-getting-started-2a850/locations/asia-east1/services/ssrreactgettingstarted2a850"}]},"done":false}
+[debug] [2023-09-25T06:46:27.170Z] [create-firebase-frameworks-react-getting-started-2a850-asia-east1-ssrreactgettingstarted2a850] Retrying task index 0
+[debug] [2023-09-25T06:46:27.170Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 [none]
+[debug] [2023-09-25T06:46:27.270Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 200
+[debug] [2023-09-25T06:46:27.271Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112 {"name":"projects/react-getting-started-2a850/locations/asia-east1/operations/operation-1695624381565-6062950ef8aba-a1e15a53-247f8112","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v2.OperationMetadata","createTime":"2023-09-25T06:46:24.239962275Z","endTime":"2023-09-25T06:46:26.570258098Z","target":"projects/react-getting-started-2a850/locations/asia-east1/functions/ssrreactgettingstarted2a850","verb":"create","cancelRequested":false,"apiVersion":"v2","requestResource":{"@type":"type.googleapis.com/google.cloud.functions.v2.Function","name":"projects/react-getting-started-2a850/locations/asia-east1/functions/ssrreactgettingstarted2a850","buildConfig":{"runtime":"nodejs16","entryPoint":"ssrreactgettingstarted2a850","source":{"storageSource":{"bucket":"gcf-v2-sources-166068049854-asia-east1","object":"ssrreactgettingstarted2a850/function-source.zip","generation":"1695624383518989"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"service":"projects/react-getting-started-2a850/locations/asia-east1/services/ssrreactgettingstarted2a850","timeoutSeconds":60,"environmentVariables":{"__FIREBASE_FRAMEWORKS_ENTRY__":"next.js","__FIREBASE_DEFAULTS__":"{\"config\":{\"projectId\":\"react-getting-started-2a850\",\"appId\":\"1:166068049854:web:bfb3c7e36958e80ab08bef\",\"databaseURL\":\"https://react-getting-started-2a850-default-rtdb.firebaseio.com\",\"storageBucket\":\"react-getting-started-2a850.appspot.com\",\"locationId\":\"us-central\",\"apiKey\":\"AIzaSyAw4nzxiqSZGYg6D6XTAvAl2IFnwp84--I\",\"authDomain\":\"react-getting-started-2a850.firebaseapp.com\",\"messagingSenderId\":\"166068049854\",\"measurementId\":\"G-MYWGCK79FE\"},\"_authTokenSyncURL\":\"/__session\"}","FIREBASE_CONFIG":"{\"projectId\":\"react-getting-started-2a850\",\"databaseURL\":\"https://react-getting-started-2a850-default-rtdb.firebaseio.com\",\"storageBucket\":\"react-getting-started-2a850.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"react-getting-started-2a850","EVENTARC_CLOUD_EVENT_SOURCE":"projects/react-getting-started-2a850/locations/asia-east1/services/ssrreactgettingstarted2a850"},"maxInstanceCount":100,"ingressSettings":"ALLOW_ALL","serviceAccountEmail":"166068049854-compute@developer.gserviceaccount.com","availableMemory":"256Mi","maxInstanceRequestConcurrency":80,"availableCpu":"1"},"labels":{"deployment-tool":"cli-firebase","firebase-functions-codebase":"firebase-frameworks-react-getting-started-2a850","firebase-functions-hash":"c880f5e2492a6a345bc1628dabde8359a48f2592"},"environment":"GEN_2"},"stages":[{"name":"ARTIFACT_REGISTRY","state":"NOT_STARTED"},{"name":"SERVICE","message":"Deleting Cloud Run service","state":"COMPLETE","resource":"projects/react-getting-started-2a850/locations/asia-east1/services/ssrreactgettingstarted2a850"}]},"done":true,"error":{"code":7,"message":"Unable to retrieve the repository metadata for projects/react-getting-started-2a850/locations/asia-east1/repositories/gcf-artifacts. Ensure that the Cloud Functions service account has 'artifactregistry.repositories.list' and 'artifactregistry.repositories.get' permissions. You can add the permissions by granting the role 'roles/artifactregistry.reader'.","details":[{"@type":"type.googleapis.com/google.rpc.Status","code":7,"message":"Unable to cleanup package projects/react-getting-started-2a850/locations/asia-east1/repositories/gcf-artifacts/packages/ssrreactgettingstarted2a850. Ensure that the Cloud Functions service account has 'artifactregistry.packages.delete' permission. You can add the permission by granting the role 'roles/artifactregistry.repoAdmin'."}]}}
+[error] Unable to retrieve the repository metadata for projects/react-getting-started-2a850/locations/asia-east1/repositories/gcf-artifacts. Ensure that the Cloud Functions service account has 'artifactregistry.repositories.list' and 'artifactregistry.repositories.get' permissions. You can add the permissions by granting the role 'roles/artifactregistry.reader'.
+[debug] [2023-09-25T06:46:27.276Z] Total Function Deployment time: 6788
+[debug] [2023-09-25T06:46:27.276Z] 1 Functions Deployed
+[debug] [2023-09-25T06:46:27.276Z] 1 Functions Errored
+[debug] [2023-09-25T06:46:27.277Z] 0 Function Deployments Aborted
+[debug] [2023-09-25T06:46:27.277Z] Average Function Deployment time: 6787
+[info] 
+[info] Functions deploy had errors with the following functions:
+	firebase-frameworks-react-getting-started-2a850:ssrreactgettingstarted2a850(asia-east1)
+[debug] [2023-09-25T06:46:27.368Z] Not printing URL for HTTPS function. Typically this means it didn't match a filter or we failed deployment
+[info] i  functions: cleaning up build files... 
+[debug] [2023-09-25T06:46:27.371Z] >>> [apiv2][query] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/react-getting-started-2a850/locations/asia-east1/repositories/gcf-artifacts/packages/ssrreactgettingstarted2a850 [none]
+[debug] [2023-09-25T06:46:27.372Z] >>> [apiv2][query] GET https://asia.gcr.io/v2/react-getting-started-2a850/gcf/asia-east1/tags/list [none]
+[debug] [2023-09-25T06:46:27.508Z] <<< [apiv2][status] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/react-getting-started-2a850/locations/asia-east1/repositories/gcf-artifacts/packages/ssrreactgettingstarted2a850 404
+[debug] [2023-09-25T06:46:27.508Z] <<< [apiv2][body] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/react-getting-started-2a850/locations/asia-east1/repositories/gcf-artifacts/packages/ssrreactgettingstarted2a850 {"error":{"code":404,"message":"Package \"projects/react-getting-started-2a850/locations/asia-east1/repositories/gcf-artifacts/packages/ssrreactgettingstarted2a850\" was not found.","status":"NOT_FOUND"}}
+[debug] [2023-09-25T06:46:29.734Z] <<< [apiv2][status] GET https://asia.gcr.io/v2/react-getting-started-2a850/gcf/asia-east1/tags/list 200
+[debug] [2023-09-25T06:46:29.734Z] <<< [apiv2][body] GET https://asia.gcr.io/v2/react-getting-started-2a850/gcf/asia-east1/tags/list {"child":[],"manifest":{},"name":"react-getting-started-2a850/gcf/asia-east1","tags":[]}
+[debug] [2023-09-25T06:46:29.735Z] Could not find image for function projects/react-getting-started-2a850/locations/asia-east1/functions/ssrreactgettingstarted2a850
+[debug] [2023-09-25T06:46:29.735Z] Functions deploy failed.
+[debug] [2023-09-25T06:46:29.735Z] {
+  "endpoint": {
+    "id": "ssrreactgettingstarted2a850",
+    "project": "react-getting-started-2a850",
+    "region": "asia-east1",
+    "entryPoint": "ssrreactgettingstarted2a850",
+    "platform": "gcfv2",
+    "runtime": "nodejs16",
+    "httpsTrigger": {},
+    "labels": {
+      "deployment-tool": "cli-firebase"
+    },
+    "serviceAccount": null,
+    "ingressSettings": null,
+    "availableMemoryMb": null,
+    "timeoutSeconds": null,
+    "maxInstances": null,
+    "minInstances": null,
+    "concurrency": 80,
+    "vpc": null,
+    "environmentVariables": {
+      "__FIREBASE_FRAMEWORKS_ENTRY__": "next.js",
+      "__FIREBASE_DEFAULTS__": "{\"config\":{\"projectId\":\"react-getting-started-2a850\",\"appId\":\"1:166068049854:web:bfb3c7e36958e80ab08bef\",\"databaseURL\":\"https://react-getting-started-2a850-default-rtdb.firebaseio.com\",\"storageBucket\":\"react-getting-started-2a850.appspot.com\",\"locationId\":\"us-central\",\"apiKey\":\"AIzaSyAw4nzxiqSZGYg6D6XTAvAl2IFnwp84--I\",\"authDomain\":\"react-getting-started-2a850.firebaseapp.com\",\"messagingSenderId\":\"166068049854\",\"measurementId\":\"G-MYWGCK79FE\"},\"_authTokenSyncURL\":\"/__session\"}",
+      "FIREBASE_CONFIG": "{\"projectId\":\"react-getting-started-2a850\",\"databaseURL\":\"https://react-getting-started-2a850-default-rtdb.firebaseio.com\",\"storageBucket\":\"react-getting-started-2a850.appspot.com\",\"locationId\":\"us-central\"}",
+      "GCLOUD_PROJECT": "react-getting-started-2a850",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/react-getting-started-2a850/locations/asia-east1/services/ssrreactgettingstarted2a850"
+    },
+    "codebase": "firebase-frameworks-react-getting-started-2a850",
+    "cpu": 1,
+    "targetedByOnly": false,
+    "hash": "c880f5e2492a6a345bc1628dabde8359a48f2592"
+  },
+  "op": "create",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "exit": 1,
+    "message": "Unable to retrieve the repository metadata for projects/react-getting-started-2a850/locations/asia-east1/repositories/gcf-artifacts. Ensure that the Cloud Functions service account has 'artifactregistry.repositories.list' and 'artifactregistry.repositories.get' permissions. You can add the permissions by granting the role 'roles/artifactregistry.reader'.",
+    "status": 7,
+    "code": 7
+  }
+}
+[debug] [2023-09-25T06:46:29.829Z] Error: Failed to create function ssrreactgettingstarted2a850 in region asia-east1
+    at C:\Users\kado_\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:288:27
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Fabricator.createV2Function (C:\Users\kado_\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:276:30)
+    at async Fabricator.createEndpoint (C:\Users\kado_\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:135:13)
+    at async handle (C:\Users\kado_\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:88:17)
+[error] 
+[error] Error: There was an error deploying functions

@@ -25,7 +25,7 @@ type Props = {
   params: Params;
 };
 
-function Esquisse(props: Props) {
+export default function Page(props: Props) {
   const router = useRouter();
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
@@ -144,8 +144,6 @@ function Esquisse(props: Props) {
     </>
   );
 }
-
-export default Esquisse;
 
 const Wrapper = styled.div`
   width: 100%;
