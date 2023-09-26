@@ -13,13 +13,13 @@ import { deletePost } from "@/helpers/api-change";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { ChangePostModal } from "@/components/modal/ChangePostModal";
 import { ChangePostButton } from "@/components/button/ChangePostButton";
-import { SubmitButton } from "@/components/button/SubmitButton";
 import { EsquisseList } from "@/components/list/EsquisseList";
 import { EsquisseForm } from "@/components/form/EsquisseForm";
 import { ImageContainer } from "@/components/image/ImageContianer";
 import { TagLinkList } from "@/components/list/TagLinkList";
 import { DeleteModal } from "@/components/modal/DeleteModal";
 import styled from "styled-components";
+import { FormButton } from "@/components/button/FormButton";
 
 type Props = {
   params: Params;
@@ -130,8 +130,7 @@ export default function Page(props: Props) {
 
           <Form onSubmit={submitFormHandler}>
             <EsquisseForm comment={comment} setComment={setComment} />
-            {/* <SubmitButton>メッセージを投稿する</SubmitButton> */}
-            <button>メッセージを投稿する</button>
+            <FormButton>メッセージを投稿する</FormButton>
           </Form>
         </WrapperInner>
       </Wrapper>

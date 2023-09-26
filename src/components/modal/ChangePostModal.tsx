@@ -21,7 +21,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Bg } from "../bg/Background";
 import { CloseButton } from "../button/CloseButton";
-import { SubmitButton } from "../button/SubmitButton";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { getAllPosts } from "@/helpers/api-util";
 import { IndicatePost } from "@/store/post";
@@ -30,6 +29,7 @@ import { ChangePostCategoryForm } from "../form/changeform/ChangePostCategoryFor
 import { ChangePostPhotoForm } from "../form/changeform/ChangePostPhotoForm";
 import { ChangePostDescriptionForm } from "../form/changeform/ChangePostDescriptionForm";
 import { Uploading } from "../bg/Uploading";
+import { FormButton } from "../button/FormButton";
 
 type Props = {
   id: string;
@@ -176,7 +176,7 @@ export const ChangePostModal = (props: Props) => {
               description={description}
               descriptionHandler={descriptionHandler}
             />
-            <SubmitButton>投稿する</SubmitButton>
+            <FormButton>投稿する</FormButton>
           </form>
         </Content>
       </WrapperInner>

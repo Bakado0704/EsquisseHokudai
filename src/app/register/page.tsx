@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import { emailRegister } from "@/helpers/api-util";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
-import { SubmitButton } from "@/components/button/SubmitButton";
 import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
+import { FormButton } from "@/components/button/FormButton";
 
 export default function Page() {
   const [email, setEmail] = useState<string>();
@@ -40,7 +40,7 @@ export default function Page() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <SubmitButton>メールを送信する</SubmitButton>
+            <FormButton>メールを送信する</FormButton>
           </Form>
         </WrapperInner>
       </Wrapper>

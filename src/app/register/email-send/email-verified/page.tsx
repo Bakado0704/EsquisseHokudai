@@ -7,7 +7,7 @@ import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
 import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
-import { SubmitButton } from "@/components/button/SubmitButton"; 
+import { FormButton } from "@/components/button/FormButton";
 
 export default function Page() {
   const router = useRouter();
@@ -53,7 +53,7 @@ export default function Page() {
               onChange={e => setPasswordConfirm(e.target.value)}
               value={passwordConfirm}
             />
-            <SubmitButton>アカウントを作成</SubmitButton>
+            <FormButton>アカウントを作成</FormButton>
           </Form>
         </WrapperInner>
       </Wrapper>

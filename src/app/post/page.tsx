@@ -1,7 +1,6 @@
 "use client";
 
 import { buildingCategory, projectCategory, toolCategory } from "@/categoryData/categoryData";
-import { SubmitButton } from "@/components/button/SubmitButton";
 import { PostCategoryForm } from "@/components/form/postform/PostCategoryForm";
 import { PostDescriptionForm } from "@/components/form/postform/PostDescriptionForm"; 
 import { PostPhotoForm } from "@/components/form/postform/PostPhotoForm"; 
@@ -18,6 +17,7 @@ import { useDispatch } from "react-redux";
 import storage from "@/helpers/firebase";
 import styled from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
+import { FormButton } from "@/components/button/FormButton";
 
 export default function Page() {
   const router = useRouter();
@@ -143,7 +143,7 @@ export default function Page() {
               description={description}
               descriptionHandler={descriptionHandler}
             />
-            <SubmitButton>投稿する</SubmitButton>
+            <FormButton>投稿する</FormButton>
           </form>
         </WrapperInner>
       </Wrapper>

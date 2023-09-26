@@ -7,10 +7,10 @@ import { FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Uploading } from "../bg/Uploading";
-import { SubmitButton } from "../button/SubmitButton";
 import { ChangeEsquisseForm } from "../form/changeform/ChangeEsquisseForm";
 import { CloseButton } from "../button/CloseButton";
 import { Bg } from "../bg/Background";
+import { FormButton } from "../button/FormButton";
 
 type Props = {
   id: string;
@@ -61,7 +61,7 @@ export const ChangeEsquisseModal = (props: Props) => {
               description={description}
               descriptionHandler={descriptionHandler}
             />
-            <SubmitButton>投稿を変更する</SubmitButton>
+            <FormButton>投稿を変更する</FormButton>
           </form>
         </Content>
       </WrapperInner>
