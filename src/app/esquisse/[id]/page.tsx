@@ -130,7 +130,8 @@ export default function Page(props: Props) {
 
           <Form onSubmit={submitFormHandler}>
             <EsquisseForm comment={comment} setComment={setComment} />
-            <SubmitButton>メッセージを投稿する</SubmitButton>
+            {/* <SubmitButton>メッセージを投稿する</SubmitButton> */}
+            <button>メッセージを投稿する</button>
           </Form>
         </WrapperInner>
       </Wrapper>

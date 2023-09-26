@@ -1,6 +1,6 @@
 "use client";
 
-import { SubmitButton } from "@/components/button/SubmitButton";
+import { ReSubmitButton } from "@/components/button/ReSubmitButton";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import { emailRegister, getUser } from "@/helpers/api-util";
@@ -33,9 +33,7 @@ export default function Page() {
             <Description>
               メールをご確認いただき、メールに記載されたURLをクリックして、メールアドレスの受信確認を完了してください。
             </Description>
-            <SubmitButton onClick={resubmitHandler}>
-              メールを送信する
-            </SubmitButton>
+            <ReSubmitButton>メールを送信する</ReSubmitButton>
           </WrapperInner>
         </Wrapper>
       )}
