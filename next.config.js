@@ -16,6 +16,7 @@ const nextConfig = {
   future: { 
     webpack5: true, 
   },  
+  basePath: '/login',
 };
 
 module.exports = nextConfig
