@@ -111,14 +111,12 @@ export default function Page() {
   };
 
   const titleHandler = () => {
-    //@ts-ignore
-    const enteredTitle = document.getElementById("title").value;
+    const enteredTitle = (document.getElementById("title") as HTMLInputElement).value;
     setTitle(enteredTitle);
   };
 
   const descriptionHandler = () => {
-    //@ts-ignore
-    const enteredDescription = document.getElementById("description").value;
+    const enteredDescription = (document.getElementById("description")as HTMLInputElement).value;
     setDescription(enteredDescription);
   };
 

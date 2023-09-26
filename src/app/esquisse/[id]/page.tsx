@@ -40,11 +40,8 @@ export default function Page(props: Props) {
   const [esquisseModal, setEsquisseModal] = useState<boolean>(false);
   const [postModal, setPostModal] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
-  //@ts-ignore
-  const index = posts.indexOf(selectedPost);
-  const changePostHandler = () => {
-    setPostModal(true);
-  };
+  const index = posts.indexOf(selectedPost!);
+  const changePostHandler = () => {setPostModal(true);};
   const alartHandler = () => {
     setDeleteModal(true);
   };
@@ -88,7 +85,6 @@ export default function Page(props: Props) {
 
     await esquisseSubmit(
       props.params.id,
-      //@ts-ignore
       comment
     ).then(() => {
       getAllEsquisses().then(function (result) {

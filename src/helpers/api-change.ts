@@ -36,9 +36,8 @@ export async function changePost(
           },
         };
 
-        const updates = {};
-        //@ts-ignore
-        updates[`/posts/${Object.keys(snapshot.val())[index]}`] = postData;
+        const updates: any = {};
+        updates[`/posts/${Object.keys(snapshot.val())[index]}` ] = postData;
         update(ref(db), updates);
       } else {
         console.log("No data available");
@@ -92,8 +91,7 @@ export async function changeEsquisse(
           },
         };
 
-        const updates = {};
-        //@ts-ignore
+        const updates : any = {};
         updates[`/esquisses/${Object.keys(snapshot.val())[index]}`] = postData;
         update(ref(db), updates);
       } else {

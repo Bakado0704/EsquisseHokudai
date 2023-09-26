@@ -22,10 +22,9 @@ export const ChangeEsquisseModal = (props: Props) => {
   const postedKey = props.id;
   const esquisses = useSelector((state: RootState) => state.post.esquisses);
   const selectedEsquisse = esquisses.find((esquisse) => esquisse.key === postedKey);
-  const selectedPostId = selectedEsquisse?.id;
-  //@ts-ignore
-  const index = esquisses.indexOf(selectedEsquisse);
-  const [description, setDescription] = useState(selectedEsquisse?.description);
+  const selectedPostId = selectedEsquisse!.id;
+  const index = esquisses.indexOf(selectedEsquisse!);
+  const [description, setDescription] = useState(selectedEsquisse!.description);
   const [uploading, setUploading] = useState(false);
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
@@ -33,8 +32,7 @@ export const ChangeEsquisseModal = (props: Props) => {
     setUploading(true);
 
     await changeEsquisse(
-      //@ts-ignore
-      selectedPostId,
+      selectedPostId!,
       postedKey,
       index,
       description
@@ -46,8 +44,7 @@ export const ChangeEsquisseModal = (props: Props) => {
   }
 
   const descriptionHandler = () => {
-    //@ts-ignore
-    const enteredDescription = document.getElementById("description").value;
+    const enteredDescription = (document.getElementById("description") as HTMLInputElement).value;
     setDescription(enteredDescription);
   };
 
