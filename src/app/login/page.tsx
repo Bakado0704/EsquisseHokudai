@@ -7,7 +7,7 @@ import { signIn } from "@/helpers/api-util";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
 import { SubmitButton } from "@/components/button/SubmitButton";
-import { InputForm } from "@/components/form/InputForm"; 
+import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 
 export default function Login() {
@@ -37,16 +37,17 @@ export default function Login() {
               title="メールアドレス"
               placeholder="メールアドレスを入力"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <InputForm
               type="password"
               title="パスワード"
               placeholder="パスワードを入力"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <SubmitButton>ログイン</SubmitButton>
+            {/* <SubmitButton>ログイン</SubmitButton> */}
+            <button>ログイン</button>
           </Form>
           <LinkBox>
             <Link href="/register">アカウントを作成する</Link>
