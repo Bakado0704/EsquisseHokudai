@@ -8,6 +8,7 @@ import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
 import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
+import { FormButton } from "@/components/button/FormButton";
 
 export default function Login() {
   const [email, setEmail] = useState<string>();
@@ -45,8 +46,7 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            {/* <SubmitButton>ログイン</SubmitButton> */}
-            <button>ログイン</button>
+            <FormButton>ログイン</FormButton>
           </Form>
           <LinkBox>
             <Link href="/register">アカウントを作成する</Link>
