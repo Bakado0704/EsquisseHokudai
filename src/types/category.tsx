@@ -27,7 +27,7 @@ export const BuildingType = {
 export type BuildingType = (typeof BuildingType)[keyof typeof BuildingType];
 
 export const ToolType = {
-  illustrator: ["illusurator", "illusurator"],
+  illustrator: ["illustrator", "illustrator"],
   photoshop: ["photoshop", "photoshop"],
   archicad: ["archicad", "archicad"],
   autocad: ["autocad", "autocad"],

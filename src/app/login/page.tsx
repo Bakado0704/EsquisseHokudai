@@ -20,7 +20,7 @@ export default function Login() {
 
     if (email && password) {
       await signIn(email, password).then(() => {
-        router.push("/home");
+        router.push("/");
       });
     }
   }

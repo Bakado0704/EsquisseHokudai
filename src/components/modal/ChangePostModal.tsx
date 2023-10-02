@@ -99,7 +99,7 @@ export const ChangePostModal = (props: Props) => {
     ).then(() => {
       getAllPosts().then(() => {
         setUploading(false);
-        router.push("/home");
+        router.push("/");
       });
     });
   }

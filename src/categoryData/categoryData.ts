@@ -34,7 +34,7 @@ export const toolCategory = [
   new CategoryList(ToolType.archicad, undefined, "archicad"),
   new CategoryList(ToolType.autocad, undefined, "autocad"),
   new CategoryList(ToolType.blender, undefined, "blender"),
-  new CategoryList(ToolType.illustrator, undefined, "illudtrator"),
+  new CategoryList(ToolType.illustrator, undefined, "illustrator"),
   new CategoryList(ToolType.lumion, undefined, "lumion"),
   new CategoryList(ToolType.photoshop, undefined, "photoshop"),
   new CategoryList(ToolType.revit, undefined, "revit"),

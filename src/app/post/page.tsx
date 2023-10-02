@@ -85,7 +85,7 @@ export default function Page() {
         setTitle("");
         setDescription("");
         setUploading(false);
-        router.push("/home");
+        router.push("/");
       });
     });
   }

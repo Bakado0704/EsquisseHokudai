@@ -20,7 +20,7 @@ export default function Page() {
 
     if (name && passwordInput && passwordInput === passwordConfirm) {
       createAccount(name, passwordInput).then(() => {
-        router.push("/home");
+        router.push("/");
       });
     }
   }

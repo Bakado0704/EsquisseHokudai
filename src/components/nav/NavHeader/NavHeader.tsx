@@ -14,23 +14,23 @@ export const NavHeader = () => {
     });
   }
 
-  function homeHandler() {
-    router.push("/home");
-  }
+  const homeHandler = () => {
+    router.push("/");
+  };
 
-  function signinHandler() {
+  const signinHandler = () => {
     router.push("/register");
-  }
+  };
 
-  function categoryHandler() {
+  const categoryHandler = () => {
     router.push("/category");
-  }
+  };
 
-  async function logoutHandler() {
+  const logoutHandler = async () => {
     await signout().then(() => {
       router.push("/login");
     });
-  }
+  };
 
   return (
     <Wrapper>
@@ -59,7 +59,7 @@ export const NavHeader = () => {
       )}
     </Wrapper>
   );
-}
+};
 
 const Wrapper = styled.div`
   --background-color: #595757;

@@ -62,7 +62,7 @@ export default function Page(props: Props) {
       getAllPosts().then(() => {
         setDeleting(false);
         setDeleteModal(false);
-        router.push("/home");
+        router.push("/");
       });
     });
   };
