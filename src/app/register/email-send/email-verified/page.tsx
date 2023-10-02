@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createAccount, getUser } from "@/helpers/api-util";
+import { createAccount } from "@/helpers/api-util";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
 import { InputForm } from "@/components/form/InputForm";
@@ -16,8 +16,6 @@ export default function Page() {
   const [passwordInput, setPasswordInput] = useState<string>();
   const [passwordConfirm, setPasswordConfirm] = useState<string>();
   const [uploading, setUploading] = useState(false);
-
-  const user = getUser();
 
   const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,39 +32,36 @@ export default function Page() {
   return (
     <>
       <NavHeader />
-      {!user && <p>waiting...</p>}
-      {user && (
-        <Wrapper>
-          {uploading && <Uploading text="アカウント作成中..." />}
-          <WrapperInner>
-            <Title>メールアドレスの受信が確認されました！</Title>
-            <Form onSubmit={submitFormHandler}>
-              <InputForm
-                type="name"
-                title="ニックネーム"
-                placeholder="ニックネームを入力"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <InputForm
-                type="password"
-                title="パスワード"
-                placeholder="パスワードを入力"
-                value={passwordInput}
-                onChange={(e) => setPasswordInput(e.target.value)}
-              />
-              <InputForm
-                type="password"
-                title="パスワード"
-                placeholder="パスワードを入力(確認用)"
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-                value={passwordConfirm}
-              />
-              <FormButton>アカウントを作成</FormButton>
-            </Form>
-          </WrapperInner>
-        </Wrapper>
-      )}
+      <Wrapper>
+        {uploading && <Uploading text="アカウント作成中..." />}
+        <WrapperInner>
+          <Title>メールアドレスの受信が確認されました！</Title>
+          <Form onSubmit={submitFormHandler}>
+            <InputForm
+              type="name"
+              title="ニックネーム"
+              placeholder="ニックネームを入力"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <InputForm
+              type="password"
+              title="パスワード"
+              placeholder="パスワードを入力"
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
+            />
+            <InputForm
+              type="password"
+              title="パスワード"
+              placeholder="パスワードを入力(確認用)"
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+              value={passwordConfirm}
+            />
+            <FormButton>アカウントを作成</FormButton>
+          </Form>
+        </WrapperInner>
+      </Wrapper>
       <NavRegisterFooter />
     </>
   );
