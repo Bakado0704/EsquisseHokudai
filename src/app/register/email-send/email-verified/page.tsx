@@ -17,7 +17,7 @@ export default function Page() {
   const [passwordConfirm, setPasswordConfirm] = useState<string>();
   const [uploading, setUploading] = useState(false);
 
-  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
+  const submitFormHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setUploading(true);
 
