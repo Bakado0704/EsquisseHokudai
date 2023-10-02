@@ -1,10 +1,9 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { IndicatePost } from "@/store/post";
-import { RootState } from "@/store/store";
 import { getAllPosts, getUser } from "@/helpers/api-util";
 import { useRouter } from "next/navigation";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
@@ -14,7 +13,6 @@ import { PostList } from "@/components/list/PostList";
 export default function Page() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const posts = useSelector((state: RootState) => state.post.posts);
   const activeUser = getUser();
 
   useEffect(() => {

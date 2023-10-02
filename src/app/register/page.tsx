@@ -8,17 +8,20 @@ import styled from "styled-components";
 import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 import { FormButton } from "@/components/button/FormButton";
+import { Uploading } from "@/components/bg/Uploading";
 
 export default function Page() {
   const [email, setEmail] = useState<string>();
+  const [uploading, setUploading] = useState(false);
   const router = useRouter();
 
   const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setUploading(true);
 
     if (email) {
       await emailRegister(email, "testPassword").then(() => {
-        console.log("email-send");
+        setUploading(false);
         router.push("/register/email-send");
       });
     }
@@ -28,6 +31,7 @@ export default function Page() {
     <>
       <NavHeader />
       <Wrapper>
+        {uploading && <Uploading text="アップロード中..." />}
         <WrapperInner>
           <Title>アカウントの作成</Title>
           <Description>
