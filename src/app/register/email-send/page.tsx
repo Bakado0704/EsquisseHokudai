@@ -1,20 +1,17 @@
 "use client";
 
-import { ReSubmitButton } from "@/components/button/ReSubmitButton";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import { emailRegister, getUser } from "@/helpers/api-util";
-import { useRouter } from "next/navigation";
+import { getUser } from "@/helpers/api-util";
 import styled from "styled-components";
 
 export default function Page() {
-  const router = useRouter();
   const user = getUser();
 
   return (
     <>
       <NavHeader />
-      {!user && <p>sending...</p>}
+      {!user && <p>loading...</p>}
       {user && (
         <Wrapper>
           <WrapperInner>
