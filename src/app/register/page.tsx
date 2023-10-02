@@ -25,6 +25,7 @@ export default function Page() {
     if (email && name && passwordInput && passwordInput === passwordConfirm) {
       await emailRegister(email, passwordInput, name).then(() => {
         const user = getUser();
+        setUploading(false);
 
         if (user) {
           setUploading(false);
