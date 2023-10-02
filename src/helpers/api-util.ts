@@ -58,7 +58,7 @@ export const emailRegister = async (
       }
     })
     .catch((error) => {
-      alert("もう一度入力ください");
+      alert(error);
     });
 
   if (auth.currentUser) {
