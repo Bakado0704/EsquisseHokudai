@@ -24,6 +24,7 @@ export default function Page() {
     if (name && passwordInput && passwordInput === passwordConfirm) {
       createAccount(name, passwordInput).then(() => {
         setUploading(false);
+        console.log("success!!");
         router.push("/");
       });
     }
