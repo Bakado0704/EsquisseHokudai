@@ -32,10 +32,11 @@ export default function Page() {
   return (
     <>
       <NavHeader />
-      <Wrapper>
+      <Title>メールアドレスの受信が確認されました！</Title>
+      {/* <Wrapper>
         {uploading && <Uploading text="アカウント作成中..." />}
         <WrapperInner>
-          <Title>メールアドレスの受信が確認されました！</Title>
+          
           <Form onSubmit={submitFormHandler}>
             <InputForm
               type="name"
@@ -61,7 +62,7 @@ export default function Page() {
             <FormButton>アカウントを作成</FormButton>
           </Form>
         </WrapperInner>
-      </Wrapper>
+      </Wrapper> */}
       <NavRegisterFooter />
     </>
   );
