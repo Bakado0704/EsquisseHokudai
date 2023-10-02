@@ -12,7 +12,7 @@ import {
 } from "firebase/auth";
 
 const actionCodeSettings = {
-  url: "https://esquisse-chat.vercel.app/login",
+  url: "https://esquisse-chat.vercel.app",
   handleCodeInApp: true,
 };
 
