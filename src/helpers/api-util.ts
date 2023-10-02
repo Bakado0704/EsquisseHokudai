@@ -57,8 +57,8 @@ export const emailRegister = async (
         });
       }
     })
-    .catch((error) => {
-      alert(error);
+    .catch(() => {
+      alert("すでにこのメールアドレスは使われています");
     });
 
   if (auth.currentUser) {
