@@ -23,7 +23,6 @@ export default function Page() {
         const user = getUser();
 
         if (user) {
-          console.log(user);
           router.push("/");
         }
       });

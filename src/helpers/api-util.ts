@@ -19,16 +19,19 @@ const actionCodeSettings = {
 //ユーザー情報取得
 export const getUser = () => {
   const user = getAuth().currentUser;
-  console.log(user);
   return user;
 };
 
 //サインイン
+const auth = getAuth();
 export const signIn = async (email: string, password: string) => {
-  const auth = getAuth();
-  await signInWithEmailAndPassword(auth, email, password).catch((error) => {
-    alert(error);
-  });
+  await signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log(userCredential.user);
+    })
+    .catch(() => {
+      alert("メールアドレスまたはパスワードが違います");
+    });
 };
 
 //サインアウト
@@ -38,14 +41,24 @@ export const signout = async () => {
 };
 
 //メール登録
-export const emailRegister = async (email: string, password: string) => {
+export const emailRegister = async (
+  email: string,
+  password: string,
+  displayName: string
+) => {
   const auth = getAuth();
   await createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
+    .then(() => {
+      if (auth.currentUser) {
+        updateProfile(auth.currentUser, {
+          displayName: displayName,
+        }).catch(() => {
+          alert("もう一度入力ください");
+        });
+      }
     })
     .catch((error) => {
-      alert(error);
+      alert("もう一度入力ください");
     });
 
   if (auth.currentUser) {
@@ -54,29 +67,29 @@ export const emailRegister = async (email: string, password: string) => {
 };
 
 //アカウント作成
-// export const createAccount = async (displayName: string, password: string) => {
-//   const auth = getAuth();
+export const createAccount = async (displayName: string, password: string) => {
+  const auth = getAuth();
 
-//   if (auth.currentUser) {
-//     await updateProfile(auth.currentUser, {
-//       displayName: displayName,
-//     })
-//       .then(() => {
-//         console.log("ニックネーム登録できた");
-//       })
-//       .catch(() => {
-//         console.log("ニックネーム登録できない");
-//       });
+  if (auth.currentUser) {
+    await updateProfile(auth.currentUser, {
+      displayName: displayName,
+    })
+      .then(() => {
+        console.log("ニックネーム登録できた");
+      })
+      .catch(() => {
+        console.log("ニックネーム登録できない");
+      });
 
-//     await updatePassword(auth.currentUser, password)
-//       .then(() => {
-//         console.log("パスワード登録できた");
-//       })
-//       .catch(() => {
-//         console.log("パスワード登録できない");
-//       });
-//   }
-// };
+    await updatePassword(auth.currentUser, password)
+      .then(() => {
+        console.log("パスワード登録できた");
+      })
+      .catch(() => {
+        console.log("パスワード登録できない");
+      });
+  }
+};
 
 //投稿をsubmit
 export const postSubmit = async (

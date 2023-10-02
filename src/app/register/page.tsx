@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { emailRegister } from "@/helpers/api-util";
+import { emailRegister, getUser } from "@/helpers/api-util";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
 import { InputForm } from "@/components/form/InputForm";
@@ -23,9 +23,13 @@ export default function Page() {
     setUploading(true);
 
     if (email && name && passwordInput && passwordInput === passwordConfirm) {
-      await emailRegister(email, passwordInput).then(() => {
-        setUploading(false);
-        router.push("/register/email-send");
+      await emailRegister(email, passwordInput, name).then(() => {
+        const user = getUser();
+
+        if (user) {
+          setUploading(false);
+          router.push("/register/email-send");
+        }
       });
     }
   };

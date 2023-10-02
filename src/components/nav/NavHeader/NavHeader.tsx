@@ -34,17 +34,18 @@ export const NavHeader = () => {
 
   return (
     <Wrapper>
-      {!user?.displayName && (
+      {!user?.emailVerified && (
         <WrapperInner>
           <Button $login={true} onClick={loginHandler}>
             EsquisseChat
           </Button>
+          
           <Button $signin={true} onClick={signinHandler}>
             サインイン
           </Button>
         </WrapperInner>
       )}
-      {user?.displayName && (
+      {user?.emailVerified && (
         <WrapperInner>
           <WrapperInner $primary={true}>
             <Button $home={true} onClick={homeHandler}>
