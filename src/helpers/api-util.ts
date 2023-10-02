@@ -42,12 +42,16 @@ export const emailRegister = async (email: string, password: string) => {
   await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      console.log("usercreate"+user);
     })
     .catch((error) => {
       console.log(error);
+      console.log("usercreateError");
     });
 
   if (auth.currentUser) {
+    console.log("AuthcurrentError");
+
     await sendEmailVerification(auth.currentUser, actionCodeSettings);
   }
 };
