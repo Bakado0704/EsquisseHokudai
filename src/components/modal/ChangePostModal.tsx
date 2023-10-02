@@ -17,7 +17,7 @@ import {
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Bg } from "../bg/Background";
 import { CloseButton } from "../button/CloseButton";
@@ -37,13 +37,12 @@ type Props = {
 
 export const ChangePostModal = (props: Props) => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [imageName, setImageName] = useState<string>();
   const [uploading, setUploading] = useState(false);
   const postedId = props.id;
-  const posts = useSelector((state: RootState) => state.post.posts);
+  const posts = useSelector((state: RootState) => state.post.posts)!;
   const selectedPost = posts.find((post) => post.id === postedId);
 
   const index = posts.indexOf(selectedPost!);

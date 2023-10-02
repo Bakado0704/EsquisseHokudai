@@ -1,13 +1,13 @@
 "use client";
 
-import { SetStateAction } from "react";
+import { ChangeEventHandler } from "react";
 import styled from "styled-components";
 
 type Props = {
   title: string;
   type: string;
   placeholder: string;
-  onChange: (e: { target: { value: SetStateAction<string | undefined>; }; }) => void;
+  onChange: ChangeEventHandler<HTMLInputElement> | undefined;
   value: string | undefined;
 };
 

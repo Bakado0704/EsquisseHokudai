@@ -19,13 +19,16 @@ const actionCodeSettings = {
 //ユーザー情報取得
 export const getUser = () => {
   const user = getAuth().currentUser;
+  console.log(user);
   return user;
 };
 
 //サインイン
 export const signIn = async (email: string, password: string) => {
   const auth = getAuth();
-  await signInWithEmailAndPassword(auth, email, password);
+  await signInWithEmailAndPassword(auth, email, password).catch((error) => {
+    alert(error);
+  });
 };
 
 //サインアウト
@@ -37,14 +40,12 @@ export const signout = async () => {
 //メール登録
 export const emailRegister = async (email: string, password: string) => {
   const auth = getAuth();
-
-  console.log()
   await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
     })
     .catch((error) => {
-      console.log(error);
+      alert(error);
     });
 
   if (auth.currentUser) {
@@ -53,29 +54,29 @@ export const emailRegister = async (email: string, password: string) => {
 };
 
 //アカウント作成
-export const createAccount = async (displayName: string, password: string) => {
-  const auth = getAuth();
+// export const createAccount = async (displayName: string, password: string) => {
+//   const auth = getAuth();
 
-  if (auth.currentUser) {
-    await updateProfile(auth.currentUser, {
-      displayName: displayName,
-    })
-      .then(() => {
-        console.log("ニックネーム登録できた");
-      })
-      .catch(() => {
-        console.log("ニックネーム登録できない");
-      });
+//   if (auth.currentUser) {
+//     await updateProfile(auth.currentUser, {
+//       displayName: displayName,
+//     })
+//       .then(() => {
+//         console.log("ニックネーム登録できた");
+//       })
+//       .catch(() => {
+//         console.log("ニックネーム登録できない");
+//       });
 
-    await updatePassword(auth.currentUser, password)
-      .then(() => {
-        console.log("パスワード登録できた");
-      })
-      .catch(() => {
-        console.log("パスワード登録できない");
-      });
-  }
-};
+//     await updatePassword(auth.currentUser, password)
+//       .then(() => {
+//         console.log("パスワード登録できた");
+//       })
+//       .catch(() => {
+//         console.log("パスワード登録できない");
+//       });
+//   }
+// };
 
 //投稿をsubmit
 export const postSubmit = async (
@@ -165,7 +166,7 @@ export const getAllPosts = async () => {
   }
 
   return posts;
-}
+};
 
 //firebase上のesquissesを取得
 export const getAllEsquisses = async () => {
@@ -184,7 +185,7 @@ export const getAllEsquisses = async () => {
   }
 
   return esquisses;
-}
+};
 
 export const getImage = async (image: string) => {
   const res = await getDownloadURL(ref(storage, "image/" + image));

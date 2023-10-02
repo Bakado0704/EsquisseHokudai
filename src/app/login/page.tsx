@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "@/helpers/api-util";
+import { getUser, signIn } from "@/helpers/api-util";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
 import { InputForm } from "@/components/form/InputForm";
@@ -20,10 +20,15 @@ export default function Page() {
 
     if (email && password) {
       await signIn(email, password).then(() => {
-        router.push("/");
+        const user = getUser();
+
+        if (user) {
+          console.log(user);
+          router.push("/");
+        }
       });
     }
-  }
+  };
 
   return (
     <>
