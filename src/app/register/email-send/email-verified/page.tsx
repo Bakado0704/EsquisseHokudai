@@ -17,12 +17,12 @@ export default function Page() {
   const [passwordConfirm, setPasswordConfirm] = useState<string>();
   const [uploading, setUploading] = useState(false);
 
-  const submitFormHandler = (event: FormEvent<HTMLFormElement>) => {
+  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setUploading(true);
 
     if (name && passwordInput && passwordInput === passwordConfirm) {
-      createAccount(name, passwordInput).then(() => {
+      await createAccount(name, passwordInput).then(() => {
         setUploading(false);
         router.push("/");
       });
