@@ -6,4 +6,6 @@ export default function Page() {
   const router = useRouter();
 
   router.push("/account");
+
+  return (<></>);
 }
