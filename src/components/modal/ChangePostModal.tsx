@@ -23,7 +23,6 @@ import { Bg } from "../bg/Background";
 import { CloseButton } from "../button/CloseButton";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { getAllPosts } from "@/helpers/api-util";
-import { IndicatePost } from "@/store/post";
 import { ChangePostTitleForm } from "../form/changeform/ChangePostTitleForm";
 import { ChangePostCategoryForm } from "../form/changeform/ChangePostCategoryForm";
 import { ChangePostPhotoForm } from "../form/changeform/ChangePostPhotoForm";
@@ -61,7 +60,7 @@ export const ChangePostModal = (props: Props) => {
 
     let projectType: (ProjectType | BuildingType | ToolType)[] = [];
     let buildingType: (ProjectType | BuildingType | ToolType)[] = [];
-    let toolType:(ProjectType | BuildingType | ToolType)[] = [];
+    let toolType: (ProjectType | BuildingType | ToolType)[] = [];
 
     setUploading(true);
 
@@ -98,8 +97,7 @@ export const ChangePostModal = (props: Props) => {
       imageName!,
       description
     ).then(() => {
-      getAllPosts().then(function (result) {
-        dispatch(IndicatePost(result));
+      getAllPosts().then(() => {
         setUploading(false);
         router.push("/home");
       });
@@ -141,19 +139,22 @@ export const ChangePostModal = (props: Props) => {
   };
 
   const titleHandler = () => {
-    const enteredTitle = (document.getElementById("title") as HTMLInputElement).value;
+    const enteredTitle = (document.getElementById("title") as HTMLInputElement)
+      .value;
     setTitle(enteredTitle);
   };
 
   const descriptionHandler = () => {
-    const enteredDescription = (document.getElementById("description") as HTMLInputElement).value;
+    const enteredDescription = (
+      document.getElementById("description") as HTMLInputElement
+    ).value;
     setDescription(enteredDescription);
   };
 
   return (
     <Wrapper>
       <Bg modalClose={props.modalClose} />
-      {uploading && <Uploading />}
+      {uploading && <Uploading text="アップロード中..." />}
       <WrapperInner>
         <Content>
           <CloseButton modalClose={props.modalClose} />
@@ -193,7 +194,6 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-y: hidden;
   position: absolute;
   color: var(--text-color);
   top: 50%;
@@ -206,20 +206,19 @@ const WrapperInner = styled.div`
 
   width: 100%;
   max-width: 1200px;
+  max-height: 80%;
   background-color: var(--background-color);
   border-radius: 20px;
   position: relative;
   padding: 40px;
-`;
-
-const Content = styled.div`
-  height: calc(100% - 171px);
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
     display: none;
   }
 `;
+
+const Content = styled.div``;
 
 const Title = styled.p`
   margin-top: 0;

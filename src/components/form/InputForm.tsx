@@ -21,6 +21,7 @@ export const InputForm = ({ type, onChange, placeholder, title, value }: Props) 
         placeholder={`${placeholder}`}
         onChange={onChange}
         value={value}
+        required
       />
     </Container>
   );

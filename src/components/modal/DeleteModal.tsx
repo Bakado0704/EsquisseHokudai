@@ -59,6 +59,8 @@ const Content = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  position: relative;
 `;
 
 const Title = styled.p`

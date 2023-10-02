@@ -46,12 +46,6 @@ const Text = styled.p`
   background-color: var(--color-text);
 `;
 
-const Title = styled.p`
-  font-size: 24px;
-  text-decoration: underline;
-  text-align: center;
-`;
-
 const Ul = styled.ul`
   width: 100%;
   display: flex;

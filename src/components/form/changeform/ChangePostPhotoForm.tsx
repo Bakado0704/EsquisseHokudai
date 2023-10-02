@@ -30,6 +30,7 @@ export const ChangePostPhotoForm = ({
           type="file"
           accept=".png, .jpeg, .jpg"
           onChange={onFileUploadToFirebase}
+          required
         />
         <PhotoContainer>
           <PhotoInner>

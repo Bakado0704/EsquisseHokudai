@@ -2,12 +2,16 @@
 
 import styled from "styled-components";
 
-export const Uploading = () => {
+type Props = {
+  text: string;
+};
+
+export const Uploading = ({ text }: Props) => {
   return (
     <>
       <Upload />
       <Container>
-        <Text>アップロード中...</Text>
+        <Text>{text}</Text>
         <Description>しばらくお待ちください</Description>
       </Container>
     </>

@@ -6,7 +6,12 @@ import { FormEvent, useEffect, useState } from "react";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { esquisseSubmit, getAllEsquisses, getAllPosts, getUser } from "@/helpers/api-util";
+import {
+  esquisseSubmit,
+  getAllEsquisses,
+  getAllPosts,
+  getUser,
+} from "@/helpers/api-util";
 import { IndicateEsquisse, IndicatePost } from "@/store/post";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import { deletePost } from "@/helpers/api-change";
@@ -20,6 +25,7 @@ import { TagLinkList } from "@/components/list/TagLinkList";
 import { DeleteModal } from "@/components/modal/DeleteModal";
 import styled from "styled-components";
 import { FormButton } from "@/components/button/FormButton";
+import { Uploading } from "@/components/bg/Uploading";
 
 type Props = {
   params: Params;
@@ -30,7 +36,7 @@ export default function Page(props: Props) {
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
   const postedId = props.params.id;
-  const posts = useSelector((state: RootState) => state.post.posts);
+  const posts = useSelector((state: RootState) => state.post.posts)!;
   const esquisses = useSelector((state: RootState) => state.post.esquisses);
   const selectedPost = posts.find((post) => post.id === postedId);
   const selectedEsquisses = esquisses.filter(
@@ -40,15 +46,22 @@ export default function Page(props: Props) {
   const [esquisseModal, setEsquisseModal] = useState<boolean>(false);
   const [postModal, setPostModal] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
+  const [deleting, setDeleting] = useState(false);
   const index = posts.indexOf(selectedPost!);
-  const changePostHandler = () => {setPostModal(true);};
+  const changePostHandler = () => {
+    setPostModal(true);
+  };
+
   const alartHandler = () => {
     setDeleteModal(true);
   };
+
   const deletePostHandler = async () => {
+    setDeleting(true);
     await deletePost(index).then(() => {
-      getAllPosts().then(function (result) {
-        dispatch(IndicatePost(result));
+      getAllPosts().then(() => {
+        setDeleting(false);
+        setDeleteModal(false);
         router.push("/home");
       });
     });
@@ -83,10 +96,7 @@ export default function Page(props: Props) {
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    await esquisseSubmit(
-      props.params.id,
-      comment
-    ).then(() => {
+    await esquisseSubmit(props.params.id, comment).then(() => {
       getAllEsquisses().then(function (result) {
         dispatch(IndicateEsquisse(result));
         setComment("");
@@ -107,6 +117,7 @@ export default function Page(props: Props) {
     <>
       <NavHeader />
       <Wrapper>
+      {deleting && <Uploading text="消去中..." />}
         <WrapperInner>
           {user && selectedPost.user.uid === user.uid && (
             <ChangePostButton
@@ -122,6 +133,7 @@ export default function Page(props: Props) {
           <Description>{selectedPost.description}</Description>
 
           <EsquisseList
+            allEsquisses={esquisses}
             selectedEsquisses={selectedEsquisses}
             setEsquisseModal={setEsquisseModal}
             esquisseModal={esquisseModal}
@@ -134,8 +146,12 @@ export default function Page(props: Props) {
           </Form>
         </WrapperInner>
       </Wrapper>
-      {postModal && <ChangePostModal id={postedId} modalClose={postModalClose} />}
-      {deleteModal && <DeleteModal modalClose={postModalClose} onDelete={deletePostHandler}/>}
+      {postModal && (
+        <ChangePostModal id={postedId} modalClose={postModalClose} />
+      )}
+      {deleteModal && (
+        <DeleteModal modalClose={postModalClose} onDelete={deletePostHandler} />
+      )}
       <NavFooter />
     </>
   );

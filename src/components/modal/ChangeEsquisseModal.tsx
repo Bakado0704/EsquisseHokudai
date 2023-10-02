@@ -51,7 +51,7 @@ export const ChangeEsquisseModal = (props: Props) => {
   return (
     <Wrapper>
       <Bg modalClose={props.modalClose} />
-      {uploading && <Uploading />}
+      {uploading && <Uploading text="アップロード中..." />}
       <WrapperInner>
         <Content>
           <CloseButton modalClose={props.modalClose} />

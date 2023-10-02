@@ -13,6 +13,7 @@ import { ChangeEsquisseModal } from "../modal/ChangeEsquisseModal";
 
 type Props = {
   selectedEsquisses: Esquisse[];
+  allEsquisses: Esquisse[];
   esquisseModal: boolean;
   setEsquisseModal: (value: SetStateAction<boolean>) => void;
   esquisseModalClose: () => void;
@@ -20,6 +21,7 @@ type Props = {
 
 export const EsquisseList = ({
   selectedEsquisses,
+  allEsquisses,
   esquisseModal,
   setEsquisseModal,
   esquisseModalClose,
@@ -30,7 +32,7 @@ export const EsquisseList = ({
   return (
     <ul>
       {selectedEsquisses.map((esquisse) => {
-        const esquisseIndex = selectedEsquisses.indexOf(esquisse);
+        const esquisseIndex = allEsquisses.indexOf(esquisse);
 
         const changeEsquisseHandler = () => {
           setEsquisseModal(true);

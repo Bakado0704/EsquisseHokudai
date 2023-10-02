@@ -13,17 +13,18 @@ type Props = {
 };
 
 export const PostItem = ({ post, tags }: Props) => {
-  console.log(tags);
   return (
     <Items key={post.id}>
-      <Link href={`/esquisse/${post.id}`}>
+      <Link href={`/esquisse/${post.id}`} style={{width: "100%"}}>
         <PostWrap>
-          <Image
-            src={post.imageSource}
-            alt={`${post.image}`}
-            width={300}
-            height={200}
-          />
+          <ImageWrap>
+            <Image
+              src={post.imageSource}
+              alt={`${post.image}`}
+              layout={"fill"}
+              objectFit={"cover"}
+            />
+          </ImageWrap>
           <PostTextWrap>
             <PostTextWrapInner>
               <TagList tags={tags} />
@@ -47,14 +48,22 @@ const Items = styled.li`
 `;
 
 const PostWrap = styled.div`
+  width: 100%;
   display: flex;
 `;
 
+const ImageWrap = styled.div`
+  position: relative;
+  width: 25%;
+  height: 200px;
+`;
+
 const PostTextWrap = styled.div`
+  width: 75%;
   margin-left: 16px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
 `;
 
 const PostTextWrapInner = styled.div``;

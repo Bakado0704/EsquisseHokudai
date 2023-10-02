@@ -1,15 +1,24 @@
 "use client";
 
-import { buildingCategory, projectCategory, toolCategory } from "@/categoryData/categoryData";
+import {
+  buildingCategory,
+  projectCategory,
+  toolCategory,
+} from "@/categoryData/categoryData";
 import { PostCategoryForm } from "@/components/form/postform/PostCategoryForm";
-import { PostDescriptionForm } from "@/components/form/postform/PostDescriptionForm"; 
-import { PostPhotoForm } from "@/components/form/postform/PostPhotoForm"; 
-import { PostTitleForm } from "@/components/form/postform/PostTitleForm"; 
+import { PostDescriptionForm } from "@/components/form/postform/PostDescriptionForm";
+import { PostPhotoForm } from "@/components/form/postform/PostPhotoForm";
+import { PostTitleForm } from "@/components/form/postform/PostTitleForm";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import { getAllPosts, postSubmit } from "@/helpers/api-util";
 import { IndicatePost } from "@/store/post";
-import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -18,6 +27,7 @@ import storage from "@/helpers/firebase";
 import styled from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { FormButton } from "@/components/button/FormButton";
+import { Uploading } from "@/components/bg/Uploading";
 
 export default function Page() {
   const router = useRouter();
@@ -28,13 +38,15 @@ export default function Page() {
   const [imageName, setImageName] = useState<string>();
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>();
+  const [uploading, setUploading] = useState(false);
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setUploading(true);
 
     let projectType: (ProjectType | BuildingType | ToolType)[] = [];
     let buildingType: (ProjectType | BuildingType | ToolType)[] = [];
-    let toolType:(ProjectType | BuildingType | ToolType)[] = [];
+    let toolType: (ProjectType | BuildingType | ToolType)[] = [];
 
     for (let i = 0; i < projectCategory.length; i++) {
       const checkedItem = document.getElementById(
@@ -55,9 +67,7 @@ export default function Page() {
     }
 
     for (let i = 0; i < toolCategory.length; i++) {
-      const checkedItem = document.getElementById(
-        `${toolCategory[i].id[0]}`
-      );
+      const checkedItem = document.getElementById(`${toolCategory[i].id[0]}`);
       if ((checkedItem as HTMLInputElement).checked) {
         toolType.push(toolCategory[i].id);
       }
@@ -69,16 +79,20 @@ export default function Page() {
       imageName!,
       description!
     ).then(() => {
+
       getAllPosts().then(function (result) {
         dispatch(IndicatePost(result));
         setTitle("");
         setDescription("");
+        setUploading(false);
         router.push("/home");
       });
     });
   }
 
-  const onFileUploadToFirebase = async ( e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFileUploadToFirebase = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = e.target.files![0];
     const storageRef = ref(storage, "image/" + file.name);
 
@@ -111,12 +125,15 @@ export default function Page() {
   };
 
   const titleHandler = () => {
-    const enteredTitle = (document.getElementById("title") as HTMLInputElement).value;
+    const enteredTitle = (document.getElementById("title") as HTMLInputElement)
+      .value;
     setTitle(enteredTitle);
   };
 
   const descriptionHandler = () => {
-    const enteredDescription = (document.getElementById("description")as HTMLInputElement).value;
+    const enteredDescription = (
+      document.getElementById("description") as HTMLInputElement
+    ).value;
     setDescription(enteredDescription);
   };
 
@@ -124,6 +141,7 @@ export default function Page() {
     <>
       <NavHeader />
       <Wrapper>
+        {uploading && <Uploading text="アップロード中..." />}
         <WrapperInner>
           <Title>投稿</Title>
           <form onSubmit={submitFormHandler}>

@@ -17,7 +17,7 @@ export const ImageContainer = ({selectedPost}: Props) => {
           src={selectedPost.imageSource}
           alt=""
           layout={"fill"}
-          objectFit={"cover"}
+          objectFit={"contain"}
         />
       </PhotoInner>
     </Photo>

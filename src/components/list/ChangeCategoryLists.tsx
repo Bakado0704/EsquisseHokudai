@@ -8,7 +8,6 @@ type Props = {
 };
 
 export const ChangeCategoryLists = ({ category }: Props) => {
-
   return (
     <List>
       {category.map((category) => {
