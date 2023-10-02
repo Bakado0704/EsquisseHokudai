@@ -8,6 +8,8 @@ export const NavHeader = () => {
   const router = useRouter();
   const user = getUser();
 
+  console.log(user);
+
   const loginHandler = async () => {
     await signout().then(() => {
       router.push("/login");
