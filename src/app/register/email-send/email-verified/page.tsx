@@ -11,58 +11,10 @@ import { FormButton } from "@/components/button/FormButton";
 import { Uploading } from "@/components/bg/Uploading";
 
 export default function Page() {
-  const router = useRouter();
-  const [name, setName] = useState<string>();
-  const [passwordInput, setPasswordInput] = useState<string>();
-  const [passwordConfirm, setPasswordConfirm] = useState<string>();
-  const [uploading, setUploading] = useState(false);
-
-  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setUploading(true);
-
-    if (name && passwordInput && passwordInput === passwordConfirm) {
-      createAccount(name, passwordInput).then(() => {
-        setUploading(false);
-        router.push("/");
-      });
-    }
-  };
 
   return (
     <>
       <NavHeader />
-      <Title>メールアドレスの受信が確認されました！</Title>
-      {/* <Wrapper>
-        {uploading && <Uploading text="アカウント作成中..." />}
-        <WrapperInner>
-          
-          <Form onSubmit={submitFormHandler}>
-            <InputForm
-              type="name"
-              title="ニックネーム"
-              placeholder="ニックネームを入力"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <InputForm
-              type="password"
-              title="パスワード"
-              placeholder="パスワードを入力"
-              value={passwordInput}
-              onChange={(e) => setPasswordInput(e.target.value)}
-            />
-            <InputForm
-              type="password"
-              title="パスワード"
-              placeholder="パスワードを入力(確認用)"
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-              value={passwordConfirm}
-            />
-            <FormButton>アカウントを作成</FormButton>
-          </Form>
-        </WrapperInner>
-      </Wrapper> */}
       <NavRegisterFooter />
     </>
   );
