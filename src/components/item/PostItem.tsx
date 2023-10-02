@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import Post from "@/models/post";
 import { TagList } from "../list/TagList";
+import { useRouter } from "next/navigation";
+import { getUser } from "@/helpers/api-util";
 
 type Props = {
   post: Post;
@@ -13,9 +15,20 @@ type Props = {
 };
 
 export const PostItem = ({ post, tags }: Props) => {
+  const router = useRouter();
+  const activeUser = getUser();
+
+  const esquisseHandler = () => {
+    if (activeUser) {
+      router.push(`/esquisse/${post.id}`);
+    } else {
+      router.push("/login");
+    }
+  };
+
   return (
     <Items key={post.id}>
-      <Link href={`/esquisse/${post.id}`} style={{width: "100%"}}>
+      <Button onClick={esquisseHandler}>
         <PostWrap>
           <ImageWrap>
             <Image
@@ -34,7 +47,7 @@ export const PostItem = ({ post, tags }: Props) => {
             </PostTextWrapInner>
           </PostTextWrap>
         </PostWrap>
-      </Link>
+      </Button>
     </Items>
   );
 };
@@ -78,4 +91,8 @@ const PostTitle = styled.p`
 const PostText = styled.p`
   margin-top: 10px;
   font-size: 16px;
+`;
+
+const Button = styled.button`
+  width: 100%;
 `;

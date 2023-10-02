@@ -1,29 +1,20 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { useEffect } from "react";
-import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
-import { getAllPosts, getUser } from "@/helpers/api-util";
+import { getUser } from "@/helpers/api-util";
 import { useRouter } from "next/navigation";
-import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { PostList } from "@/components/list/PostList";
 
-export default function Page() {
-  const dispatch = useDispatch();
+export const HomeContent = () => {
   const router = useRouter();
   const posts = useSelector((state: RootState) => state.post.posts);
   const activeUser = getUser();
 
-  useEffect(() => {
-    getAllPosts().then((result) => {
-      dispatch(IndicatePost(result));
-    });
-  }, [dispatch]);
-
-  getUser();
+  if (!posts) {
+    <p>Loading...</p>;
+  }
 
   const postHandler = () => {
     if (activeUser) {
@@ -35,7 +26,6 @@ export default function Page() {
 
   return (
     <>
-      <NavHeader />
       <Wrapper>
         <WrapperInner>
           <HomeTitle>ホーム</HomeTitle>
@@ -47,7 +37,6 @@ export default function Page() {
           </ButtonWrap>
         </WrapperInner>
       </Wrapper>
-      <NavFooter />
     </>
   );
 }
