@@ -26,7 +26,7 @@ export default function Page(props: Props) {
   const posts = useSelector((state: RootState) => state.post.posts);
 
   useEffect(() => {
-    getAllPosts().then(function (result) {
+    getAllPosts().then((result) => {
       dispatch(IndicatePost(result));
     });
   }, [dispatch]);

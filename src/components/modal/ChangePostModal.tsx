@@ -55,7 +55,7 @@ export const ChangePostModal = (props: Props) => {
     selectedPost!.imageSource
   );
 
-  async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
+  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     let projectType: (ProjectType | BuildingType | ToolType)[] = [];

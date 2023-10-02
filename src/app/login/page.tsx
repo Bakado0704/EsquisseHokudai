@@ -10,12 +10,12 @@ import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 import { FormButton } from "@/components/button/FormButton";
 
-export default function Login() {
+export default function Page() {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const router = useRouter();
 
-  async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
+  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (email && password) {

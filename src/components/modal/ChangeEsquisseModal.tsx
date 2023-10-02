@@ -27,7 +27,7 @@ export const ChangeEsquisseModal = (props: Props) => {
   const [description, setDescription] = useState(selectedEsquisse!.description);
   const [uploading, setUploading] = useState(false);
 
-  async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
+  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setUploading(true);
 

@@ -148,7 +148,7 @@ export const esquisseSubmit = async (id: string, description: string) => {
 };
 
 //firebase上のpostsを取得
-export async function getAllPosts() {
+export const getAllPosts = async () => {
   const response = await fetch(
     "https://react-getting-started-2a850-default-rtdb.firebaseio.com/posts.json"
   );
@@ -168,7 +168,7 @@ export async function getAllPosts() {
 }
 
 //firebase上のesquissesを取得
-export async function getAllEsquisses() {
+export const getAllEsquisses = async () => {
   const response = await fetch(
     "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisses.json"
   );

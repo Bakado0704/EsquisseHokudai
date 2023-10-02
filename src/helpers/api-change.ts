@@ -2,7 +2,7 @@ import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, child, update, get, set } from "firebase/database";
 
-export async function changePost(
+export const changePost = async (
   id: string,
   index: number,
   title: string,
@@ -13,7 +13,7 @@ export async function changePost(
   },
   image: string,
   description: string
-) {
+) => {
   const dbRef = ref(getDatabase());
   const db = getDatabase();
   const auth = getAuth();
@@ -48,7 +48,7 @@ export async function changePost(
     });
 }
 
-export async function deletePost(index: number) {
+export const deletePost =  async (index: number) => {
   const dbRef = ref(getDatabase());
   const db = getDatabase();
 
@@ -65,12 +65,12 @@ export async function deletePost(index: number) {
     });
 }
 
-export async function changeEsquisse(
+export const changeEsquisse = async (
   id: string,
   key: string,
   index: number,
   description: string
-) {
+) => {
   const dbRef = ref(getDatabase());
   const db = getDatabase();
   const auth = getAuth();
@@ -103,7 +103,7 @@ export async function changeEsquisse(
     });
 }
 
-export async function deleteEsquisse(index: number) {
+export const deleteEsquisse = async (index: number) => {
   const dbRef = ref(getDatabase());
   const db = getDatabase();
 

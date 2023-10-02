@@ -40,7 +40,7 @@ export default function Page() {
   const [description, setDescription] = useState<string>();
   const [uploading, setUploading] = useState(false);
 
-  async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
+  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setUploading(true);
 
@@ -80,7 +80,7 @@ export default function Page() {
       description!
     ).then(() => {
 
-      getAllPosts().then(function (result) {
+      getAllPosts().then((result) => {
         dispatch(IndicatePost(result));
         setTitle("");
         setDescription("");

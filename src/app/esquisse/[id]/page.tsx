@@ -72,10 +72,10 @@ export default function Page(props: Props) {
   }
 
   useEffect(() => {
-    getAllPosts().then(function (result) {
+    getAllPosts().then((result) => {
       dispatch(IndicatePost(result));
     });
-    getAllEsquisses().then(function (result) {
+    getAllEsquisses().then((result) => {
       dispatch(IndicateEsquisse(result));
     });
   }, [dispatch, esquisses]);
@@ -97,11 +97,11 @@ export default function Page(props: Props) {
     tags.push(data);
   });
 
-  async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
+  const  submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     await esquisseSubmit(props.params.id, comment).then(() => {
-      getAllEsquisses().then(function (result) {
+      getAllEsquisses().then((result) => {
         dispatch(IndicateEsquisse(result));
         setComment("");
       });

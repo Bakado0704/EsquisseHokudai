@@ -11,7 +11,7 @@ export default function Page() {
   const router = useRouter();
   const user = getUser();
 
-  async function resubmitHandler() {
+  const resubmitHandler = async () => {
     if (user) {
       await emailRegister(user.email!, "testPassword").then(() => {
         router.push("/register/email-send");

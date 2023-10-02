@@ -8,7 +8,7 @@ export const NavHeader = () => {
   const router = useRouter();
   const user = getUser();
 
-  async function loginHandler() {
+  const loginHandler = async () => {
     await signout().then(() => {
       router.push("/login");
     });
