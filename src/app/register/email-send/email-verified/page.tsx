@@ -8,23 +8,18 @@ import styled from "styled-components";
 import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 import { FormButton } from "@/components/button/FormButton";
-import { Uploading } from "@/components/bg/Uploading";
 
 export default function Page() {
   const router = useRouter();
   const [name, setName] = useState<string>();
   const [passwordInput, setPasswordInput] = useState<string>();
   const [passwordConfirm, setPasswordConfirm] = useState<string>();
-  const [uploading, setUploading] = useState(false);
 
   async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setUploading(true);
 
     if (name && passwordInput && passwordInput === passwordConfirm) {
       createAccount(name, passwordInput).then(() => {
-        setUploading(false);
-        console.log("success!!");
         router.push("/");
       });
     }
@@ -34,7 +29,6 @@ export default function Page() {
     <>
       <NavHeader />
       <Wrapper>
-        {uploading && <Uploading text="アカウント作成中..." />}
         <WrapperInner>
           <Title>メールアドレスの受信が確認されました！</Title>
           <Form onSubmit={submitFormHandler}>
@@ -43,20 +37,20 @@ export default function Page() {
               title="ニックネーム"
               placeholder="ニックネームを入力"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={e => setName(e.target.value)}
             />
             <InputForm
               type="password"
               title="パスワード"
               placeholder="パスワードを入力"
               value={passwordInput}
-              onChange={(e) => setPasswordInput(e.target.value)}
+              onChange={e => setPasswordInput(e.target.value)}
             />
             <InputForm
               type="password"
               title="パスワード"
               placeholder="パスワードを入力(確認用)"
-              onChange={(e) => setPasswordConfirm(e.target.value)}
+              onChange={e => setPasswordConfirm(e.target.value)}
               value={passwordConfirm}
             />
             <FormButton>アカウントを作成</FormButton>
