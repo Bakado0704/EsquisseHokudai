@@ -26,6 +26,7 @@ import { DeleteModal } from "@/components/modal/DeleteModal";
 import styled from "styled-components";
 import { FormButton } from "@/components/button/FormButton";
 import { Uploading } from "@/components/bg/Uploading";
+import User from "@/models/user";
 
 type Props = {
   params: Params;
@@ -66,6 +67,10 @@ export default function Page(props: Props) {
       });
     });
   };
+
+  if(!user) {
+    router.push("/login");
+  }
 
   useEffect(() => {
     getAllPosts().then(function (result) {

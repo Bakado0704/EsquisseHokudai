@@ -1,7 +1,7 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-import styled  from "styled-components";
+import styled from "styled-components";
 import { useEffect } from "react";
 import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
@@ -15,9 +15,10 @@ export default function Page() {
   const dispatch = useDispatch();
   const router = useRouter();
   const posts = useSelector((state: RootState) => state.post.posts);
+  const activeUser = getUser();
 
   useEffect(() => {
-    getAllPosts().then(function (result) {
+    getAllPosts().then((result) => {
       dispatch(IndicatePost(result));
     });
   }, [dispatch]);
@@ -26,11 +27,15 @@ export default function Page() {
     <p>Loading...</p>;
   }
 
-  function postHandler() {
-    router.push("/post");
-  }
-
   getUser();
+
+  const postHandler = () => {
+    if (activeUser) {
+      router.push("/post");
+    } else {
+      router.push("/login");
+    }
+  };
 
   return (
     <>
