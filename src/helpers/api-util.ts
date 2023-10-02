@@ -12,7 +12,7 @@ import {
 } from "firebase/auth";
 
 const actionCodeSettings = {
-  url: "https://esquisse-chat.vercel.app/register/email-send/email-verified",
+  url: "https://esquisse-chat.vercel.app/",
   handleCodeInApp: true,
 };
 
@@ -37,6 +37,8 @@ export const signout = async () => {
 //メール登録
 export const emailRegister = async (email: string, password: string) => {
   const auth = getAuth();
+
+  console.log()
   await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;

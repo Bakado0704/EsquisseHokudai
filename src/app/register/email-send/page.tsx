@@ -33,7 +33,7 @@ export default function Page() {
             <Description>
               メールをご確認いただき、メールに記載されたURLをクリックして、メールアドレスの受信確認を完了してください。
             </Description>
-            <ReSubmitButton>メールを送信する</ReSubmitButton>
+            <ReSubmitButton onClick={resubmitHandler}>メールを再送信する</ReSubmitButton>
           </WrapperInner>
         </Wrapper>
       )}

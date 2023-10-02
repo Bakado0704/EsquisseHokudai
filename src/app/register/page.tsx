@@ -13,11 +13,12 @@ export default function Page() {
   const [email, setEmail] = useState<string>();
   const router = useRouter();
 
-  async function submitFormHandler(event: FormEvent<HTMLFormElement>) {
+  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (email) {
       await emailRegister(email, "testPassword").then(() => {
+        console.log("email-send");
         router.push("/register/email-send");
       });
     }
