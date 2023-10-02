@@ -8,29 +8,37 @@ import styled from "styled-components";
 import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 import { FormButton } from "@/components/button/FormButton";
+import { Uploading } from "@/components/bg/Uploading";
 
 export default function Page() {
+  const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
+  const [passwordInput, setPasswordInput] = useState<string>();
+  const [passwordConfirm, setPasswordConfirm] = useState<string>();
+  const [uploading, setUploading] = useState(false);
   const router = useRouter();
 
   const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setUploading(true);
 
-    if (email) {
-      await emailRegister(email, "testPassword").then(() => {
+    if (email && name && passwordInput && passwordInput === passwordConfirm) {
+      await emailRegister(email, passwordInput).then(() => {
+        setUploading(false);
         router.push("/register/email-send");
       });
     }
-  }
+  };
 
   return (
     <>
       <NavHeader />
       <Wrapper>
+        {uploading && <Uploading text="アカウント作成中..." />}
         <WrapperInner>
           <Title>アカウントの作成</Title>
           <Description>
-            EsquisseChatのアカウントを作成するために、メールアドレスとパスワードをご入力下さい。
+            EsquisseChatのアカウントを作成するために、メールアドレス、ニックネーム、パスワードをご入力下さい。
           </Description>
           <Form onSubmit={submitFormHandler}>
             <InputForm
@@ -39,6 +47,27 @@ export default function Page() {
               placeholder="メールアドレスを入力"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+            <InputForm
+              type="name"
+              title="ニックネーム"
+              placeholder="ニックネームを入力"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <InputForm
+              type="password"
+              title="パスワード"
+              placeholder="パスワードを入力"
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
+            />
+            <InputForm
+              type="password"
+              title="パスワード"
+              placeholder="パスワードを入力(確認用)"
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+              value={passwordConfirm}
             />
             <FormButton>メールを送信する</FormButton>
           </Form>
