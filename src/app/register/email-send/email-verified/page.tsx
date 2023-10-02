@@ -7,5 +7,5 @@ export default function Page() {
 
   router.push("/account");
 
-  return (<></>);
+  return <></>;
 }
