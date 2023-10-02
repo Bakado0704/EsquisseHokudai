@@ -5,10 +5,8 @@ import { useRouter } from "next/navigation";
 import { createAccount } from "@/helpers/api-util";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
-import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
-import { FormButton } from "@/components/button/FormButton";
-import { Uploading } from "@/components/bg/Uploading";
+import { EmailVerified } from "@/components/register/EmailVerified";
 
 export default function Page() {
   const router = useRouter();
@@ -17,7 +15,7 @@ export default function Page() {
   const [passwordConfirm, setPasswordConfirm] = useState<string>();
   const [uploading, setUploading] = useState(false);
 
-  const submitFormHandler = async(event: FormEvent<HTMLFormElement>) => {
+  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setUploading(true);
 
@@ -27,41 +25,21 @@ export default function Page() {
         router.push("/");
       });
     }
-  }
+  };
 
   return (
     <>
       <NavHeader />
-      <Wrapper>
-        {uploading && <Uploading text="アカウント作成中..." />}
-        <WrapperInner>
-          <Title>メールアドレスの受信が確認されました！</Title>
-          <Form onSubmit={submitFormHandler}>
-            <InputForm
-              type="name"
-              title="ニックネーム"
-              placeholder="ニックネームを入力"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <InputForm
-              type="password"
-              title="パスワード"
-              placeholder="パスワードを入力"
-              value={passwordInput}
-              onChange={(e) => setPasswordInput(e.target.value)}
-            />
-            <InputForm
-              type="password"
-              title="パスワード"
-              placeholder="パスワードを入力(確認用)"
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-              value={passwordConfirm}
-            />
-            <FormButton>アカウントを作成</FormButton>
-          </Form>
-        </WrapperInner>
-      </Wrapper>
+      <EmailVerified
+        uploading={uploading}
+        submitFormHandler={submitFormHandler}
+        name={name}
+        setName={setName}
+        passwordInput={passwordInput}
+        setPasswordInput={setPasswordInput}
+        setPasswordConfirm={setPasswordConfirm}
+        passwordConfirm={passwordConfirm}
+      />
       <NavRegisterFooter />
     </>
   );
