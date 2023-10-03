@@ -105,8 +105,4 @@ const Button = styled.button`
   border: solid 2px var(--border-color);
   border-radius: 10px;
   margin-top: 32px;
-
-  &:hover {
-    filter: brightness(0.85);
-  }
 `;
