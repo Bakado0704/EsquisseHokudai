@@ -105,8 +105,8 @@ export default function Page(props: Props) {
     if (!activeUser) {
       router.push("/login");
     } else {
-      await esquisseSubmit(props.params.id, comment).then(async () => {
-        await getAllEsquisses().then((result) => {
+      await esquisseSubmit(props.params.id, comment).then(() => {
+        getAllEsquisses().then((result) => {
           dispatch(IndicateEsquisse(result));
           setComment("");
         });
