@@ -58,8 +58,8 @@ export default function Page(props: Props) {
 
   const deletePostHandler = async () => {
     setDeleting(true);
-    await deletePost(index).then(() => {
-      getAllPosts()
+    await deletePost(index).then(async () => {
+      await getAllPosts()
         .then((result) => {
           dispatch(IndicatePost(result));
         })
