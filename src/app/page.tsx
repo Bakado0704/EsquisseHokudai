@@ -104,5 +104,5 @@ const Button = styled.button`
   color: var(--text-color);
   border: solid 2px var(--border-color);
   border-radius: 10px;
-  margin-top: 32px;
+  margin-top: 30px;
 `;
