@@ -58,17 +58,17 @@ export default function Page(props: Props) {
 
   const deletePostHandler = async () => {
     setDeleting(true);
-    await deletePost(index)
-      .then(() => {
-        getAllPosts().then((result) => {
+    await deletePost(index).then(() => {
+      getAllPosts()
+        .then((result) => {
           dispatch(IndicatePost(result));
+        })
+        .then(() => {
+          setDeleting(false);
+          setDeleteModal(false);
+          router.push("/");
         });
-      })
-      .then(() => {
-        setDeleting(false);
-        setDeleteModal(false);
-        router.push("/");
-      });
+    });
   };
 
   useEffect(() => {
