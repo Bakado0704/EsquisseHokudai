@@ -16,9 +16,11 @@ type Props = {
 
 export const PostItem = ({ post, tags }: Props) => {
   const router = useRouter();
-  const activeUser = getUser();
+  
 
   const esquisseHandler = () => {
+    const activeUser = getUser();
+    
     if (activeUser) {
       router.push(`/esquisse/${post.id}`);
     } else {

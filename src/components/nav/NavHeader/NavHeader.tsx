@@ -9,17 +9,29 @@ export const NavHeader = () => {
   const user = getUser();
 
   const loginHandler = async () => {
-    await signout().then(() => {
-      router.push("/login");
-    });
+    const activeUser = getUser();
+
+    if (activeUser) {
+      router.push("/");
+    } else {
+      await signout().then(() => {
+        router.push("/login");
+      });
+    }
+  };
+
+  const signinHandler = () => {
+    const activeUser = getUser();
+
+    if (activeUser) {
+      router.push("/");
+    } else {
+      router.push("/register");
+    }
   };
 
   const homeHandler = () => {
     router.push("/");
-  };
-
-  const signinHandler = () => {
-    router.push("/register");
   };
 
   const categoryHandler = () => {

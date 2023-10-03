@@ -79,7 +79,6 @@ export default function Page() {
       imageName!,
       description!
     ).then(() => {
-
       getAllPosts().then((result) => {
         dispatch(IndicatePost(result));
         setTitle("");

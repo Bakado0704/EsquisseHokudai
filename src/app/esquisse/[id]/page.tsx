@@ -95,8 +95,9 @@ export default function Page(props: Props) {
 
   const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const activeUser = getUser();
 
-    if (!user) {
+    if (!activeUser) {
       router.push("/login");
     } else {
       await esquisseSubmit(props.params.id, comment).then(() => {

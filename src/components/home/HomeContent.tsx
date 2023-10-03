@@ -10,13 +10,14 @@ import { PostList } from "@/components/list/PostList";
 export const HomeContent = () => {
   const router = useRouter();
   const posts = useSelector((state: RootState) => state.post.posts);
-  const activeUser = getUser();
 
   if (!posts) {
     <p>Loading...</p>;
   }
 
   const postHandler = () => {
+    const activeUser = getUser();
+
     if (activeUser) {
       router.push("/post");
     } else {
