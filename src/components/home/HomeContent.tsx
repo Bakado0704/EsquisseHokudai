@@ -1,20 +1,12 @@
 "use client";
 
-import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { RootState } from "@/store/store";
 import { getUser } from "@/helpers/api-util";
 import { useRouter } from "next/navigation";
 import { PostList } from "@/components/list/PostList";
 
 export const HomeContent = () => {
   const router = useRouter();
-  const posts = useSelector((state: RootState) => state.post.posts);
-
-  if (!posts) {
-    <p>Loading...</p>;
-  }
-
   const postHandler = () => {
     const activeUser = getUser();
 
