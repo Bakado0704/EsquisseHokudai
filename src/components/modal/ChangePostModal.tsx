@@ -163,7 +163,6 @@ export const ChangePostModal = (props: Props) => {
               projectCategory={projectCategory}
               buildingCategory={buildingCategory}
               toolCategory={toolCategory}
-              selectedPost={selectedPost}
             />
             <ChangePostPhotoForm
               onFileUploadToFirebase={onFileUploadToFirebase}

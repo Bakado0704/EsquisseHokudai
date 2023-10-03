@@ -2,32 +2,18 @@
 
 import CategoryList from "@/models/categoryList";
 import styled from "styled-components";
+import { CategoryItem } from "../item/CategoryItem";
 
 type Props = {
   category: CategoryList[];
-  tags: string[];
 };
 
-export const ChangeCategoryLists = ({ category, tags }: Props) => {
+export const ChangeCategoryLists = ({ category }: Props) => {
   return (
     <List>
       {category && category.map((category) => {
-        let checked: boolean;
-
-        if (tags.includes(category.id[0])) {
-          checked = true;
-        }
-
         return (
-          <CategoryItem key={category.id[0]}>
-            <Input
-              type="checkbox"
-              id={category.id[0]}
-              name={category.id[0]}
-              value={category.id[0]}
-            />
-            {category.title}
-          </CategoryItem>
+          <CategoryItem category={category} key={category.id[0]} />
         );
       })}
     </List>
@@ -41,53 +27,5 @@ const List = styled.ul`
 
   &:first-child {
     margin-top: 0;
-  }
-`;
-
-const CategoryItem = styled.li`
-  margin-top: 10px;
-`;
-
-const Input = styled.input`
-  --border-color: #9fa0a0;
-  --background-color: #dcdddd;
-
-  cursor: pointer;
-  padding-left: 30px;
-  vertical-align: middle;
-  position: relative;
-
-  &::before,
-  &::after {
-    content: "";
-    display: block;
-    position: absolute;
-  }
-
-  &::before {
-    border-color: var(--border-color);
-    background-color: var(--background-color);
-    border: 3px solid #666464;
-    width: 20px;
-    height: 20px;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-  }
-
-  &::after {
-    opacity: 0;
-    width: 10px;
-    height: 10px;
-    background-color: var(--border-color);
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-  }
-
-  &:checked::after {
-    opacity: 1;
   }
 `;

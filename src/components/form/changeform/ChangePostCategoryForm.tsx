@@ -3,42 +3,25 @@
 import styled from "styled-components";
 import { ChangeCategoryLists } from "@/components/list/ChangeCategoryLists";
 import CategoryList from "@/models/categoryList";
-import Post from "@/models/post";
 
 type Props = {
   projectCategory: CategoryList[];
   buildingCategory: CategoryList[];
   toolCategory: CategoryList[];
-  selectedPost: Post;
 };
 
 export const ChangePostCategoryForm = ({
   projectCategory,
   buildingCategory,
   toolCategory,
-  selectedPost,
 }: Props) => {
-  let tags: string[] = [];
-
-  if (selectedPost.category) {
-    selectedPost.category.projectType?.map((data) => {
-      tags.push(data[0]);
-    });
-    selectedPost.category.buildingType?.map((data) => {
-      tags.push(data[0]);
-    });
-    selectedPost.category.toolType?.map((data) => {
-      tags.push(data[0]);
-    });
-  }
-
   return (
     <Container>
       <LeftText>カテゴリ</LeftText>
       <RightContainer>
-        <ChangeCategoryLists category={projectCategory} tags={tags} />
-        <ChangeCategoryLists category={buildingCategory} tags={tags} />
-        <ChangeCategoryLists category={toolCategory} tags={tags} />
+        <ChangeCategoryLists category={projectCategory} />
+        <ChangeCategoryLists category={buildingCategory} />
+        <ChangeCategoryLists category={toolCategory} />
       </RightContainer>
     </Container>
   );
