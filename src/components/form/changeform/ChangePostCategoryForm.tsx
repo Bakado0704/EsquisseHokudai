@@ -3,25 +3,40 @@
 import styled from "styled-components";
 import { ChangeCategoryLists } from "@/components/list/ChangeCategoryLists"; 
 import CategoryList from "@/models/categoryList";
+import Post from "@/models/post";
 
 type Props = {
   projectCategory: CategoryList[];
   buildingCategory: CategoryList[];
   toolCategory: CategoryList[];
+  selectedPost: Post;
 };
 
 export const ChangePostCategoryForm = ({
   projectCategory,
   buildingCategory,
   toolCategory,
+  selectedPost,
 }: Props) => {
+  let tags: string[] = [];
+
+  selectedPost.category.projectType?.map((data) => {
+    tags.push(data[0]);
+  });
+  selectedPost.category.buildingType?.map((data) => {
+    tags.push(data[0]);
+  });
+  selectedPost.category.toolType?.map((data) => {
+    tags.push(data[0]);
+  });
+
   return (
     <Container>
       <LeftText>カテゴリ</LeftText>
       <RightContainer>
-        <ChangeCategoryLists category={projectCategory} />
-        <ChangeCategoryLists category={buildingCategory} />
-        <ChangeCategoryLists category={toolCategory} />
+        <ChangeCategoryLists category={projectCategory} tags={tags} />
+        <ChangeCategoryLists category={buildingCategory} tags={tags} />
+        <ChangeCategoryLists category={toolCategory} tags={tags} />
       </RightContainer>
     </Container>
   );
@@ -41,6 +56,6 @@ const LeftText = styled.p`
   text-align: center;
 `;
 
-const RightContainer = styled.button`
+const RightContainer = styled.div`
   width: 90%;
 `;

@@ -14,7 +14,7 @@ import {
   uploadBytes,
   uploadBytesResumable,
 } from "firebase/storage";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { StaticImageData, StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
@@ -39,16 +39,18 @@ export const ChangePostModal = (props: Props) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
-  const [imageName, setImageName] = useState<string>();
+  
   const [uploading, setUploading] = useState(false);
   const postedId = props.id;
   const posts = useSelector((state: RootState) => state.post.posts)!;
   const selectedPost = posts.find((post) => post.id === postedId)!;
 
   const index = posts.indexOf(selectedPost!);
-  const [title, setTitle] = useState<string>(selectedPost!.title);
-  const [description, setDescription] = useState<string>(selectedPost.description);
-  const [imageSource, setImageSource] = useState<string | StaticImport>(selectedPost.imageSource);
+  const [ title, setTitle] = useState<string>(selectedPost.title);
+  const [ imageName, setImageName] = useState<StaticImageData | string>(selectedPost.image);
+  const [ description, setDescription] = useState<string>(selectedPost.description);
+  const [ imageSource, setImageSource] = useState<string | StaticImport>(selectedPost.imageSource);
+  const[ initialImage, setInitialImage] = useState(true);
 
   const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -89,7 +91,7 @@ export const ChangePostModal = (props: Props) => {
       index,
       title,
       { projectType, buildingType, toolType },
-      imageName!,
+      imageName,
       description
     ).then(() => {
       getAllPosts().then(() => {
@@ -105,6 +107,7 @@ export const ChangePostModal = (props: Props) => {
     const storageRef = ref(storage, "image/" + file.name);
 
     setImageName(file.name);
+    setInitialImage(false);
 
     uploadBytes(storageRef, file).then((snapshot) => {
       console.log("Uploaded a blob or file!");
@@ -160,6 +163,7 @@ export const ChangePostModal = (props: Props) => {
               projectCategory={projectCategory}
               buildingCategory={buildingCategory}
               toolCategory={toolCategory}
+              selectedPost={selectedPost}
             />
             <ChangePostPhotoForm
               onFileUploadToFirebase={onFileUploadToFirebase}
@@ -167,6 +171,7 @@ export const ChangePostModal = (props: Props) => {
               isUploaded={isUploaded}
               loading={loading}
               imageSource={imageSource}
+              initialImage={initialImage}
             />
             <ChangePostDescriptionForm
               description={description}

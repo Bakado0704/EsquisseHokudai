@@ -82,16 +82,17 @@ export default function Page(props: Props) {
 
   let tags: (ProjectType | BuildingType | ToolType)[] = [];
 
-  //集合配列tagについて
-  selectedPost.category.projectType?.map((data) => {
-    tags.push(data);
-  });
-  selectedPost.category.buildingType?.map((data) => {
-    tags.push(data);
-  });
-  selectedPost.category.toolType?.map((data) => {
-    tags.push(data);
-  });
+  if (selectedPost.category) {
+    selectedPost.category.projectType?.map((data) => {
+      tags.push(data);
+    });
+    selectedPost.category.buildingType?.map((data) => {
+      tags.push(data);
+    });
+    selectedPost.category.toolType?.map((data) => {
+      tags.push(data);
+    });
+  }
 
   const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -130,7 +131,7 @@ export default function Page(props: Props) {
               onDelete={alartHandler}
             />
           )}
-          <TagLinkList tags={tags} />
+          {tags && <TagLinkList tags={tags} />}
           <Title>{selectedPost.title}</Title>
           <Description>{selectedPost.user.displayName}</Description>
           <Description>{selectedPost.createdAt}</Description>

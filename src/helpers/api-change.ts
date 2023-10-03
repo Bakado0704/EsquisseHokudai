@@ -1,6 +1,7 @@
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, child, update, get, set } from "firebase/database";
+import { StaticImageData } from "next/image";
 
 export const changePost = async (
   id: string,
@@ -11,7 +12,7 @@ export const changePost = async (
     buildingType: (ProjectType | BuildingType | ToolType)[];
     toolType: (ProjectType | BuildingType | ToolType)[];
   },
-  image: string,
+  image: string | StaticImageData,
   description: string
 ) => {
   const dbRef = ref(getDatabase());

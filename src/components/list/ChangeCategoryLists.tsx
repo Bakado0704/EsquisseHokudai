@@ -5,23 +5,28 @@ import styled from "styled-components";
 
 type Props = {
   category: CategoryList[];
+  tags: string[];
 };
 
-export const ChangeCategoryLists = ({ category }: Props) => {
+export const ChangeCategoryLists = ({ category, tags }: Props) => {
   return (
     <List>
       {category.map((category) => {
+        let checked: boolean;
+
+        if (tags.includes(category.id[0])) {
+          checked = true;
+        }
+
         return (
           <CategoryItem key={category.id[0]}>
-            <label>
-              <Input
-                type="checkbox"
-                id={category.id[0]}
-                name={category.id[0]}
-                value={category.id[0]}
-              />
-              {category.title}
-            </label>
+            <Input
+              type="checkbox"
+              id={category.id[0]}
+              name={category.id[0]}
+              value={category.id[0]}
+            />
+            {category.title}
           </CategoryItem>
         );
       })}

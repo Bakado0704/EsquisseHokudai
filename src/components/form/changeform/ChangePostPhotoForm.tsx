@@ -11,6 +11,7 @@ type Props = {
   isUploaded: boolean;
   loading: boolean;
   imageSource: string | StaticImport;
+  initialImage: boolean;
 };
 
 export const ChangePostPhotoForm = ({
@@ -19,8 +20,9 @@ export const ChangePostPhotoForm = ({
   loading,
   isUploaded,
   imageSource,
+  initialImage
 }: Props) => {
-  console.log(imageSource);
+  // console.log((await getImage("wood-housing.png")));
 
   return (
     <Container>
@@ -32,7 +34,6 @@ export const ChangePostPhotoForm = ({
           type="file"
           accept=".png, .jpeg, .jpg"
           onChange={onFileUploadToFirebase}
-          required
         />
         <PhotoContainer>
           <PhotoInner>
@@ -40,7 +41,7 @@ export const ChangePostPhotoForm = ({
               <h2>アップロード中・・・</h2>
             ) : (
               <>
-                {selectedPost!.imageSource && (
+                {selectedPost!.imageSource && initialImage && (
                   <Image
                     src={selectedPost!.imageSource}
                     alt="church"
