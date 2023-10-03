@@ -13,16 +13,16 @@ import { PostList } from "@/components/list/PostList";
 export default function Page() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const activeUser = getUser();
 
   useEffect(() => {
     getAllPosts().then((result) => {
       dispatch(IndicatePost(result));
     });
-    getUser();
   }, [dispatch]);
 
   const postHandler = () => {
+    const activeUser = getUser();
+
     if (activeUser) {
       router.push("/post");
     } else {
