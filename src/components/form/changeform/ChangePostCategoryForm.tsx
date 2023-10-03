@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { ChangeCategoryLists } from "@/components/list/ChangeCategoryLists"; 
+import { ChangeCategoryLists } from "@/components/list/ChangeCategoryLists";
 import CategoryList from "@/models/categoryList";
 import Post from "@/models/post";
 
@@ -20,15 +20,17 @@ export const ChangePostCategoryForm = ({
 }: Props) => {
   let tags: string[] = [];
 
-  selectedPost.category.projectType?.map((data) => {
-    tags.push(data[0]);
-  });
-  selectedPost.category.buildingType?.map((data) => {
-    tags.push(data[0]);
-  });
-  selectedPost.category.toolType?.map((data) => {
-    tags.push(data[0]);
-  });
+  if (selectedPost.category) {
+    selectedPost.category.projectType?.map((data) => {
+      tags.push(data[0]);
+    });
+    selectedPost.category.buildingType?.map((data) => {
+      tags.push(data[0]);
+    });
+    selectedPost.category.toolType?.map((data) => {
+      tags.push(data[0]);
+    });
+  }
 
   return (
     <Container>

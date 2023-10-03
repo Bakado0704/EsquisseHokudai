@@ -11,7 +11,7 @@ type Props = {
 export const ChangeCategoryLists = ({ category, tags }: Props) => {
   return (
     <List>
-      {category.map((category) => {
+      {category && category.map((category) => {
         let checked: boolean;
 
         if (tags.includes(category.id[0])) {

@@ -65,7 +65,7 @@ const Container = styled.div`
   border-bottom: 1px solid white;
 `;
 
-const RightContainer = styled.button`
+const RightContainer = styled.div`
   width: 90%;
 `;
 

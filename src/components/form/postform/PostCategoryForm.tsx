@@ -41,6 +41,6 @@ const LeftText = styled.p`
   text-align: center;
 `;
 
-const RightContainer = styled.button`
+const RightContainer = styled.div`
   width: 90%;
 `;
