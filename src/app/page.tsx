@@ -19,6 +19,7 @@ export default function Page() {
     getAllPosts().then((result) => {
       dispatch(IndicatePost(result));
     });
+    getUser();
   }, [dispatch]);
 
   getUser();
