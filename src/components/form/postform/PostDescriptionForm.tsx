@@ -13,7 +13,7 @@ export const PostDescriptionForm = ({
 }: Props) => {
   return (
     <Container>
-      <Label htmlFor="description">内容</Label>
+      <Label>内容</Label>
       <Textarea
         id="description"
         value={description}

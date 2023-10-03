@@ -2,7 +2,7 @@
 
 import { getUser, signout } from "@/helpers/api-util";
 import { useRouter } from "next/navigation";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const NavHeader = () => {
   const router = useRouter();
@@ -12,7 +12,7 @@ export const NavHeader = () => {
     await signout().then(() => {
       router.push("/login");
     });
-  }
+  };
 
   const homeHandler = () => {
     router.push("/");
@@ -36,26 +36,17 @@ export const NavHeader = () => {
     <Wrapper>
       {!user?.emailVerified && (
         <WrapperInner>
-          <Button $login={true} onClick={loginHandler}>
-            EsquisseChat
-          </Button>
-          
-          <Button $signin={true} onClick={signinHandler}>
-            サインイン
-          </Button>
+          <LogoButton onClick={loginHandler}>EsquisseChat</LogoButton>
+          <SigninButton onClick={signinHandler}>サインイン</SigninButton>
         </WrapperInner>
       )}
       {user?.emailVerified && (
         <WrapperInner>
-          <WrapperInner $primary={true}>
-            <Button $home={true} onClick={homeHandler}>
-              ホーム
-            </Button>
-            <Button onClick={categoryHandler}>カテゴリ</Button>
-          </WrapperInner>
-          <Button $logout={true} onClick={logoutHandler}>
-            ログアウト
-          </Button>
+          <ButtonsRight>
+            <HomeButton onClick={homeHandler}>ホーム</HomeButton>
+            <CategoryButton onClick={categoryHandler}>カテゴリ</CategoryButton>
+          </ButtonsRight>
+          <LogoutButton onClick={logoutHandler}>ログアウト</LogoutButton>
         </WrapperInner>
       )}
     </Wrapper>
@@ -76,34 +67,29 @@ const Wrapper = styled.div`
   border-bottom: solid 2px white;
 `;
 
-const WrapperInner = styled.div<{ $primary?: boolean }>`
-  display: flex;
+const WrapperInner = styled.div`
   width: 100%;
   padding-right: 40px;
   padding-left: 40px;
   max-width: 1440px;
+  display: flex;
+  margin: 0 auto;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
-
-  ${(props) =>
-    props.$primary &&
-    css`
-      width: 80%;
-      justify-content: left;
-      margin-left: 0;
-      padding-right: 0;
-      padding-left: 0;
-    `}
 `;
 
-const Button = styled.button<{
-  $signin?: boolean;
-  $login?: boolean;
-  $logout?: boolean;
-  $home?: boolean;
-}>`
-  background: transparent;
+const ButtonsRight = styled.div`
+  display: flex;
+  align-items: center;
+  width: 80%;
+  justify-content: left;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0;
+`;
+
+const SigninButton = styled.button`
+  transform: translate(16px);
   color: white;
   display: block;
   padding: 16px;
@@ -111,33 +97,46 @@ const Button = styled.button<{
   &:hover {
     filter: brightness(0.85);
   }
+`;
 
-  ${(props) =>
-    props.$signin &&
-    css`
-      transform: translate(16px);
-    `}
+const LogoButton = styled.button`
+  --main-color: #f8b62d;
 
-  ${(props) =>
-    props.$login &&
-    css`
-      --main-color: #f8b62d;
+  color: var(--main-color);
+  display: block;
+  padding: 16px;
+  font-size: 20px;
+  transform: translate(-16px);
+`;
 
-      color: var(--main-color);
-      font-size: 20px;
-      padding: 16px;
-      transform: translate(-16px);
-    `}
+const HomeButton = styled.button`
+  transform: translate(-16px);
+  color: white;
+  display: block;
+  padding: 16px;
 
-    ${(props) =>
-    props.$logout &&
-    css`
-      transform: translate(16px);
-    `}
+  &:hover {
+    filter: brightness(0.85);
+  }
+`;
 
-      ${(props) =>
-    props.$home &&
-    css`
-      transform: translate(-16px);
-    `}
+const CategoryButton = styled.button`
+  color: white;
+  display: block;
+  padding: 16px;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
+`;
+
+const LogoutButton = styled.button`
+  color: white;
+  display: block;
+  padding: 16px;
+  transform: translate(16px);
+
+  &:hover {
+    filter: brightness(0.85);
+  }
 `;

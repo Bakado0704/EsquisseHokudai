@@ -10,7 +10,7 @@ type Props = {
 export const ChangePostTitleForm = ({ title, titleHandler }: Props) => {
   return (
     <Container>
-      <Label htmlFor="title">タイトル</Label>
+      <Label>タイトル</Label>
       <Textarea id="title" value={title} rows={1} onChange={titleHandler} />
     </Container>
   );

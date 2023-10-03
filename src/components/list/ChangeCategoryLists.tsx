@@ -13,7 +13,7 @@ export const ChangeCategoryLists = ({ category }: Props) => {
       {category.map((category) => {
         return (
           <CategoryItem key={category.id[0]}>
-            <label htmlFor="title">
+            <label>
               <Input
                 type="checkbox"
                 id={category.id[0]}

@@ -20,9 +20,11 @@ export const ChangePostPhotoForm = ({
   isUploaded,
   imageSource,
 }: Props) => {
+  console.log(imageSource);
+
   return (
     <Container>
-      <Label htmlFor="image">写真</Label>
+      <Label>写真</Label>
       <RightContainer>
         <input
           multiple
@@ -38,12 +40,14 @@ export const ChangePostPhotoForm = ({
               <h2>アップロード中・・・</h2>
             ) : (
               <>
-                <Image
-                  src={selectedPost!.imageSource}
-                  alt="church"
-                  layout={"fill"}
-                  objectFit={"cover"}
-                />
+                {selectedPost!.imageSource && (
+                  <Image
+                    src={selectedPost!.imageSource}
+                    alt="church"
+                    layout={"fill"}
+                    objectFit={"cover"}
+                  />
+                )}
                 {isUploaded && (
                   <>
                     {imageSource && (
@@ -87,7 +91,7 @@ const PhotoContainer = styled.div`
   --color-background: #dcdddd;
 
   width: 100%;
-  height: 400px;
+  height: 500px;
   padding-right: 80px;
   padding-left: 80px;
   margin-top: 8px;

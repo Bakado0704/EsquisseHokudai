@@ -43,16 +43,12 @@ export const ChangePostModal = (props: Props) => {
   const [uploading, setUploading] = useState(false);
   const postedId = props.id;
   const posts = useSelector((state: RootState) => state.post.posts)!;
-  const selectedPost = posts.find((post) => post.id === postedId);
+  const selectedPost = posts.find((post) => post.id === postedId)!;
 
   const index = posts.indexOf(selectedPost!);
   const [title, setTitle] = useState<string>(selectedPost!.title);
-  const [description, setDescription] = useState<string>(
-    selectedPost!.description
-  );
-  const [imageSource, setImageSource] = useState<string | StaticImport>(
-    selectedPost!.imageSource
-  );
+  const [description, setDescription] = useState<string>(selectedPost.description);
+  const [imageSource, setImageSource] = useState<string | StaticImport>(selectedPost.imageSource);
 
   const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -101,7 +97,7 @@ export const ChangePostModal = (props: Props) => {
         router.push("/");
       });
     });
-  }
+  };
 
   const onFileUploadToFirebase = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];

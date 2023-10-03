@@ -38,16 +38,16 @@ export default function Page(props: Props) {
   const postedId = props.params.id;
   const posts = useSelector((state: RootState) => state.post.posts)!;
   const esquisses = useSelector((state: RootState) => state.post.esquisses);
-  const selectedPost = posts.find((post) => post.id === postedId);
+  const selectedPost = posts.find((post) => post.id === postedId)!;
   const selectedEsquisses = esquisses.filter(
     (esquisse) => esquisse.id === postedId
   );
   const user = getUser();
-  const [esquisseModal, setEsquisseModal] = useState<boolean>(false);
-  const [postModal, setPostModal] = useState<boolean>(false);
-  const [deleteModal, setDeleteModal] = useState<boolean>(false);
+  const [esquisseModal, setEsquisseModal] = useState(false);
+  const [postModal, setPostModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const index = posts.indexOf(selectedPost!);
+  const index = posts.indexOf(selectedPost);
   const changePostHandler = () => {
     setPostModal(true);
   };
@@ -66,10 +66,6 @@ export default function Page(props: Props) {
       });
     });
   };
-
-  if(!user) {
-    router.push("/login");
-  }
 
   useEffect(() => {
     getAllPosts().then((result) => {
@@ -97,16 +93,20 @@ export default function Page(props: Props) {
     tags.push(data);
   });
 
-  const  submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
+  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    await esquisseSubmit(props.params.id, comment).then(() => {
-      getAllEsquisses().then((result) => {
-        dispatch(IndicateEsquisse(result));
-        setComment("");
+    if (!user) {
+      router.push("/login");
+    } else {
+      await esquisseSubmit(props.params.id, comment).then(() => {
+        getAllEsquisses().then((result) => {
+          dispatch(IndicateEsquisse(result));
+          setComment("");
+        });
       });
-    });
-  }
+    }
+  };
 
   const postModalClose = () => {
     setPostModal(false);
@@ -121,7 +121,7 @@ export default function Page(props: Props) {
     <>
       <NavHeader />
       <Wrapper>
-      {deleting && <Uploading text="消去中..." />}
+        {deleting && <Uploading text="消去中..." />}
         <WrapperInner>
           {user && selectedPost.user.uid === user.uid && (
             <ChangePostButton

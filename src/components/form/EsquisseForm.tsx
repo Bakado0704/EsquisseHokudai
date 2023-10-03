@@ -10,7 +10,7 @@ type Props = {
 export const EsquisseForm = ({ comment, setComment }: Props) => {
   return (
     <FormContainer>
-      <Label htmlFor="text">コメントを追加する。</Label>
+      <Label>コメントを追加する。</Label>
       <Textarea
         id="text"
         value={comment}

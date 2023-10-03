@@ -19,7 +19,7 @@ export const PostPhotoForm = ({
 }: Props) => {
   return (
     <Container>
-      <Label htmlFor="image">写真</Label>
+      <Label>写真</Label>
       <RightContainer>
         <input
           multiple

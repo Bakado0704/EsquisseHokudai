@@ -14,7 +14,7 @@ type Props = {
 export const InputForm = ({ type, onChange, placeholder, title, value }: Props) => {
   return (
     <Container>
-      <Label htmlFor={`${type}`}>{title}</Label>
+      <Label>{title}</Label>
       <Input
         type={`${type}`}
         id={`${type}`}
