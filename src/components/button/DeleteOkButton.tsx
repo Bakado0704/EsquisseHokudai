@@ -37,6 +37,10 @@ const CancelButton = styled.button`
   border-radius: 10px;
   margin: 32px auto 0;
   text-align: center;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
 `;
 
 const OkButton = styled.button`
@@ -52,4 +56,8 @@ const OkButton = styled.button`
   border-radius: 10px;
   margin: 32px auto 0;
   text-align: center;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
 `;

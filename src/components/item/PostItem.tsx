@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
@@ -96,4 +95,8 @@ const PostText = styled.p`
 
 const Button = styled.button`
   width: 100%;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
 `;

@@ -22,4 +22,8 @@ const Button = styled.button`
   border: solid 2px var(--border-color);
   border-radius: 10px;
   margin: 32px auto 0;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
 `;
