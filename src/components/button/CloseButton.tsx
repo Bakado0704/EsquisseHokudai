@@ -25,6 +25,10 @@ const Button = styled.button`
   height: 30px;
   top: 5px;
   right: 5px;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
 `;
 
 const Span = styled.span`

@@ -95,4 +95,8 @@ const PostText = styled.p`
 
 const Button = styled.button`
   width: 100%;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
 `;
