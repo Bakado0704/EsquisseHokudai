@@ -22,8 +22,6 @@ export default function Page() {
     getUser();
   }, [dispatch]);
 
-  getUser();
-
   const postHandler = () => {
     if (activeUser) {
       router.push("/post");
