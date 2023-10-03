@@ -11,7 +11,7 @@ export const PostTitleForm = ({ title, titleHandler }: Props) => {
   return (
     <Container>
       <Label>タイトル</Label>
-      <Textarea id="title" value={title} rows={1} onChange={titleHandler} />
+      <Textarea id="title" value={title} rows={1} onChange={titleHandler} required />
     </Container>
   );
 };

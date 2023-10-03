@@ -19,6 +19,7 @@ export const PostDescriptionForm = ({
         value={description}
         rows={5}
         onChange={descriptionHandler}
+        required
       />
     </Container>
   );
