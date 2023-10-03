@@ -16,6 +16,7 @@ export const EsquisseForm = ({ comment, setComment }: Props) => {
         value={comment}
         rows={5}
         onChange={(e: { target: { value: SetStateAction<string>; }; }) => setComment(e.target.value)}
+        required
       />
     </FormContainer>
   );
