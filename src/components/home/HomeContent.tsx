@@ -3,9 +3,9 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "@/store/store";
-import { getUser } from "@/helpers/api-storage";
 import { useRouter } from "next/navigation";
 import { PostList } from "@/components/list/PostList";
+import { getUser } from "@/helpers/api-database";
 
 export const HomeContent = () => {
   const router = useRouter();

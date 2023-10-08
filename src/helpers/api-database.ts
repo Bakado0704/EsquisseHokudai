@@ -1,5 +1,5 @@
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
-import { getAuth } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { getDatabase, ref, child, update, get, set } from "firebase/database";
 import { StaticImageData } from "next/image";
 
@@ -120,3 +120,75 @@ export const deleteEsquisse = async (index: number) => {
       console.error(error);
     });
 }
+
+//エスキスをsubmit
+export const esquisseSubmit = async (id: string, description: string) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  if (user) {
+    await fetch(
+      "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisses.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          id: id,
+          key: new Date().getTime().toString(),
+          description: description,
+          createdAt: new Date().toDateString(),
+          user: {
+            displayName: user.displayName,
+            email: user.email,
+            uid: user.uid,
+          },
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => response.json());
+  }
+};
+
+//firebase上のesquissesを取得
+export const getAllEsquisses = async () => {
+  const response = await fetch(
+    "https://react-getting-started-2a850-default-rtdb.firebaseio.com/esquisses.json"
+  );
+  const data = await response.json();
+
+  const esquisses = [];
+
+  for (const key in data) {
+    esquisses.push({
+      id: key,
+      ...data[key],
+    });
+  }
+
+  return esquisses;
+};
+
+//ユーザー情報取得
+export const getUser = () => {
+  const user = getAuth().currentUser;
+  return user;
+};
+
+//サインイン
+const auth = getAuth();
+export const signIn = async (email: string, password: string) => {
+  await signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log(userCredential.user);
+    })
+    .catch(() => {
+      alert("メールアドレスまたはパスワードが違います");
+    });
+};
+
+//サインアウト
+export const signout = async () => {
+  const auth = getAuth();
+  await signOut(auth);
+};

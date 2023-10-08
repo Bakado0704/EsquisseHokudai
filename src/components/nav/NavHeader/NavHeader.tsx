@@ -1,6 +1,7 @@
 "use client";
 
-import { getUser, signout } from "@/helpers/api-storage";
+import { getUser, signout } from "@/helpers/api-database";
+
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
 

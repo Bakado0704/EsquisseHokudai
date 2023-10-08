@@ -2,13 +2,14 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { emailRegister, getUser } from "@/helpers/api-storage";
+import { emailRegister } from "@/helpers/api-storage";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import styled from "styled-components";
 import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 import { FormButton } from "@/components/button/FormButton";
 import { Uploading } from "@/components/bg/Uploading";
+import { getUser } from "@/helpers/api-database";
 
 export default function Page() {
   const [name, setName] = useState<string>();
