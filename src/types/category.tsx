@@ -14,15 +14,15 @@ export const ProjectType = {
 export type ProjectType = (typeof ProjectType)[keyof typeof ProjectType];
 
 export const BuildingType = {
-  housing: ["housing", "2年後期:住宅"],
-  station: ["station", "2年後期:中島公園駅"],
-  housingcomp: ["housingcomp", "2年後期:集合住宅"],
-  school: ["school", "3年前期:小中学校"],
-  library: ["library", "3年前期:図書館"],
-  structure: ["structure", "3年前期:構造"],
-  renovation: ["renovation", "3年前期:リノべーション"],
-  university: ["university", "3年後期:国際戦略拠点"],
-  museum: ["museum", "3年後期:小別沢・美術館"],
+  housing: ["housing", "住宅"],
+  station: ["station", "中島公園駅"],
+  housingcomp: ["housingcomp", "集合住宅"],
+  school: ["school", "小中学校"],
+  library: ["library", "図書館"],
+  structure: ["structure", "構造"],
+  renovation: ["renovation", "リノべーション"],
+  university: ["university", "国際戦略拠点"],
+  museum: ["museum", "小別沢・美術館"],
 } as const;
 export type BuildingType = (typeof BuildingType)[keyof typeof BuildingType];
 

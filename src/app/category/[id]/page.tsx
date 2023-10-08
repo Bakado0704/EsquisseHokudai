@@ -7,7 +7,7 @@ import {
 } from "@/categoryData/categoryData";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import { getAllPosts } from "@/helpers/api-util";
+import { getAllPosts } from "@/helpers/api-storage";
 import CategoryList from "@/models/categoryList";
 import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";

@@ -11,7 +11,7 @@ import { PostPhotoForm } from "@/components/form/postform/PostPhotoForm";
 import { PostTitleForm } from "@/components/form/postform/PostTitleForm";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import { getAllPosts, postSubmit } from "@/helpers/api-util";
+import { getAllPosts, postSubmit } from "@/helpers/api-storage";
 import { IndicatePost } from "@/store/post";
 import {
   getDownloadURL,
@@ -23,7 +23,7 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import storage from "@/helpers/firebase";
+import storage from "@/helpers/storage";
 import styled from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { FormButton } from "@/components/button/FormButton";

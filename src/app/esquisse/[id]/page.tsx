@@ -11,10 +11,10 @@ import {
   getAllEsquisses,
   getAllPosts,
   getUser,
-} from "@/helpers/api-util";
+} from "@/helpers/api-storage";
 import { IndicateEsquisse, IndicatePost } from "@/store/post";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import { deletePost } from "@/helpers/api-change";
+import { deletePost } from "@/helpers/api-database";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { ChangePostModal } from "@/components/modal/ChangePostModal";
 import { ChangePostButton } from "@/components/button/ChangePostButton";

@@ -1,6 +1,6 @@
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { getDownloadURL, ref } from "firebase/storage";
-import storage from "./firebase";
+import storage from "./storage";
 import {
   getAuth,
   createUserWithEmailAndPassword,

@@ -1,13 +1,13 @@
 "use client";
 
-import { deleteEsquisse } from "@/helpers/api-change";
+import { deleteEsquisse } from "@/helpers/api-database";
 import Esquisse from "@/models/esquisse";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { SetStateAction } from "react";
 import styled from "styled-components";
 import personImg from "@/assets/icon/person.png";
-import { getUser } from "@/helpers/api-util";
+import { getUser } from "@/helpers/api-storage";
 import { ChangeEsquisseButton } from "../button/ChangeEsquisseButton";
 import { ChangeEsquisseModal } from "../modal/ChangeEsquisseModal"; 
 
