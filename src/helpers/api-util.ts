@@ -1,6 +1,18 @@
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
-import { getDownloadURL, ref as storageRef } from "firebase/storage";
-import { getDatabase, ref as databaseRef, child, update, get, set } from "firebase/database";
+import {
+  getDownloadURL,
+  ref as storageRef,
+  uploadBytes,
+  uploadBytesResumable,
+} from "firebase/storage";
+import {
+  getDatabase,
+  ref as databaseRef,
+  child,
+  update,
+  get,
+  set,
+} from "firebase/database";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -68,7 +80,10 @@ export const deletePost = async (index: number) => {
   get(child(dbRef, `posts`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        set(databaseRef(db, `/posts/${Object.keys(snapshot.val())[index]}`), null);
+        set(
+          databaseRef(db, `/posts/${Object.keys(snapshot.val())[index]}`),
+          null
+        );
       } else {
         console.log("No data available");
       }
@@ -123,7 +138,10 @@ export const deleteEsquisse = async (index: number) => {
   get(child(dbRef, `esquisses`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        set(databaseRef(db, `/esquisses/${Object.keys(snapshot.val())[index]}`), null);
+        set(
+          databaseRef(db, `/esquisses/${Object.keys(snapshot.val())[index]}`),
+          null
+        );
       } else {
         console.log("No data available");
       }
@@ -302,6 +320,35 @@ export const getImage = async (image: string) => {
 
   return res;
 };
+
+//storageに画像をup
+export const upImage = async (
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  const file = e.target.files![0];
+  const stRef = storageRef(storage, "image/" + file.name);
+  await uploadBytes(stRef, file);
+};
+
+//storageからurlを取得
+export const importImage = async (
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  const file = e.target.files![0];
+  const stRef = storageRef(storage, "image/" + file.name);
+  const url = getDownloadURL(stRef);
+
+  return url;
+};
+
+//アップロードの管理
+export const imageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files![0];
+  const stRef = storageRef(storage, "image/" + file.name);
+  const upload = uploadBytesResumable(stRef, file);
+
+  return upload;
+}
 
 //アカウント作成
 // export const createAccount = async (displayName: string, password: string) => {

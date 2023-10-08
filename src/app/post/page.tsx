@@ -12,22 +12,21 @@ import { PostTitleForm } from "@/components/form/postform/PostTitleForm";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import { IndicatePost } from "@/store/post";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from "firebase/storage";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import storage from "@/helpers/storage";
-import styled from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { FormButton } from "@/components/button/FormButton";
 import { Uploading } from "@/components/bg/Uploading";
-import { getAllPosts, postSubmit } from "@/helpers/api-util";
+import {
+  getAllPosts,
+  imageUpload,
+  importImage,
+  postSubmit,
+  upImage,
+} from "@/helpers/api-util";
+import styled from "styled-components";
 
 export default function Page() {
   const router = useRouter();
@@ -35,9 +34,9 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [imageSource, setImageSource] = useState<string | StaticImport>();
-  const [imageName, setImageName] = useState<string>();
+  const [imageName, setImageName] = useState<string>("");
   const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>();
+  const [description, setDescription] = useState<string>("");
   const [uploading, setUploading] = useState(false);
 
   const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
@@ -76,10 +75,10 @@ export default function Page() {
     await postSubmit(
       title,
       { projectType, buildingType, toolType },
-      imageName!,
+      imageName,
       description!
-    ).then(() => {
-      getAllPosts().then((result) => {
+    ).then(async () => {
+      await getAllPosts().then((result) => {
         dispatch(IndicatePost(result));
         setTitle("");
         setDescription("");
@@ -87,28 +86,20 @@ export default function Page() {
         router.push("/");
       });
     });
-  }
+  };
 
   const onFileUploadToFirebase = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const file = e.target.files![0];
-    const storageRef = ref(storage, "image/" + file.name);
+    setImageName(e.target.files![0].name);
 
-    setImageName(file.name);
-    await uploadBytes(storageRef, file)
-      .then((snapshot) => {
-        console.log("Uploaded a blob or file!");
-      })
-      .then(() => {
-        getDownloadURL(ref(storage, "image/" + file.name)).then((url) => {
-          setImageSource(url);
-        });
+    await upImage(e).then(async () => {
+      await importImage(e).then((url) => {
+        setImageSource(url);
       });
+    });
 
-    const uploadImage = uploadBytesResumable(storageRef, file);
-
-    uploadImage.on(
+    imageUpload(e).on(
       "state_changed",
       (snapshot) => {
         setLoading(true);

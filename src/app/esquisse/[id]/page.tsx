@@ -33,9 +33,7 @@ export default function Page(props: Props) {
   const posts = useSelector((state: RootState) => state.post.posts)!;
   const esquisses = useSelector((state: RootState) => state.post.esquisses);
   const selectedPost = posts.find((post) => post.id === postedId)!;
-  const selectedEsquisses = esquisses.filter(
-    (esquisse) => esquisse.id === postedId
-  );
+  const selectedEsquisses = esquisses.filter((esquisse) => esquisse.id === postedId);
   const user = getUser();
   const [esquisseModal, setEsquisseModal] = useState(false);
   const [postModal, setPostModal] = useState(false);

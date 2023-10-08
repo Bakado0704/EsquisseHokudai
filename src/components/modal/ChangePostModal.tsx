@@ -5,15 +5,8 @@ import {
   projectCategory,
   toolCategory,
 } from "@/categoryData/categoryData";
-import { changePost, getAllPosts } from "@/helpers/api-util";
-import storage from "@/helpers/storage";
+import { changePost, getAllPosts, imageUpload, importImage, upImage } from "@/helpers/api-util";
 import { RootState } from "@/store/store";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from "firebase/storage";
 import { StaticImageData, StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -100,33 +93,23 @@ export const ChangePostModal = (props: Props) => {
     });
   };
 
-  const onFileUploadToFirebase = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files![0];
-
-    const storageRef = ref(storage, "image/" + file.name);
-
-    setImageName(file.name);
+  const onFileUploadToFirebase = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setImageName(e.target.files![0].name);
     setInitialImage(false);
 
-    uploadBytes(storageRef, file).then((snapshot) => {
-      console.log("Uploaded a blob or file!");
+    await upImage(e).then(async () => {
+      await importImage(e).then((url) => {
+        setImageSource(url);
+      });
     });
 
-    const uploadImage = uploadBytesResumable(storageRef, file);
-
-    getDownloadURL(ref(storage, "image/" + file.name))
-      .then((url) => {
-        setImageSource(url);
-      })
-      .catch((error) => {});
-
-    uploadImage.on(
+    imageUpload(e).on(
       "state_changed",
-      (snapshot) => {
+      () => {
         setLoading(true);
       },
       (err) => {
-        console.log(err);
+        alert(err);
       },
       () => {
         setLoading(false);
