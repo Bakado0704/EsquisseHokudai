@@ -7,20 +7,19 @@ import schoolimg from "@/assets/category/school.jpg";
 import libraryimg from "@/assets/category/library.jpg";
 import universityimg from "@/assets/category/university.jpg";
 import museumimg from "@/assets/category/museum.jpg";
-import kindergartenimg from "@/assets/category/kindergarten.jpg";
-import churchimg from "@/assets/category/church.jpg";
+import structureimg from "@/assets/category/structure.jpg"
 import renovationimg from "@/assets/category/renovation.jpg";
 
 export const buildingCategory = [
-  new CategoryList(BuildingType.housing, housingimg, "住宅"),
-  new CategoryList(BuildingType.housingcomp, housingcompimg, "集合住宅"),
-  new CategoryList(BuildingType.school, schoolimg, "小中学校"),
-  new CategoryList(BuildingType.library, libraryimg, "図書館"),
-  new CategoryList(BuildingType.university, universityimg, "大学キャンパス"),
-  new CategoryList(BuildingType.museum, museumimg, "美術館"),
-  new CategoryList(BuildingType.kindergarten, kindergartenimg, "幼稚園"),
-  new CategoryList(BuildingType.church, churchimg, "教会"),
-  new CategoryList(BuildingType.renovation, renovationimg, "リノベーション"),
+  new CategoryList(BuildingType.housing, housingimg, "2年後期:住宅"),
+  new CategoryList(BuildingType.station, stationimg, "2年後期:中島公園"),
+  new CategoryList(BuildingType.housingcomp, housingcompimg, "2年後期:集合住宅"),
+  new CategoryList(BuildingType.school, schoolimg, "3年前期:小中学校"),
+  new CategoryList(BuildingType.library, libraryimg, "3年前期:図書館"),
+  new CategoryList(BuildingType.structure, structureimg, "3年前期:構造"),
+  new CategoryList(BuildingType.renovation, renovationimg, "3年前期:リノベーション"),
+  new CategoryList(BuildingType.museum, museumimg, "3年後期:小別沢・美術館"),
+  new CategoryList(BuildingType.university, universityimg, "3年後期:国際戦略拠点"),
 ];
 
 export const projectCategory = [

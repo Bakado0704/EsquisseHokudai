@@ -11,7 +11,7 @@ export default function Page() {
       <NavHeader />
       <Wrapper>
         <WrapperInner>
-          <Title>カテゴリ</Title>
+          <Title>設計演習</Title>
           <CategoryLinkList/>
         </WrapperInner>
       </Wrapper>

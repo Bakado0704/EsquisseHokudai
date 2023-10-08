@@ -48,7 +48,7 @@ export const NavHeader = () => {
     <Wrapper>
       {!user?.emailVerified && (
         <WrapperInner>
-          <LogoButton onClick={loginHandler}>EsquisseChat</LogoButton>
+          <LogoButton onClick={loginHandler}>EsquisseHokudai</LogoButton>
           <SigninButton onClick={signinHandler}>サインイン</SigninButton>
         </WrapperInner>
       )}
@@ -56,7 +56,7 @@ export const NavHeader = () => {
         <WrapperInner>
           <ButtonsRight>
             <HomeButton onClick={homeHandler}>ホーム</HomeButton>
-            <CategoryButton onClick={categoryHandler}>カテゴリ</CategoryButton>
+            <CategoryButton onClick={categoryHandler}>設計演習</CategoryButton>
           </ButtonsRight>
           <LogoutButton onClick={logoutHandler}>ログアウト</LogoutButton>
         </WrapperInner>

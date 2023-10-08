@@ -4,7 +4,7 @@ export const NavFooter = () => {
   return (
     <Wrapper>
       <WrapperInner>
-        <P>EsquisseChat</P>
+        <P>EsquisseHokudai</P>
         <Div />
       </WrapperInner>
     </Wrapper>
