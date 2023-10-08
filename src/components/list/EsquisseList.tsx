@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteEsquisse, getUser } from "@/helpers/api-database";
+import { deleteEsquisse, getUser } from "@/helpers/api-util";
 import Esquisse from "@/models/esquisse";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

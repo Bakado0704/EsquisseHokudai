@@ -7,7 +7,6 @@ import {
 } from "@/categoryData/categoryData";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import { getAllPosts } from "@/helpers/api-storage";
 import CategoryList from "@/models/categoryList";
 import { IndicatePost } from "@/store/post";
 import { RootState } from "@/store/store";
@@ -16,6 +15,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { CategoryPostList } from "@/components/list/CategoryPostList";
+import { getAllPosts } from "@/helpers/api-util";
 
 type Props = {
   params: Params;

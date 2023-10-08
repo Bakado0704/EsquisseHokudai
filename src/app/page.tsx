@@ -4,11 +4,11 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { IndicatePost } from "@/store/post";
-import { getAllPosts, getUser } from "@/helpers/api-storage";
 import { useRouter } from "next/navigation";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { PostList } from "@/components/list/PostList";
+import { getAllPosts, getUser } from "@/helpers/api-util";
 
 export default function Page() {
   const dispatch = useDispatch();

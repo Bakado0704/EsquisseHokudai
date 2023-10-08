@@ -2,7 +2,7 @@
 
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import { getUser } from "@/helpers/api-database";
+import { getUser } from "@/helpers/api-util";
 import styled from "styled-components";
 
 export default function Page() {

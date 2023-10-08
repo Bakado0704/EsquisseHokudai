@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { RootState } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { PostList } from "@/components/list/PostList";
-import { getUser } from "@/helpers/api-database";
+import { getUser } from "@/helpers/api-util";
 
 export const HomeContent = () => {
   const router = useRouter();

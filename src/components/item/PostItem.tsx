@@ -6,7 +6,7 @@ import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import Post from "@/models/post";
 import { TagList } from "../list/TagList";
 import { useRouter } from "next/navigation";
-import { getUser } from "@/helpers/api-database";
+import { getUser } from "@/helpers/api-util";
 
 type Props = {
   post: Post;

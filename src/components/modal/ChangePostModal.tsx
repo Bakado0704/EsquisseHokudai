@@ -5,7 +5,7 @@ import {
   projectCategory,
   toolCategory,
 } from "@/categoryData/categoryData";
-import { changePost } from "@/helpers/api-database";
+import { changePost, getAllPosts } from "@/helpers/api-util";
 import storage from "@/helpers/storage";
 import { RootState } from "@/store/store";
 import {
@@ -22,7 +22,6 @@ import styled from "styled-components";
 import { Bg } from "../bg/Background";
 import { CloseButton } from "../button/CloseButton";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
-import { getAllPosts } from "@/helpers/api-storage";
 import { ChangePostTitleForm } from "../form/changeform/ChangePostTitleForm";
 import { ChangePostCategoryForm } from "../form/changeform/ChangePostCategoryForm";
 import { ChangePostPhotoForm } from "../form/changeform/ChangePostPhotoForm";

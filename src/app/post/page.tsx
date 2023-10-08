@@ -11,7 +11,6 @@ import { PostPhotoForm } from "@/components/form/postform/PostPhotoForm";
 import { PostTitleForm } from "@/components/form/postform/PostTitleForm";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import { getAllPosts, postSubmit } from "@/helpers/api-storage";
 import { IndicatePost } from "@/store/post";
 import {
   getDownloadURL,
@@ -28,6 +27,7 @@ import styled from "styled-components";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { FormButton } from "@/components/button/FormButton";
 import { Uploading } from "@/components/bg/Uploading";
+import { getAllPosts, postSubmit } from "@/helpers/api-util";
 
 export default function Page() {
   const router = useRouter();

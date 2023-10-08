@@ -6,12 +6,9 @@ import { FormEvent, useEffect, useState } from "react";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import {
-  getAllPosts,
-} from "@/helpers/api-storage";
 import { IndicateEsquisse, IndicatePost } from "@/store/post";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import { deletePost, esquisseSubmit, getAllEsquisses, getUser } from "@/helpers/api-database";
+import { deletePost, esquisseSubmit, getAllEsquisses, getAllPosts, getUser } from "@/helpers/api-util";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { ChangePostModal } from "@/components/modal/ChangePostModal";
 import { ChangePostButton } from "@/components/button/ChangePostButton";

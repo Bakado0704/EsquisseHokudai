@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { InputForm } from "@/components/form/InputForm";
 import { NavRegisterFooter } from "@/components/nav/NavFooter/NavRegisterFooter";
 import { FormButton } from "@/components/button/FormButton";
-import { getUser, signIn } from "@/helpers/api-database";
+import { getUser, signIn } from "@/helpers/api-util";
 
 export default function Page() {
   const [email, setEmail] = useState<string>();
