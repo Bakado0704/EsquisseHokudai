@@ -85,8 +85,8 @@ export const ChangePostModal = (props: Props) => {
       { projectType, buildingType, toolType },
       imageName,
       description
-    ).then(() => {
-      getAllPosts().then(() => {
+    ).then(async () => {
+      await getAllPosts().then(() => {
         setUploading(false);
         router.push("/");
       });
@@ -118,19 +118,6 @@ export const ChangePostModal = (props: Props) => {
     );
   };
 
-  const titleHandler = () => {
-    const enteredTitle = (document.getElementById("title") as HTMLInputElement)
-      .value;
-    setTitle(enteredTitle);
-  };
-
-  const descriptionHandler = () => {
-    const enteredDescription = (
-      document.getElementById("description") as HTMLInputElement
-    ).value;
-    setDescription(enteredDescription);
-  };
-
   return (
     <Wrapper>
       <Bg modalClose={props.modalClose} />
@@ -140,7 +127,7 @@ export const ChangePostModal = (props: Props) => {
           <CloseButton modalClose={props.modalClose} />
           <Title>投稿修正</Title>
           <form onSubmit={submitFormHandler}>
-            <ChangePostTitleForm title={title} titleHandler={titleHandler} />
+            <ChangePostTitleForm title={title} setTitle={setTitle} />
             <ChangePostCategoryForm
               projectCategory={projectCategory}
               buildingCategory={buildingCategory}
@@ -156,7 +143,7 @@ export const ChangePostModal = (props: Props) => {
             />
             <ChangePostDescriptionForm
               description={description}
-              descriptionHandler={descriptionHandler}
+              setDescription={setDescription}
             />
             <FormButton>投稿する</FormButton>
           </form>

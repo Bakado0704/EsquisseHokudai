@@ -114,19 +114,6 @@ export default function Page() {
     );
   };
 
-  const titleHandler = () => {
-    const enteredTitle = (document.getElementById("title") as HTMLInputElement)
-      .value;
-    setTitle(enteredTitle);
-  };
-
-  const descriptionHandler = () => {
-    const enteredDescription = (
-      document.getElementById("description") as HTMLInputElement
-    ).value;
-    setDescription(enteredDescription);
-  };
-
   return (
     <>
       <NavHeader />
@@ -135,7 +122,7 @@ export default function Page() {
         <WrapperInner>
           <Title>投稿</Title>
           <form onSubmit={submitFormHandler}>
-            <PostTitleForm title={title} titleHandler={titleHandler} />
+            <PostTitleForm title={title} setTitle={setTitle} />
             <PostCategoryForm
               projectCategory={projectCategory}
               buildingCategory={buildingCategory}
@@ -149,7 +136,7 @@ export default function Page() {
             />
             <PostDescriptionForm
               description={description}
-              descriptionHandler={descriptionHandler}
+              setDescription={setDescription}
             />
             <FormButton>投稿する</FormButton>
           </form>

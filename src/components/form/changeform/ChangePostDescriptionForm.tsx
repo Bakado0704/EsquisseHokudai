@@ -4,12 +4,12 @@ import styled from "styled-components";
 
 type Props = {
   description: string;
-  descriptionHandler: () => void;
+  setDescription: (description: string) => void;
 };
 
 export const ChangePostDescriptionForm = ({
   description,
-  descriptionHandler,
+  setDescription,
 }: Props) => {
   return (
     <Container>
@@ -18,7 +18,7 @@ export const ChangePostDescriptionForm = ({
         id="description"
         value={description}
         rows={5}
-        onChange={descriptionHandler}
+        onChange={(e) => setDescription(e.target.value)}
       />
     </Container>
   );

@@ -4,14 +4,14 @@ import styled from "styled-components";
 
 type Props = {
   title: string | undefined;
-  titleHandler: () => void;
+  setTitle: (title: string) => void;
 };
 
-export const PostTitleForm = ({ title, titleHandler }: Props) => {
+export const PostTitleForm = ({ title, setTitle }: Props) => {
   return (
     <Container>
       <Label>タイトル</Label>
-      <Textarea id="title" value={title} rows={1} onChange={titleHandler} required />
+      <Textarea id="title" value={title} rows={1} onChange={(e) => setTitle(e.target.value)} required />
     </Container>
   );
 };

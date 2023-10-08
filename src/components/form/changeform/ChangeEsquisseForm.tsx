@@ -4,13 +4,10 @@ import styled from "styled-components";
 
 type Props = {
   description: string | undefined;
-  descriptionHandler: () => void;
+  setDescription: (description: string) => void;
 };
 
-export const ChangeEsquisseForm = ({
-  description,
-  descriptionHandler,
-}: Props) => {
+export const ChangeEsquisseForm = ({ description, setDescription }: Props) => {
   return (
     <Container>
       <Label>内容</Label>
@@ -18,7 +15,7 @@ export const ChangeEsquisseForm = ({
         id="description"
         value={description}
         rows={5}
-        onChange={descriptionHandler}
+        onChange={(e) => setDescription(e.target.value)}
         required
       />
     </Container>

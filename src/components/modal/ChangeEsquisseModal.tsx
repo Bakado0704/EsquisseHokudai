@@ -43,11 +43,6 @@ export const ChangeEsquisseModal = (props: Props) => {
     });
   }
 
-  const descriptionHandler = () => {
-    const enteredDescription = (document.getElementById("description") as HTMLInputElement).value;
-    setDescription(enteredDescription);
-  };
-
   return (
     <Wrapper>
       <Bg modalClose={props.modalClose} />
@@ -59,7 +54,7 @@ export const ChangeEsquisseModal = (props: Props) => {
           <form onSubmit={submitFormHandler}>
             <ChangeEsquisseForm
               description={description}
-              descriptionHandler={descriptionHandler}
+              setDescription={setDescription}
             />
             <FormButton>投稿を変更する</FormButton>
           </form>
