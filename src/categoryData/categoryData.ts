@@ -1,6 +1,7 @@
 import CategoryList from "@/models/categoryList";
 import { BuildingType, ProjectType, ToolType } from "@/types/category";
 import housingimg from "@/assets/category/housing.jpg";
+import stationimg from "@/assets/category/nakazimaSta.jpg"
 import housingcompimg from "@/assets/category/housing-comp.jpg";
 import schoolimg from "@/assets/category/school.jpg";
 import libraryimg from "@/assets/category/library.jpg";
