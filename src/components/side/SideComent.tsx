@@ -41,18 +41,14 @@ export const SideCommentPost = ({
 
   const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const activeUser = getUser();
 
-    if (!activeUser) {
-      router.push("/login");
-    } else {
-      await esquisseSubmit(id, comment).then(() => {
-        getAllEsquisses().then((result) => {
-          dispatch(IndicateEsquisse(result));
-          setComment("");
-        });
+    await esquisseSubmit(id, comment).then(async () => {
+      await getAllEsquisses().then((result) => {
+        dispatch(IndicateEsquisse(result));
+        setComment("");
+        sideDelete();
       });
-    }
+    });
   };
 
   return (

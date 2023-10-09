@@ -30,6 +30,8 @@ export const EsquisseList = ({
   const router = useRouter();
   const user = getUser();
 
+  
+
   return (
     <ul>
       {selectedEsquisses.map((esquisse) => {

@@ -107,28 +107,18 @@ export default function Page(props: Props) {
     });
   }
 
-  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const activeUser = getUser();
-
-    if (!activeUser) {
-      router.push("/login");
-    } else {
-      await esquisseSubmit(props.params.id, comment).then(() => {
-        getAllEsquisses().then((result) => {
-          dispatch(IndicateEsquisse(result));
-          setComment("");
-        });
-      });
-    }
-  };
-
   const sideDelete = () => {
     setSide(false);
   };
 
   const sideAppear = () => {
-    setSide((side) => !side);
+    const activeUser = getUser();
+
+    if (!activeUser) {
+      router.push("/login");
+    } else {
+      setSide((side) => !side);
+    }
   };
 
   const postModalClose = () => {
@@ -171,6 +161,7 @@ export default function Page(props: Props) {
             />
           </EsquisseCard>
         </WrapperInner>
+
         <SideCommentPost
           side={side}
           index={1}
