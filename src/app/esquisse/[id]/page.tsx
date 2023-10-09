@@ -8,7 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { IndicateEsquisse, IndicatePost } from "@/store/post";
 import { NavHeader } from "@/components/nav/NavHeader/NavHeader";
-import { deletePost, esquisseSubmit, getAllEsquisses, getAllPosts, getUser } from "@/helpers/api-util";
+import {
+  deletePost,
+  esquisseSubmit,
+  getAllEsquisses,
+  getAllPosts,
+  getUser,
+} from "@/helpers/api-util";
 import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { ChangePostModal } from "@/components/modal/ChangePostModal";
 import { ChangePostButton } from "@/components/button/ChangePostButton";
@@ -20,6 +26,8 @@ import { DeleteModal } from "@/components/modal/DeleteModal";
 import styled from "styled-components";
 import { FormButton } from "@/components/button/FormButton";
 import { Uploading } from "@/components/bg/Uploading";
+import { EsquisseIndex } from "@/components/esquisse/EsquisseIndex";
+import { SideComment } from "@/components/side/SideComent";
 
 type Props = {
   params: Params;
@@ -33,9 +41,12 @@ export default function Page(props: Props) {
   const posts = useSelector((state: RootState) => state.post.posts)!;
   const esquisses = useSelector((state: RootState) => state.post.esquisses);
   const selectedPost = posts.find((post) => post.id === postedId)!;
-  const selectedEsquisses = esquisses.filter((esquisse) => esquisse.id === postedId);
+  const selectedEsquisses = esquisses.filter(
+    (esquisse) => esquisse.id === postedId
+  );
   const user = getUser();
   const [esquisseModal, setEsquisseModal] = useState(false);
+  const [side, setSide] = useState(false);
   const [postModal, setPostModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -43,6 +54,14 @@ export default function Page(props: Props) {
   const changePostHandler = () => {
     setPostModal(true);
   };
+
+  let contentWidth;
+
+  if (side) {
+    contentWidth = "calc(50% + 320px)";
+  } else {
+    contentWidth = "100%";
+  }
 
   const alartHandler = () => {
     setDeleteModal(true);
@@ -106,6 +125,14 @@ export default function Page(props: Props) {
     }
   };
 
+  const sideDelete = () => {
+    setSide(false);
+  };
+
+  const sideAppear = () => {
+    setSide((side) => !side);
+  };
+
   const postModalClose = () => {
     setPostModal(false);
     setDeleteModal(false);
@@ -120,7 +147,7 @@ export default function Page(props: Props) {
       <NavHeader />
       <Wrapper>
         {deleting && <Uploading text="消去中..." />}
-        <WrapperInner>
+        <WrapperInner style={{width : `${contentWidth}`}}>
           {user && selectedPost.user.uid === user.uid && (
             <ChangePostButton
               onChange={changePostHandler}
@@ -131,22 +158,27 @@ export default function Page(props: Props) {
           <Title>{selectedPost.title}</Title>
           <Description>{selectedPost.user.displayName}</Description>
           <Description>{selectedPost.createdAt}</Description>
-          <ImageContainer selectedPost={selectedPost} />
-          <Description>{selectedPost.description}</Description>
 
-          <EsquisseList
-            allEsquisses={esquisses}
-            selectedEsquisses={selectedEsquisses}
-            setEsquisseModal={setEsquisseModal}
-            esquisseModal={esquisseModal}
-            esquisseModalClose={esquisseModalClose}
-          />
+          <EsquisseIndex index={1} />
+          <EsquisseCard>
+            <ImageContainer selectedPost={selectedPost} />
+            <Description>{selectedPost.description}</Description>
+            <EsquisseList
+              allEsquisses={esquisses}
+              selectedEsquisses={selectedEsquisses}
+              setEsquisseModal={setEsquisseModal}
+              esquisseModal={esquisseModal}
+              esquisseModalClose={esquisseModalClose}
+              sideAppear={sideAppear}
+            />
+          </EsquisseCard>
 
-          <Form onSubmit={submitFormHandler}>
+          {/* <Form onSubmit={submitFormHandler}>
             <EsquisseForm comment={comment} setComment={setComment} />
             <FormButton>メッセージを投稿する</FormButton>
-          </Form>
+          </Form> */}
         </WrapperInner>
+        <SideComment side={side} sideDelete={sideDelete} />
       </Wrapper>
       {postModal && (
         <ChangePostModal id={postedId} modalClose={postModalClose} />
@@ -169,7 +201,7 @@ const Wrapper = styled.div`
   padding-left: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   overflow-y: hidden;
 `;
 
@@ -179,10 +211,19 @@ const WrapperInner = styled.div`
   padding-top: 40px;
   padding-bottom: 40px;
   overflow-y: scroll;
+  transition: all 0.16s ease-in-out;
 
   &::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const EsquisseCard = styled.div`
+  --background-color: #595757;
+
+  padding: 40px;
+  background-color: var(--background-color);
+  border-radius: 40px;
 `;
 
 const Title = styled.p`
@@ -190,14 +231,14 @@ const Title = styled.p`
   --background-color: #434141;
 
   margin-top: 8px;
-  font-size: 24px;
+  font-size: 30px;
   text-decoration: underline;
   text-align: left;
 `;
 
 const Description = styled.p`
-  margin-top: 10px;
-  font-size: 16px;
+  margin-top: 16px;
+  font-size: 20px;
 `;
 
 const Form = styled.form`

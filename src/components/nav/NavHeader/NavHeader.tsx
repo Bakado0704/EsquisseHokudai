@@ -70,6 +70,7 @@ const Wrapper = styled.div`
   --background-color: #595757;
 
   position: fixed;
+  z-index: 10000;
   top: 0;
   height: 80px;
   width: 100%;

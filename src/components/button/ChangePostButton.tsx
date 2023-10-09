@@ -8,13 +8,19 @@ type Props = {
 export const ChangePostButton = ({ onChange, onDelete }: Props) => {
   return (
     <Container>
-      <button onClick={onChange}>変更</button>
+      <Button onClick={onChange}>変更</Button>
       <span> | </span>
-      <button onClick={onDelete}>消去</button>
+      <Button onClick={onDelete}>消去</Button>
     </Container>
   );
 };
 
 const Container = styled.div`
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+`;
+
+const Button = styled.button`
+  &:hover {
+    filter: brightness(0.85);
+  }
 `;
