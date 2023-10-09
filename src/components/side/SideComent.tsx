@@ -1,13 +1,36 @@
 "use client";
 
+import { esquisseSubmit, getAllEsquisses, getUser } from "@/helpers/api-util";
+import { IndicateEsquisse } from "@/store/post";
+import backImg from "@/assets/icon/back-button.png";
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { EsquisseForm } from "../form/EsquisseForm";
+import { FormButton } from "../button/FormButton";
+import Image from "next/image";
 
 type Props = {
+  index: number;
   side: boolean;
+  id: string;
   sideDelete: () => void;
+  comment: string;
+  setComment: (comment: string) => void;
 };
 
-export const SideComment = ({ side, sideDelete }: Props) => {
+export const SideCommentPost = ({
+  index,
+  side,
+  id,
+  comment,
+  setComment,
+  sideDelete,
+}: Props) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   let scroll;
 
   if (side) {
@@ -16,11 +39,37 @@ export const SideComment = ({ side, sideDelete }: Props) => {
     scroll = "100vw";
   }
 
+  const submitFormHandler = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const activeUser = getUser();
+
+    if (!activeUser) {
+      router.push("/login");
+    } else {
+      await esquisseSubmit(id, comment).then(() => {
+        getAllEsquisses().then((result) => {
+          dispatch(IndicateEsquisse(result));
+          setComment("");
+        });
+      });
+    }
+  };
+
   return (
     <Side style={{ transform: `translate(${scroll})` }}>
       <DummyHeader />
-      <Content >
-        <Button onClick={sideDelete}>消去</Button>
+      <Content>
+        <Button onClick={sideDelete}>
+          <Image src={backImg} alt="tag" width={40} height={40} />
+        </Button>
+        <Form onSubmit={submitFormHandler}>
+          <EsquisseForm
+            index={index}
+            comment={comment}
+            setComment={setComment}
+          />
+          <FormButton>メッセージを投稿する</FormButton>
+        </Form>
       </Content>
     </Side>
   );
@@ -49,8 +98,15 @@ const DummyHeader = styled.div`
 `;
 
 const Content = styled.div`
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding: 40px;
 `;
 
-const Button = styled.button``;
+const Button = styled.button`
+  &:hover {
+    filter: brightness(0.85);
+  }
+`;
+
+const Form = styled.form`
+  margin-top: 24px;
+`;

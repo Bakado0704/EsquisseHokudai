@@ -19,15 +19,13 @@ import { NavFooter } from "@/components/nav/NavFooter/NavFooter";
 import { ChangePostModal } from "@/components/modal/ChangePostModal";
 import { ChangePostButton } from "@/components/button/ChangePostButton";
 import { EsquisseList } from "@/components/list/EsquisseList";
-import { EsquisseForm } from "@/components/form/EsquisseForm";
 import { ImageContainer } from "@/components/image/ImageContianer";
 import { TagLinkList } from "@/components/list/TagLinkList";
 import { DeleteModal } from "@/components/modal/DeleteModal";
 import styled from "styled-components";
-import { FormButton } from "@/components/button/FormButton";
 import { Uploading } from "@/components/bg/Uploading";
 import { EsquisseIndex } from "@/components/esquisse/EsquisseIndex";
-import { SideComment } from "@/components/side/SideComent";
+import { SideCommentPost } from "@/components/side/SideComent";
 
 type Props = {
   params: Params;
@@ -58,7 +56,7 @@ export default function Page(props: Props) {
   let contentWidth;
 
   if (side) {
-    contentWidth = "calc(50% + 320px)";
+    contentWidth = "calc(50% + 360px)";
   } else {
     contentWidth = "100%";
   }
@@ -147,7 +145,7 @@ export default function Page(props: Props) {
       <NavHeader />
       <Wrapper>
         {deleting && <Uploading text="消去中..." />}
-        <WrapperInner style={{width : `${contentWidth}`}}>
+        <WrapperInner style={{ width: `${contentWidth}` }}>
           {user && selectedPost.user.uid === user.uid && (
             <ChangePostButton
               onChange={changePostHandler}
@@ -172,13 +170,15 @@ export default function Page(props: Props) {
               sideAppear={sideAppear}
             />
           </EsquisseCard>
-
-          {/* <Form onSubmit={submitFormHandler}>
-            <EsquisseForm comment={comment} setComment={setComment} />
-            <FormButton>メッセージを投稿する</FormButton>
-          </Form> */}
         </WrapperInner>
-        <SideComment side={side} sideDelete={sideDelete} />
+        <SideCommentPost
+          side={side}
+          index={1}
+          id={props.params.id}
+          comment={comment}
+          setComment={setComment}
+          sideDelete={sideDelete}
+        />
       </Wrapper>
       {postModal && (
         <ChangePostModal id={postedId} modalClose={postModalClose} />
@@ -237,11 +237,8 @@ const Title = styled.p`
 `;
 
 const Description = styled.p`
-  margin-top: 16px;
+  line-height: 1.4;
+  margin-top: 8px;
   font-size: 20px;
-`;
-
-const Form = styled.form`
-  border-top: 1px solid white;
-  margin-top: 24px;
+  white-space: pre-wrap;
 `;
